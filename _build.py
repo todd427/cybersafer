@@ -9,7 +9,7 @@ Run after adding or editing any scenario:
 import json, os, sys
 from pathlib import Path
 
-SCENARIOS_DIR = Path("scenarios")
+SCENARIOS_DIR = Path("static/scenarios")
 OUTPUT = Path("static/scenarios-index.json")
 
 scenarios = []

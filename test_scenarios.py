@@ -47,7 +47,7 @@ def dim(msg):   print(f"{DIM}  {msg}{RESET}")
 
 # ── Constants ───────────────────────────────────────────────────────────────
 
-SCENARIOS_DIR = Path("scenarios")
+SCENARIOS_DIR = Path("static/scenarios")
 PLAYERS_DIR   = Path("players")
 STATIC_DIR    = Path("static")
 
