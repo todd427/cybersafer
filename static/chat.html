@@ -70,19 +70,21 @@
     const backBtn     = document.getElementById('back-btn');
 
     // ---------- Init ----------
+    async function newSession() {
+      const res = await fetch('/api/session/start', { method: 'POST' });
+      const data = await res.json();
+      sessionId = data.session_id;
+      sessionStorage.setItem('cs_session', sessionId);
+    }
+
     async function init() {
       if (!scenarioId && !playerId) {
         window.location.href = 'scenarios.html';
         return;
       }
 
-      // Create or reuse session
-      if (!sessionId) {
-        const res = await fetch('/api/session/start', { method: 'POST' });
-        const data = await res.json();
-        sessionId = data.session_id;
-        sessionStorage.setItem('cs_session', sessionId);
-      }
+      // Create session if we don't have one
+      if (!sessionId) await newSession();
 
       if (isFreePlay) {
         await startFreePlay();
@@ -98,6 +100,13 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ session_id: sessionId }),
         });
+
+        // Session expired/lost (e.g. server restart) — create fresh and retry once
+        if (res.status === 404 || res.status === 410) {
+          await newSession();
+          return startScenario();
+        }
+
         if (!res.ok) throw new Error(await res.text());
         const data = await res.json();
 
@@ -135,6 +144,13 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ session_id: sessionId, player_id: playerId }),
         });
+
+        // Session expired/lost — create fresh and retry once
+        if (res.status === 404 || res.status === 410) {
+          await newSession();
+          return startFreePlay();
+        }
+
         if (!res.ok) throw new Error(await res.text());
         const data = await res.json();
 
