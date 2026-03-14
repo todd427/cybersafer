@@ -15,6 +15,13 @@ from dataclasses import dataclass, field
 from typing import Optional, Literal, List, Dict, Any
 from contextlib import asynccontextmanager
 
+# Load .env file if present (local development)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 import anthropic
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse
