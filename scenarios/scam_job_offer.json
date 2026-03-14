@@ -4,7 +4,7 @@
   "difficulty": "beginner",
   "title": "Dream Job Offer",
   "introduction": "You get an email about a part-time job that seems perfect - work from home, flexible hours, great pay. They want to hire you immediately. You just need to provide some information and pay for training materials first...",
-  "player": "phishing_emailer",
+  "player": "job_scammer",
   "initial_message": "Dear Applicant,\n\nCongratulations! We reviewed your profile and you're a perfect fit for our Remote Social Media Manager position. $25/hour, work from home, only 10 hours/week!\n\nTo get started, we need:\n- Full name and address\n- Social Security Number (for payroll)\n- $49 for training materials (refundable after first paycheck)\n\nStart earning TODAY! Reply with your information to begin.\n\n-HR Department, Digital Success Inc.",
   "red_flags": [
     "questions_sender",

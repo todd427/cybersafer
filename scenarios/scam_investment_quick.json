@@ -3,9 +3,9 @@
   "category": "online_scams",
   "difficulty": "medium",
   "title": "Get Rich Quick",
-  "introduction": "You see an ad on social media about making easy money. A teen just like you claims they made $2000 in a week just by investing $100. They're messaging people offering to help them do the same...",
-  "player": "romance_scammer",
-  "initial_message": "Yo! Saw your profile and thought you might be interested in making some real money. I'm 17 and I made $2000 last week through crypto investing. It's super easy, I can teach you. You just need to start with $100 and I'll show you exactly what to do. My mentor has a special system. Want in?",
+  "introduction": "You get a DM from someone called Chris who claims to have made easy money last week through crypto investing with a 'special system'. They're offering to show you how.",
+  "player": "investment_scammer",
+  "initial_message": "Hey! Saw your profile and thought you'd be a good fit for something I've been doing. Made $2000 last week through a crypto trading system my mentor taught me \u2014 it takes about 20 minutes a day. I only share it with a few people. You just need $100 to start and I'll show you exactly what to do. Interested?",
   "red_flags": [
     "questions_urgency",
     "refuses_money",

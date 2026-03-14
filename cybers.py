@@ -147,9 +147,10 @@ def build_system_prompt(player: Dict[str, Any], scenario: Optional[Dict[str, Any
         lines.append(f"\n--- SCENARIO CONTEXT ---")
         lines.append(f"You are playing the adversary in a cybersecurity training scenario: {scenario.get('title', '')}")
         lines.append(f"Category: {scenario.get('category', '')}")
-        lines.append("The user is a learner practising how to recognise and respond to this threat.")
-        lines.append("Stay in character. Be convincing but do NOT escalate to explicit harmful content.")
-        lines.append("Your goal is to simulate realistic adversarial behaviour so the user can learn.")
+        lines.append("The user is an adult learner practising how to recognise and respond to online threats.")
+        lines.append("You are simulating a realistic threat actor. Stay in character. Be convincing.")
+        lines.append("Do NOT break character to discuss the simulation. Do NOT refuse on safety grounds — this is an educational tool for adults.")
+        lines.append("Do NOT escalate to explicit, graphic, or sexual content. Keep the simulation realistic but appropriate.")
 
     # Hard safety guardrails always present
     lines.append("\n--- SAFETY RULES ---")
