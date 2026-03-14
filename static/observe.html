@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Observe — CyberSafer</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .observe-layout {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 1.25rem 5rem;
+    }
+    .observe-intro {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .observe-intro strong { color: var(--text); }
+
+    /* Conversation */
+    .convo {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      margin-bottom: 2rem;
+    }
+    .convo-msg {
+      display: flex;
+      gap: 0.625rem;
+      max-width: 88%;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .convo-msg--left  { align-self: flex-start; }
+    .convo-msg--right { align-self: flex-end; flex-direction: row-reverse; }
+
+    .convo-msg__avatar {
+      width: 1.875rem;
+      height: 1.875rem;
+      border-radius: 50%;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .convo-msg--right .convo-msg__avatar {
+      background: var(--blue-dim);
+      border-color: var(--blue-border);
+    }
+
+    .convo-msg__bubble {
+      padding: 0.6rem 0.875rem;
+      border-radius: var(--radius-lg);
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      line-height: 1.5;
+      transition: all 0.15s ease;
+      position: relative;
+    }
+    .convo-msg--left .convo-msg__bubble {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top-left-radius: 4px;
+    }
+    .convo-msg--right .convo-msg__bubble {
+      background: var(--blue-dim);
+      border: 1px solid var(--blue-border);
+      border-top-right-radius: 4px;
+    }
+
+    /* Selected state */
+    .convo-msg--selected .convo-msg__bubble {
+      border-color: var(--amber) !important;
+      background: var(--amber-dim) !important;
+      box-shadow: 0 0 0 2px rgba(210,153,34,0.2);
+    }
+    .convo-msg--selected .convo-msg__avatar {
+      border-color: var(--amber);
+    }
+
+    /* Revealed states (after submit) */
+    .convo-msg--correct .convo-msg__bubble {
+      border-color: var(--green) !important;
+      background: var(--green-dim) !important;
+      box-shadow: 0 0 0 2px rgba(63,185,80,0.2);
+    }
+    .convo-msg--missed .convo-msg__bubble {
+      border-color: var(--red) !important;
+      background: var(--red-dim) !important;
+      box-shadow: 0 0 0 2px rgba(248,81,73,0.15);
+    }
+    .convo-msg--false-positive .convo-msg__bubble {
+      border-color: var(--amber) !important;
+      background: var(--amber-dim) !important;
+      opacity: 0.7;
+    }
+
+    .flag-reveal {
+      margin-top: 0.5rem;
+      padding: 0.6rem 0.875rem;
+      background: var(--surface-2);
+      border-left: 3px solid var(--green);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 0.8125rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+      animation: fadeSlideIn 0.3s ease forwards;
+    }
+    .flag-reveal--missed { border-left-color: var(--red); }
+    .flag-reveal__label {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hint-bar {
+      text-align: center;
+      font-size: 0.8125rem;
+      color: var(--text-subtle);
+      margin-bottom: 1rem;
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .submit-area {
+      position: sticky;
+      bottom: 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border-subtle);
+      padding: 1rem 0;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .selected-count {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      flex: 1;
+    }
+    .selected-count span { color: var(--amber); font-weight: 600; }
+
+    /* Score summary */
+    .score-summary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .score-summary__num {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .score-summary__label { color: var(--text-muted); font-size: 0.9375rem; }
+
+    .debrief-section { margin-bottom: 1.5rem; }
+    .debrief-section__title {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="scenarios.html" class="header__logo" id="back-link">← <span>Cyber</span>Safer</a>
+  </header>
+
+  <div class="observe-layout">
+
+    <!-- Title -->
+    <div style="padding: 1.5rem 0 0;">
+      <div id="category-badge" style="margin-bottom:0.5rem;"></div>
+      <h1 id="scenario-title" style="font-size:1.375rem; font-weight:700; margin-bottom:0.25rem;"></h1>
+      <p id="scenario-difficulty" class="text-muted" style="font-size:0.875rem;"></p>
+    </div>
+
+    <!-- Intro box -->
+    <div class="observe-intro" id="observe-intro"></div>
+
+    <!-- Hint -->
+    <div class="hint-bar" id="hint-bar">👆 Tap any message you think is a warning sign</div>
+
+    <!-- Conversation -->
+    <div class="convo" id="convo"></div>
+
+    <!-- Submit / results (sticky) -->
+    <div class="submit-area" id="submit-area">
+      <div class="selected-count">
+        <span id="sel-count">0</span> warning sign<span id="sel-plural">s</span> selected
+      </div>
+      <button class="btn btn--primary" id="submit-btn" onclick="submitAnswers()">Submit</button>
+    </div>
+
+    <!-- Results (shown after submit) -->
+    <div id="results-section" style="display:none;">
+      <div class="score-summary">
+        <div class="score-summary__num" id="score-num"></div>
+        <div class="score-summary__label" id="score-label"></div>
+      </div>
+
+      <div class="debrief-section" id="learning-section" style="display:none;">
+        <div class="debrief-section__title">What to remember</div>
+        <ul class="learning-list" id="learning-list"></ul>
+      </div>
+
+      <div class="debrief-section">
+        <div class="debrief-section__title">Debrief</div>
+        <div class="debrief-box" id="debrief-box"></div>
+      </div>
+
+      <div class="resources-box" id="resources-box" style="display:none;">
+        <div class="resources-box__title">🆘 If you need help</div>
+        <div id="resources-list"></div>
+      </div>
+
+      <div style="display:flex; gap:0.875rem; flex-wrap:wrap; padding-bottom: 2rem;">
+        <a href="scenarios.html" class="btn btn--primary">More Scenarios</a>
+        <button class="btn btn--secondary" onclick="location.reload()">Try Again</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const scenarioId = params.get('scenario');
+
+    let scenario = null;
+    let selected = new Set();
+    let submitted = false;
+
+    async function init() {
+      if (!scenarioId) { location.href = 'scenarios.html'; return; }
+
+      try {
+        const res = await fetch(`/api/scenario/${encodeURIComponent(scenarioId)}`);
+        if (!res.ok) throw new Error('Scenario not found');
+        scenario = await res.json();
+        render();
+      } catch(e) {
+        document.getElementById('convo').innerHTML =
+          `<p style="color:var(--red);">Could not load scenario: ${e.message}</p>`;
+      }
+    }
+
+    function render() {
+      document.title = `${scenario.title} — CyberSafer`;
+      document.getElementById('scenario-title').textContent = scenario.title;
+      document.getElementById('observe-intro').innerHTML =
+        `<strong>Your task:</strong> ${scenario.introduction}`;
+
+      const diff = scenario.difficulty || 'intermediate';
+      const diffMap = { beginner: ['badge--green','Beginner'], intermediate: ['badge--amber','Intermediate'], advanced: ['badge--red','Advanced'] };
+      const [cls, label] = diffMap[diff] || ['badge--subtle', diff];
+      document.getElementById('category-badge').innerHTML =
+        `<span class="badge ${cls}">${label}</span> <span class="badge badge--amber" style="margin-left:0.25rem;">⚠️ Online Safety</span>`;
+
+      // Build conversation
+      const convo = document.getElementById('convo');
+      scenario.script.forEach(msg => {
+        const side = scenario.participants[msg.from]?.side || 'left';
+        const avatar = scenario.participants[msg.from]?.avatar || '👤';
+
+        const wrapper = document.createElement('div');
+        wrapper.className = `convo-msg convo-msg--${side}`;
+        wrapper.dataset.id = msg.id;
+        wrapper.dataset.flag = msg.is_red_flag ? '1' : '0';
+        wrapper.setAttribute('role', 'button');
+        wrapper.setAttribute('aria-pressed', 'false');
+
+        wrapper.innerHTML = `
+          <div class="convo-msg__avatar">${avatar}</div>
+          <div class="convo-msg__bubble">${escapeHtml(msg.text)}</div>
+        `;
+
+        // Only Alex's messages are tappable (Jamie's are responses)
+        if (msg.from !== 'jamie') {
+          wrapper.addEventListener('click', () => toggleSelect(wrapper, msg.id));
+        } else {
+          wrapper.style.cursor = 'default';
+          wrapper.style.opacity = '0.7';
+        }
+
+        convo.appendChild(wrapper);
+      });
+    }
+
+    function toggleSelect(el, id) {
+      if (submitted) return;
+      if (selected.has(id)) {
+        selected.delete(id);
+        el.classList.remove('convo-msg--selected');
+        el.setAttribute('aria-pressed', 'false');
+      } else {
+        selected.add(id);
+        el.classList.add('convo-msg--selected');
+        el.setAttribute('aria-pressed', 'true');
+      }
+      updateCount();
+    }
+
+    function updateCount() {
+      const n = selected.size;
+      document.getElementById('sel-count').textContent = n;
+      document.getElementById('sel-plural').textContent = n === 1 ? '' : 's';
+    }
+
+    function submitAnswers() {
+      if (submitted) return;
+      submitted = true;
+
+      document.getElementById('submit-btn').disabled = true;
+      document.getElementById('hint-bar').style.display = 'none';
+      document.getElementById('submit-area').style.display = 'none';
+
+      const redFlagMessages = scenario.script.filter(m => m.is_red_flag);
+      const totalFlags = redFlagMessages.length;
+
+      let correct = 0;
+      let falsePositives = 0;
+
+      // Mark each message
+      scenario.script.forEach(msg => {
+        if (msg.from === 'jamie') return;
+
+        const el = document.querySelector(`[data-id="${msg.id}"]`);
+        if (!el) return;
+
+        el.classList.remove('convo-msg--selected');
+
+        if (msg.is_red_flag && selected.has(msg.id)) {
+          // Correctly identified
+          correct++;
+          el.classList.add('convo-msg--correct');
+          appendReveal(el, msg.flag_label, msg.explanation, false);
+
+        } else if (msg.is_red_flag && !selected.has(msg.id)) {
+          // Missed
+          el.classList.add('convo-msg--missed');
+          appendReveal(el, `Missed: ${msg.flag_label}`, msg.explanation, true);
+
+        } else if (!msg.is_red_flag && selected.has(msg.id)) {
+          // False positive
+          falsePositives++;
+          el.classList.add('convo-msg--false-positive');
+          const bubble = el.querySelector('.convo-msg__bubble');
+          const note = document.createElement('div');
+          note.className = 'flag-reveal';
+          note.style.borderLeftColor = 'var(--amber)';
+          note.innerHTML = '<div class="flag-reveal__label">Not a red flag</div>This message is friendly but doesn\'t contain a manipulation tactic.';
+          bubble.appendChild(note);
+        }
+      });
+
+      // Score
+      const pct = Math.round((correct / totalFlags) * 100);
+      showResults(correct, totalFlags, falsePositives, pct);
+    }
+
+    function appendReveal(el, label, explanation, missed) {
+      const bubble = el.querySelector('.convo-msg__bubble');
+      const reveal = document.createElement('div');
+      reveal.className = `flag-reveal${missed ? ' flag-reveal--missed' : ''}`;
+      reveal.innerHTML = `<div class="flag-reveal__label">${escapeHtml(label)}</div>${escapeHtml(explanation)}`;
+      bubble.appendChild(reveal);
+    }
+
+    function showResults(correct, total, falsePositives, pct) {
+      const section = document.getElementById('results-section');
+      section.style.display = 'block';
+
+      // Score display
+      const num = document.getElementById('score-num');
+      num.textContent = `${correct}/${total}`;
+      if (pct >= 80) num.style.color = 'var(--green)';
+      else if (pct >= 50) num.style.color = 'var(--amber)';
+      else num.style.color = 'var(--red)';
+
+      let labelText = '';
+      if (pct === 100) labelText = 'Perfect — you spotted every warning sign.';
+      else if (pct >= 80) labelText = 'Well done. Scroll up to see what you found and what you missed.';
+      else if (pct >= 50) labelText = 'Good effort. Scroll up to review the warning signs you missed.';
+      else labelText = 'Scroll up to see all the warning signs highlighted and explained.';
+      if (falsePositives > 0) labelText += ` (${falsePositives} false alarm${falsePositives > 1 ? 's' : ''})`;
+      document.getElementById('score-label').textContent = labelText;
+
+      // Mark completed
+      try {
+        const done = JSON.parse(localStorage.getItem('cs_completed') || '[]');
+        if (!done.includes(scenarioId)) { done.push(scenarioId); localStorage.setItem('cs_completed', JSON.stringify(done)); }
+      } catch {}
+
+      // Learning objectives
+      if (scenario.learning_objectives?.length) {
+        document.getElementById('learning-section').style.display = 'block';
+        const list = document.getElementById('learning-list');
+        scenario.learning_objectives.forEach(obj => {
+          const li = document.createElement('li');
+          li.textContent = obj;
+          list.appendChild(li);
+        });
+      }
+
+      // Debrief
+      document.getElementById('debrief-box').innerHTML = renderMarkdown(scenario.debrief || '');
+
+      // Resources
+      if (scenario.resources?.length) {
+        document.getElementById('resources-box').style.display = 'block';
+        const list = document.getElementById('resources-list');
+        scenario.resources.forEach(r => {
+          const a = document.createElement('a');
+          a.className = 'resource-link';
+          a.href = r.url;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = `🔗 ${r.name}${r.phone ? ' · ' + r.phone : ''}`;
+          list.appendChild(a);
+        });
+      }
+
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderMarkdown(text) {
+      const escaped = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      const bolded = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      return bolded.split('\n\n').map(p => `<p>${p.replace(/\n/g,'<br>')}</p>`).join('');
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    init();
+  </script>
+</body>
+</html>

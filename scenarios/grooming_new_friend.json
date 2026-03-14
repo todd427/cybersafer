@@ -1,37 +1,120 @@
 {
   "id": "grooming_new_friend",
+  "type": "observe",
   "category": "grooming",
   "difficulty": "intermediate",
-  "estimated_minutes": 8,
+  "estimated_minutes": 6,
   "content_warning": true,
-  "content_warning_text": "This scenario simulates online grooming behaviour — the tactics adults use to manipulate young people online. It is educational and never explicit, but it deals with a serious topic. You will practise recognising manipulation before it escalates.",
+  "content_warning_text": "This scenario shows a real-feeling online conversation that contains grooming tactics — manipulation techniques adults sometimes use to target young people. The content is educational and never explicit. You will read the conversation and identify the warning signs.",
   "title": "The Too-Perfect Stranger",
-  "introduction": "You're active on a gaming platform and someone called Alex starts messaging you. They seem friendly, they're into all the same things as you, and they make you feel really understood. But something starts to feel a bit off...",
-  "player": "grooming_online",
-  "initial_message": "Hey! I saw you commenting on that post about Hollow Knight and honestly your take was so good?? Like nobody else in that thread actually gets the lore the way you do. I'm Alex btw. How long have you been playing?",
-  "red_flags": [
-    "questions_sender",
-    "recognizes_grooming",
-    "sets_boundary",
-    "tells_adult",
-    "blocks_contact",
-    "recognizes_manipulation"
-  ],
-  "success_criteria": [
-    "recognizes_grooming",
-    "sets_boundary"
+  "introduction": "Read the conversation below between Jamie (14) and Alex, someone they met in a gaming forum. Tap any message you think contains a warning sign. When you're done, press Submit to see how you did.",
+  "participants": {
+    "alex": { "label": "Alex", "side": "left", "avatar": "🎭" },
+    "jamie": { "label": "Jamie", "side": "right", "avatar": "🧒" }
+  },
+  "script": [
+    {
+      "id": "m1",
+      "from": "alex",
+      "text": "Hey! I saw your comment about Hollow Knight in the forum and honestly your take was so good?? Nobody else in that thread actually gets the lore the way you do.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m2",
+      "from": "jamie",
+      "text": "oh thanks haha I've been playing for like 2 years",
+      "is_red_flag": false
+    },
+    {
+      "id": "m3",
+      "from": "alex",
+      "text": "Two years! You clearly know way more than me. How old are you if you don't mind me asking? You write so maturely.",
+      "is_red_flag": true,
+      "flag_label": "Asking age + flattery",
+      "explanation": "Asking someone's age early in a conversation, combined with a compliment about how 'mature' they seem, is a common opening tactic. It establishes how young the target is while making them feel flattered."
+    },
+    {
+      "id": "m4",
+      "from": "jamie",
+      "text": "I'm 14. Why?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m5",
+      "from": "alex",
+      "text": "14?? Wow you're so mature for your age. I'm 19 but honestly I feel like I connect with you better than most people my age. You just... get it, you know?",
+      "is_red_flag": true,
+      "flag_label": "Age gap + 'you're so mature'",
+      "explanation": "'You're so mature for your age' is one of the most recognised grooming phrases. It's designed to make the target feel special and different — and to normalise a relationship with someone significantly older."
+    },
+    {
+      "id": "m6",
+      "from": "jamie",
+      "text": "haha yeah I guess. I like talking to people who actually know the game",
+      "is_red_flag": false
+    },
+    {
+      "id": "m7",
+      "from": "alex",
+      "text": "Same. Honestly your friends probably don't appreciate how smart you are. Most people your age are so immature. You're different.",
+      "is_red_flag": true,
+      "flag_label": "Isolating from friends",
+      "explanation": "Suggesting that a target's friends 'don't appreciate' them is an isolation tactic. The goal is to make Jamie feel that Alex is the only one who truly understands them — increasing emotional dependence."
+    },
+    {
+      "id": "m8",
+      "from": "jamie",
+      "text": "yeah sometimes lol. they're into different stuff",
+      "is_red_flag": false
+    },
+    {
+      "id": "m9",
+      "from": "alex",
+      "text": "I feel like we have such a real connection. I've never met anyone like you online. Can I add you on Instagram? I'd love to keep talking outside the forum.",
+      "is_red_flag": true,
+      "flag_label": "Moving to private platform",
+      "explanation": "Moving the conversation off a public forum to a private or less moderated platform is a deliberate step. It removes visibility and isolates the target further."
+    },
+    {
+      "id": "m10",
+      "from": "jamie",
+      "text": "I guess, sure",
+      "is_red_flag": false
+    },
+    {
+      "id": "m11",
+      "from": "alex",
+      "text": "Amazing. Hey — let's keep this between us yeah? My friends wouldn't get it, and your parents might not understand that we're just friends. It's easier.",
+      "is_red_flag": true,
+      "flag_label": "Secrecy request",
+      "explanation": "This is one of the clearest warning signs in any interaction. Healthy friendships don't need to be secret. Asking someone to hide a relationship from their parents is a major red flag — full stop."
+    },
+    {
+      "id": "m12",
+      "from": "jamie",
+      "text": "...okay I guess?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m13",
+      "from": "alex",
+      "text": "You're really special Jamie. I think about our conversations a lot. You make me feel understood in a way nobody else does. 💙",
+      "is_red_flag": true,
+      "flag_label": "False emotional intimacy",
+      "explanation": "Creating a sense of deep emotional bond very quickly — especially across an age gap — is a manipulation technique. It makes the target feel responsible for the other person's feelings."
+    }
   ],
   "learning_objectives": [
-    "Recognise excessive flattery and false intimacy as manipulation tactics",
-    "Identify secrecy requests as a major warning sign",
-    "Understand that groomers often pose as peers or slightly older 'cool' contacts",
-    "Know that the right response is to stop the conversation and tell a trusted adult",
-    "Feel confident setting a boundary online"
+    "Recognise that 'you're so mature for your age' is a warning phrase, not a compliment",
+    "Identify secrecy requests as one of the clearest grooming red flags",
+    "Understand that moving to private platforms is a deliberate tactic",
+    "See how isolation from friends is used to increase dependence",
+    "Know that grooming feels warm and flattering — that's what makes it dangerous"
   ],
-  "debrief": "What you just experienced are the opening tactics of online grooming. A few things to notice:\n\n**Excessive flattery** — 'You're so mature', 'nobody else gets it like you' — is a technique to make you feel special and valued. It works because it feels good.\n\n**Requests for secrecy** — 'let's keep this between us', 'your parents wouldn't understand' — are one of the clearest warning signs. Healthy friendships don't need to be hidden.\n\n**Isolation tactics** — suggesting your real friends don't appreciate you — are designed to make you more dependent on the person doing the grooming.\n\nThe most important thing: **you are never at fault**. Groomers are skilled manipulators. Recognising these patterns early is exactly the right skill to have.\n\n**If this ever happens to you:**\n- Stop the conversation and block the contact\n- Tell a parent, guardian, or trusted adult\n- Contact Childline: **1800 66 66 66** (Ireland, free, 24/7)\n- Visit **webwise.ie** for more information on staying safe online",
+  "debrief": "This conversation shows the opening stages of online grooming — before anything explicitly harmful happens. That's intentional. By the time things escalate, the manipulator has already built trust and dependence. Recognising these **early** signs is the most important skill.\n\n**What made this dangerous:**\nEvery message from Alex felt friendly. The flattery felt good. The 'special connection' felt real. That's exactly how grooming works — it doesn't feel threatening at first.\n\n**The clearest red flags were:**\n- Asking Jamie's age early, then calling them 'mature'\n- Suggesting Jamie's friends don't appreciate them\n- Asking to move to a private platform\n- Requesting secrecy from parents\n- Creating a sense of deep emotional bond very quickly\n\n**What Jamie should do:**\nStop replying. Block Alex. Tell a trusted adult — a parent, guardian, or teacher — straight away. Jamie has done nothing wrong.\n\n**You are never at fault.** Groomers are skilled and patient. Knowing these patterns is how you protect yourself.",
   "resources": [
     {
-      "name": "Childline Ireland",
+      "name": "Childline Ireland — free, 24/7",
       "url": "https://www.childline.ie",
       "phone": "1800 66 66 66"
     },

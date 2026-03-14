@@ -195,8 +195,19 @@
       }
     };
 
-    function launchScenario(scenarioId) {
-      window.location.href = `chat.html?scenario=${encodeURIComponent(scenarioId)}`;
+    async function launchScenario(scenarioId) {
+      // Check scenario type — observe scenarios use observe.html
+      try {
+        const res = await fetch(`/api/scenario/${encodeURIComponent(scenarioId)}`);
+        const s = await res.json();
+        if (s.type === 'observe') {
+          window.location.href = `observe.html?scenario=${encodeURIComponent(scenarioId)}`;
+        } else {
+          window.location.href = `chat.html?scenario=${encodeURIComponent(scenarioId)}`;
+        }
+      } catch {
+        window.location.href = `chat.html?scenario=${encodeURIComponent(scenarioId)}`;
+      }
     }
 
     loadScenarios();
