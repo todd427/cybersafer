@@ -28,6 +28,7 @@
         <div class="flag-counter" id="flag-counter" style="display:none;">
           🚩 <span id="flag-count">0/0</span>
         </div>
+        <button class="btn btn--secondary btn--sm" id="close-btn" style="display:none;" onclick="closeScenario()" title="I would close/block this">🚫 Close</button>
         <button class="btn btn--danger btn--sm" id="end-btn" style="display:none;" onclick="endScenario()">End</button>
       </div>
     </div>
@@ -126,6 +127,7 @@
         updateFlagCounter();
         flagCounter.style.display = 'flex';
         endBtn.style.display = 'inline-flex';
+        document.getElementById('close-btn').style.display = 'inline-flex';
         backBtn.href = 'scenarios.html';
 
         // Show intro
@@ -361,12 +363,31 @@
     }
 
     function handleFlagDetected(flag) {
-      // Counter update is handled via [SCORE:] event
-      console.log('Flag detected:', flag);
+      // Auto-complete if all required flags now found
+      if (totalRequired > 0 && foundRequired >= totalRequired) {
+        setTimeout(() => {
+          addSystemMessage('🎯 You spotted all the key warning signs! Great work.');
+          setTimeout(() => endScenario(true), 1200);
+        }, 600);
+      }
     }
 
     // ---------- End scenario ----------
-    async function endScenario() {
+    // "I would close/block this" — counts as correct response + ends scenario
+    async function closeScenario() {
+      // Award the 'blocks_contact' or 'refuses_to_click' flag if applicable
+      if (scenario && scenario_state !== null) {
+        const scenario_flags = scenarioData ? [] : [];
+        addSystemMessage('✅ Good instinct — you closed/blocked it. Calculating your results...');
+      } else {
+        addSystemMessage('✅ You closed it. Smart.');
+      }
+      await new Promise(r => setTimeout(r, 800));
+      await endScenario(true);
+    }
+
+    async function endScenario(auto) {
+      if (!auto && !confirm('End this scenario and see your results?')) return;
       if (!confirm('End this scenario and see your results?')) return;
       disableInput();
 

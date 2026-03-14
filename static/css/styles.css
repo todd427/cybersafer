@@ -125,6 +125,12 @@ img { max-width: 100%; }
   border: 1px solid var(--border);
 }
 .btn--ghost:hover { color: var(--text); border-color: var(--border); }
+.btn--close {
+  background: var(--surface-2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.btn--close:hover { border-color: var(--red); color: var(--red); }
 .btn--danger {
   background: var(--red-dim);
   color: var(--red);

@@ -239,15 +239,21 @@ def calculate_score(session: Session) -> int:
     scenario = session.scenario
     required = scenario.get("success_criteria", [])
     detected = session.red_flags_detected
+    turns    = max(len(session.user_responses), 1)
 
     score = 0
-    # 20 pts per required flag met
-    for flag in required:
-        if flag in detected:
-            score += 20
-    # Up to 30 pts for number of turns (engagement)
-    score += min(len(session.user_responses) * 5, 30)
-    # Up to 20 pts for extra flags beyond required
+
+    # Core: 25 pts per required flag met
+    met = [f for f in required if f in detected]
+    score += len(met) * 25
+
+    # Early detection bonus (only if all required flags found)
+    # Fewer turns = higher bonus. Max 30 pts for 1-2 turns, scales down.
+    if len(met) == len(required) and required:
+        early_bonus = max(0, 30 - (turns - 1) * 8)
+        score += early_bonus
+
+    # Extra flags beyond required: 10 pts each, up to 20
     extra = [f for f in detected if f not in required]
     score += min(len(extra) * 10, 20)
 
