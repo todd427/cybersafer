@@ -34,6 +34,12 @@
       "is_red_flag": false
     },
     {
+      "id": "m2a",
+      "from": "alex",
+      "text": "That's actually impressive. Most people give up way before that.",
+      "is_red_flag": false
+    },
+    {
       "id": "m3",
       "from": "alex",
       "text": "Two years! You clearly know way more than me. How old are you if you don't mind me asking? You write so maturely.",
@@ -62,6 +68,12 @@
       "is_red_flag": false
     },
     {
+      "id": "m6a",
+      "from": "alex",
+      "text": "Honestly the lore in this game is incredible. The developers put so much into it.",
+      "is_red_flag": false
+    },
+    {
       "id": "m7",
       "from": "alex",
       "text": "Same. Honestly your friends probably don't appreciate how smart you are. Most people your age are so immature. You're different.",
@@ -87,6 +99,12 @@
       "id": "m10",
       "from": "jamie",
       "text": "I guess, sure",
+      "is_red_flag": false
+    },
+    {
+      "id": "m10a",
+      "from": "alex",
+      "text": "Cool! I'll send you a request. My username is the same on there as here.",
       "is_red_flag": false
     },
     {

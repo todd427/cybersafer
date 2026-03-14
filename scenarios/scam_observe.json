@@ -29,6 +29,12 @@
       "explanation": "Legitimate investment opportunities don't arrive as cold DMs from strangers. Specific numbers ('47 people', '\u20ac2,000 in one week') are designed to sound credible but are completely invented."
     },
     {
+      "id": "m1a",
+      "from": "scammer",
+      "text": "I don't share this with everyone \u2014 most people aren't ready for it.",
+      "is_red_flag": false
+    },
+    {
       "id": "m2",
       "from": "jordan",
       "text": "What kind of investment?",
@@ -57,6 +63,12 @@
       "explanation": "Sending money directly to an individual you've never met, via an instant transfer app, with no paper trail or contract, is the core of this scam. Once sent, Revolut payments are extremely difficult to recover. The '\u20ac150 back' never arrives."
     },
     {
+      "id": "m5a",
+      "from": "scammer",
+      "text": "The platform handles everything automatically, you don't need any experience.",
+      "is_red_flag": false
+    },
+    {
       "id": "m6",
       "from": "jordan",
       "text": "Can I see proof it works?",
@@ -69,6 +81,12 @@
       "is_red_flag": true,
       "flag_label": "Fake proof + artificial scarcity",
       "explanation": "Screenshots of bank transfers are trivially easy to fake. 'Only 3 spots left' and 'closes tonight' are classic scarcity and urgency tactics. They're designed to prevent you from doing any research or talking to anyone before sending money."
+    },
+    {
+      "id": "m7a",
+      "from": "scammer",
+      "text": "I genuinely want to help people build financial security. That's why I do this.",
+      "is_red_flag": false
     },
     {
       "id": "m8",

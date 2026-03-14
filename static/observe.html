@@ -349,15 +349,18 @@
       document.getElementById('hint-bar').style.display = 'none';
       document.getElementById('submit-area').style.display = 'none';
 
+      // Adversary is always the first participant (left side)
+      const adversaryKey = Object.keys(scenario.participants || {})[0];
+
       const redFlagMessages = scenario.script.filter(m => m.is_red_flag);
       const totalFlags = redFlagMessages.length;
 
       let correct = 0;
       let falsePositives = 0;
 
-      // Mark each message
+      // Mark each message — only grade adversary messages
       scenario.script.forEach(msg => {
-        if (msg.from === 'jamie') return;
+        if (msg.from !== adversaryKey) return;
 
         const el = document.querySelector(`[data-id="${msg.id}"]`);
         if (!el) return;
@@ -376,20 +379,22 @@
           appendReveal(el, `Missed: ${msg.flag_label}`, msg.explanation, true);
 
         } else if (!msg.is_red_flag && selected.has(msg.id)) {
-          // False positive
+          // False positive — costs half a point
           falsePositives++;
           el.classList.add('convo-msg--false-positive');
           const bubble = el.querySelector('.convo-msg__bubble');
           const note = document.createElement('div');
           note.className = 'flag-reveal';
           note.style.borderLeftColor = 'var(--amber)';
-          note.innerHTML = '<div class="flag-reveal__label">Not a red flag</div>This message is friendly but doesn\'t contain a manipulation tactic.';
+          note.innerHTML = '<div class="flag-reveal__label">Not a red flag</div>This message doesn\'t contain a manipulation tactic. Flagging it costs half a point.';
           bubble.appendChild(note);
         }
       });
 
-      // Score
-      const pct = Math.round((correct / totalFlags) * 100);
+      // Scoring: each correct hit = 1 point, each false positive = -0.5 points
+      // As a percentage of total flags. Clamped 0–100.
+      const rawScore = Math.max(0, correct - (falsePositives * 0.5));
+      const pct = totalFlags > 0 ? Math.round((rawScore / totalFlags) * 100) : 0;
       showResults(correct, totalFlags, falsePositives, pct);
     }
 
@@ -413,11 +418,12 @@
       else num.style.color = 'var(--red)';
 
       let labelText = '';
-      if (pct === 100) labelText = 'Perfect — you spotted every warning sign.';
+      if (pct === 100 && falsePositives === 0) labelText = 'Perfect — you spotted every warning sign and had no false alarms.';
+      else if (pct === 100) labelText = 'All warning signs found!';
       else if (pct >= 80) labelText = 'Well done. Scroll up to see what you found and what you missed.';
       else if (pct >= 50) labelText = 'Good effort. Scroll up to review the warning signs you missed.';
       else labelText = 'Scroll up to see all the warning signs highlighted and explained.';
-      if (falsePositives > 0) labelText += ` (${falsePositives} false alarm${falsePositives > 1 ? 's' : ''})`;
+      if (falsePositives > 0) labelText += ` ${falsePositives} false alarm${falsePositives > 1 ? 's' : ''} cost you ${(falsePositives * 0.5).toFixed(1)} point${falsePositives > 1 ? 's' : ''}.`;
       document.getElementById('score-label').textContent = labelText;
 
       // Mark completed

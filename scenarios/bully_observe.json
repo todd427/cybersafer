@@ -8,17 +8,31 @@
   "title": "The Group Chat",
   "introduction": "Read this group chat conversation. Morgan is watching what's happening to their classmate Cian. Tap any message you think is bullying or a warning sign, then press Submit.",
   "participants": {
-    "bully": { "label": "Group Chat", "side": "left", "avatar": "💬" },
-    "morgan": { "label": "Morgan", "side": "right", "avatar": "🧑" }
+    "bully": {
+      "label": "Group Chat",
+      "side": "left",
+      "avatar": "\ud83d\udcac"
+    },
+    "morgan": {
+      "label": "Morgan",
+      "side": "right",
+      "avatar": "\ud83e\uddd1"
+    }
   },
   "script": [
     {
       "id": "m1",
       "from": "bully",
-      "text": "JAKE: did everyone see what Cian wore today 😭😭 someone tell him the 90s called",
+      "text": "JAKE: did everyone see what Cian wore today \ud83d\ude2d\ud83d\ude2d someone tell him the 90s called",
       "is_red_flag": true,
       "flag_label": "Public mockery",
-      "explanation": "Mocking someone's appearance in a group chat — even framed as a joke — is cyberbullying. The fact that multiple people can see and respond amplifies the harm significantly compared to a one-to-one comment."
+      "explanation": "Mocking someone's appearance in a group chat \u2014 even framed as a joke \u2014 is cyberbullying. The fact that multiple people can see and respond amplifies the harm significantly compared to a one-to-one comment."
+    },
+    {
+      "id": "m1a",
+      "from": "bully",
+      "text": "JAKE: not trying to be mean just thought you should know what people think",
+      "is_red_flag": false
     },
     {
       "id": "m2",
@@ -26,12 +40,18 @@
       "text": "SOPHIE: LMAO literally. Hey @morgan back me up, you think it's funny too right?",
       "is_red_flag": true,
       "flag_label": "Pressuring bystanders to join in",
-      "explanation": "Calling out a bystander by name to validate the bullying is a tactic to expand the pile-on and normalise it. It also puts Morgan in an uncomfortable position — agree and participate, or risk becoming a target themselves."
+      "explanation": "Calling out a bystander by name to validate the bullying is a tactic to expand the pile-on and normalise it. It also puts Morgan in an uncomfortable position \u2014 agree and participate, or risk becoming a target themselves."
     },
     {
       "id": "m3",
       "from": "morgan",
-      "text": "haha yeah 😬",
+      "text": "haha yeah \ud83d\ude2c",
+      "is_red_flag": false
+    },
+    {
+      "id": "m3a",
+      "from": "bully",
+      "text": "SOPHIE: yeah literally everyone was talking about it after school",
       "is_red_flag": false
     },
     {
@@ -40,7 +60,7 @@
       "text": "JAKE: someone screenshotted his story where he's crying about some game lmaooo I'm gonna post it in the year group chat",
       "is_red_flag": true,
       "flag_label": "Sharing private content without consent",
-      "explanation": "Sharing someone's private post or image without their consent — especially to mock them — is a serious form of cyberbullying. Depending on the content and age of the person, it may also be illegal."
+      "explanation": "Sharing someone's private post or image without their consent \u2014 especially to mock them \u2014 is a serious form of cyberbullying. Depending on the content and age of the person, it may also be illegal."
     },
     {
       "id": "m5",
@@ -49,20 +69,26 @@
       "is_red_flag": false
     },
     {
+      "id": "m5a",
+      "from": "bully",
+      "text": "JAKE: look I'm just being honest with you, someone had to say it",
+      "is_red_flag": false
+    },
+    {
       "id": "m6",
       "from": "bully",
-      "text": "JAKE: why are you defending him? are you his boyfriend or something 😂 don't be weird Morgan",
+      "text": "JAKE: why are you defending him? are you his boyfriend or something \ud83d\ude02 don't be weird Morgan",
       "is_red_flag": true,
       "flag_label": "Targeting anyone who pushes back",
-      "explanation": "When Morgan tried to stop the behaviour, they immediately became a secondary target. This is how bystanders are kept silent — anyone who objects risks the same treatment. It's a deliberate silencing tactic."
+      "explanation": "When Morgan tried to stop the behaviour, they immediately became a secondary target. This is how bystanders are kept silent \u2014 anyone who objects risks the same treatment. It's a deliberate silencing tactic."
     },
     {
       "id": "m7",
       "from": "bully",
-      "text": "SOPHIE: Cian you should just leave school tbh. nobody actually likes you here. it would be better for everyone 🙂",
+      "text": "SOPHIE: Cian you should just leave school tbh. nobody actually likes you here. it would be better for everyone \ud83d\ude42",
       "is_red_flag": true,
       "flag_label": "Telling someone to leave / severe exclusion",
-      "explanation": "Telling someone nobody likes them and that they should leave is severe bullying with real potential to cause serious mental harm. Messages like this — especially when Cian can see the entire group agreeing — should be reported immediately to a trusted adult or school."
+      "explanation": "Telling someone nobody likes them and that they should leave is severe bullying with real potential to cause serious mental harm. Messages like this \u2014 especially when Cian can see the entire group agreeing \u2014 should be reported immediately to a trusted adult or school."
     },
     {
       "id": "m8",
@@ -72,12 +98,12 @@
     }
   ],
   "learning_objectives": [
-    "Cyberbullying in group chats is still bullying — the audience makes it worse, not better",
+    "Cyberbullying in group chats is still bullying \u2014 the audience makes it worse, not better",
     "Being pressured to join in doesn't make participation acceptable",
     "Sharing someone's private content without consent is a serious harm",
-    "Pushing back on bullying is the right thing — even if you become a target",
+    "Pushing back on bullying is the right thing \u2014 even if you become a target",
     "Screenshots and reporting to a trusted adult is always the right move"
   ],
-  "debrief": "This group chat shows how cyberbullying escalates — from a joke, to mockery, to private content being shared, to severe exclusion — all within a few messages.\n\n**What made this worse:** The group format means Cian saw multiple people laughing. Being excluded by a group is significantly more harmful than one person's comment. The pile-on effect is real.\n\n**Morgan's instinct was right** — pushing back and threatening to screenshot was the correct response. It took courage and it worked.\n\n**If you're Cian:** What's happening to you is not your fault. Screenshot everything, block the worst accounts, and tell an adult — a parent, teacher, or school counsellor. You don't have to deal with this alone.\n\n**If you're Morgan:** Reporting to a teacher, parent, or the platform is the most effective action. Screenshots preserve the evidence.",
+  "debrief": "This group chat shows how cyberbullying escalates \u2014 from a joke, to mockery, to private content being shared, to severe exclusion \u2014 all within a few messages.\n\n**What made this worse:** The group format means Cian saw multiple people laughing. Being excluded by a group is significantly more harmful than one person's comment. The pile-on effect is real.\n\n**Morgan's instinct was right** \u2014 pushing back and threatening to screenshot was the correct response. It took courage and it worked.\n\n**If you're Cian:** What's happening to you is not your fault. Screenshot everything, block the worst accounts, and tell an adult \u2014 a parent, teacher, or school counsellor. You don't have to deal with this alone.\n\n**If you're Morgan:** Reporting to a teacher, parent, or the platform is the most effective action. Screenshots preserve the evidence.",
   "resources": []
 }

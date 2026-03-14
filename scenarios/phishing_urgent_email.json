@@ -8,8 +8,16 @@
   "title": "The Urgent Account Security Email",
   "introduction": "Read this email that landed in Jamie's inbox. Tap every message or element you think is suspicious, then press Submit.",
   "participants": {
-    "email": { "label": "Email", "side": "left", "avatar": "📧" },
-    "jamie": { "label": "Jamie", "side": "right", "avatar": "🧑" }
+    "email": {
+      "label": "Email",
+      "side": "left",
+      "avatar": "\ud83d\udce7"
+    },
+    "jamie": {
+      "label": "Jamie",
+      "side": "right",
+      "avatar": "\ud83e\uddd1"
+    }
   },
   "script": [
     {
@@ -18,7 +26,13 @@
       "text": "FROM: security-noreply@aib-accounts-verify.net\nTO: jamie@gmail.com\nSUBJECT: URGENT: Your account has been compromised",
       "is_red_flag": true,
       "flag_label": "Fake sender domain",
-      "explanation": "AIB's real domain is aib.ie — not aib-accounts-verify.net. This domain was registered specifically to look like AIB. Always check the full email address before reading anything else."
+      "explanation": "AIB's real domain is aib.ie \u2014 not aib-accounts-verify.net. This domain was registered specifically to look like AIB. Always check the full email address before reading anything else."
+    },
+    {
+      "id": "m1a",
+      "from": "email",
+      "text": "We take the security of all customer accounts extremely seriously.",
+      "is_red_flag": false
     },
     {
       "id": "m2",
@@ -26,7 +40,7 @@
       "text": "Dear Valued Customer,\n\nWe've detected suspicious activity on your account. For your security, you must verify your identity within 24 hours or your account will be permanently locked.",
       "is_red_flag": true,
       "flag_label": "Generic greeting + threat",
-      "explanation": "Your bank knows your name and uses it. 'Dear Valued Customer' means this was sent to thousands of people. The 24-hour threat is designed to stop you thinking clearly — real banks don't operate this way."
+      "explanation": "Your bank knows your name and uses it. 'Dear Valued Customer' means this was sent to thousands of people. The 24-hour threat is designed to stop you thinking clearly \u2014 real banks don't operate this way."
     },
     {
       "id": "m3",
@@ -34,7 +48,13 @@
       "text": "Click here to verify now: http://totally-real-bank-security.com/verify\n\nThank you,\nCustomer Security Team",
       "is_red_flag": true,
       "flag_label": "Suspicious link",
-      "explanation": "The URL has nothing to do with any real bank. Real bank links go to their own domain — aib.ie, bankofireland.com, etc. Never click a link in a security email. Go directly to your bank's website by typing the address yourself."
+      "explanation": "The URL has nothing to do with any real bank. Real bank links go to their own domain \u2014 aib.ie, bankofireland.com, etc. Never click a link in a security email. Go directly to your bank's website by typing the address yourself."
+    },
+    {
+      "id": "m3a",
+      "from": "email",
+      "text": "For your convenience, this verification process takes less than two minutes to complete.",
+      "is_red_flag": false
     },
     {
       "id": "m4",
@@ -52,12 +72,12 @@
     }
   ],
   "learning_objectives": [
-    "Always check the full sender email address — the domain after the @ symbol",
+    "Always check the full sender email address \u2014 the domain after the @ symbol",
     "Real banks use your name, never 'Dear Valued Customer'",
-    "Never click links in security emails — go directly to the bank's website",
-    "Artificial deadlines are pressure tactics — slow down, don't speed up",
+    "Never click links in security emails \u2014 go directly to the bank's website",
+    "Artificial deadlines are pressure tactics \u2014 slow down, don't speed up",
     "When in doubt, call the number on the back of your card"
   ],
-  "debrief": "This is a textbook phishing email. Every element follows the same formula: fake authority + alarming problem + urgent deadline + link to fake site.\n\n**Jamie did exactly the right thing** — ignored the email and called the real bank directly. That single habit protects against virtually every phishing email ever sent.\n\n**One rule:** When an email about your account asks you to act urgently, slow down. That urgency is the weapon. Removing it removes the threat.",
+  "debrief": "This is a textbook phishing email. Every element follows the same formula: fake authority + alarming problem + urgent deadline + link to fake site.\n\n**Jamie did exactly the right thing** \u2014 ignored the email and called the real bank directly. That single habit protects against virtually every phishing email ever sent.\n\n**One rule:** When an email about your account asks you to act urgently, slow down. That urgency is the weapon. Removing it removes the threat.",
   "resources": []
 }

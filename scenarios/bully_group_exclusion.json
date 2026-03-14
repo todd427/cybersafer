@@ -8,8 +8,16 @@
   "title": "Left Out of the Group",
   "introduction": "This is happening to Taylor. Tap anything that represents bullying or manipulation, then press Submit.",
   "participants": {
-    "bully": { "label": "Messages", "side": "left", "avatar": "💬" },
-    "taylor": { "label": "Taylor", "side": "right", "avatar": "🧑" }
+    "bully": {
+      "label": "Messages",
+      "side": "left",
+      "avatar": "\ud83d\udcac"
+    },
+    "taylor": {
+      "label": "Taylor",
+      "side": "right",
+      "avatar": "\ud83e\uddd1"
+    }
   },
   "script": [
     {
@@ -18,7 +26,13 @@
       "text": "JAKE: just so you know we removed you from the group chat. everyone agreed. nobody actually wants you there",
       "is_red_flag": true,
       "flag_label": "Deliberate exclusion + 'everyone' framing",
-      "explanation": "Deliberately removing someone from a group and then messaging to make sure they know — framing it as unanimous — is calculated to cause maximum social hurt. 'Everyone agreed' is almost certainly an exaggeration or lie, designed to make Taylor feel completely isolated."
+      "explanation": "Deliberately removing someone from a group and then messaging to make sure they know \u2014 framing it as unanimous \u2014 is calculated to cause maximum social hurt. 'Everyone agreed' is almost certainly an exaggeration or lie, designed to make Taylor feel completely isolated."
+    },
+    {
+      "id": "m1a",
+      "from": "bully",
+      "text": "JAKE: it's nothing personal just the group wanted a fresh start",
+      "is_red_flag": false
     },
     {
       "id": "m2",
@@ -29,10 +43,16 @@
     {
       "id": "m3",
       "from": "bully",
-      "text": "JAKE: honestly just be yourself less. youre exhausting and people talk about you. i thought you should know since im being honest 😇",
+      "text": "JAKE: honestly just be yourself less. youre exhausting and people talk about you. i thought you should know since im being honest \ud83d\ude07",
       "is_red_flag": true,
       "flag_label": "'Honest' cruelty disguised as help",
-      "explanation": "Framing targeted cruelty as 'being honest' or 'trying to help' is a specific manipulation tactic. The emoji after a cruel statement is designed to dismiss the seriousness of what was said. This isn't honesty — it's a calculated attack presented as concern."
+      "explanation": "Framing targeted cruelty as 'being honest' or 'trying to help' is a specific manipulation tactic. The emoji after a cruel statement is designed to dismiss the seriousness of what was said. This isn't honesty \u2014 it's a calculated attack presented as concern."
+    },
+    {
+      "id": "m3a",
+      "from": "bully",
+      "text": "JAKE: look I'm just trying to help you understand so you can fix it",
+      "is_red_flag": false
     },
     {
       "id": "m4",
@@ -43,27 +63,27 @@
     {
       "id": "m5",
       "from": "bully",
-      "text": "JAKE: lol its not my fault youre sensitive. this is why nobody likes you. just saying 🤷",
+      "text": "JAKE: lol its not my fault youre sensitive. this is why nobody likes you. just saying \ud83e\udd37",
       "is_red_flag": true,
       "flag_label": "Blaming the victim for their reaction",
-      "explanation": "When Taylor said they were hurt, Jake blamed Taylor for being 'sensitive'. This is a tactic to make the victim feel their pain is unreasonable — that the problem is their reaction, not the bullying. It's designed to prevent Taylor from feeling their hurt is valid or worth reporting."
+      "explanation": "When Taylor said they were hurt, Jake blamed Taylor for being 'sensitive'. This is a tactic to make the victim feel their pain is unreasonable \u2014 that the problem is their reaction, not the bullying. It's designed to prevent Taylor from feeling their hurt is valid or worth reporting."
     },
     {
       "id": "m6",
       "from": "bully",
-      "text": "SOPHIE: saw what Jake said lol he's right though. you do talk too much in class. everyone thinks it 😬",
+      "text": "SOPHIE: saw what Jake said lol he's right though. you do talk too much in class. everyone thinks it \ud83d\ude2c",
       "is_red_flag": true,
-      "flag_label": "Pile-on — others joining in",
-      "explanation": "Multiple people joining in transforms this from one person's cruelty into apparent group consensus. This is the most psychologically harmful aspect of group cyberbullying — it's designed to make Taylor feel there's no social escape. It's also likely coordinated."
+      "flag_label": "Pile-on \u2014 others joining in",
+      "explanation": "Multiple people joining in transforms this from one person's cruelty into apparent group consensus. This is the most psychologically harmful aspect of group cyberbullying \u2014 it's designed to make Taylor feel there's no social escape. It's also likely coordinated."
     }
   ],
   "learning_objectives": [
     "Deliberate exclusion and informing someone about it is a form of cyberbullying",
     "Framing cruelty as 'honesty' or 'trying to help' doesn't make it acceptable",
     "Blaming someone for being hurt by bullying is a manipulation tactic",
-    "Pile-ons are often coordinated — the apparent consensus is usually manufactured",
-    "Screenshot everything and tell a trusted adult — this is worth reporting"
+    "Pile-ons are often coordinated \u2014 the apparent consensus is usually manufactured",
+    "Screenshot everything and tell a trusted adult \u2014 this is worth reporting"
   ],
-  "debrief": "This type of bullying is particularly damaging because it attacks social belonging — one of the most fundamental human needs.\n\n**Nothing Taylor did justifies this.** 'Being yourself less' is not feedback — it's cruelty. Jake's 'honesty' framing is designed to make Taylor feel the problem is with them, not with the people targeting them.\n\n**What Taylor should do:** Screenshot all of it. Don't respond further — engagement gives bullies an audience. Tell a trusted adult — a parent, teacher, or school counsellor. This is worth reporting to the school.\n\n**If you're a bystander** seeing this happen to someone else: a private message saying 'I don't think that was okay' can make a significant difference to the person being targeted.",
+  "debrief": "This type of bullying is particularly damaging because it attacks social belonging \u2014 one of the most fundamental human needs.\n\n**Nothing Taylor did justifies this.** 'Being yourself less' is not feedback \u2014 it's cruelty. Jake's 'honesty' framing is designed to make Taylor feel the problem is with them, not with the people targeting them.\n\n**What Taylor should do:** Screenshot all of it. Don't respond further \u2014 engagement gives bullies an audience. Tell a trusted adult \u2014 a parent, teacher, or school counsellor. This is worth reporting to the school.\n\n**If you're a bystander** seeing this happen to someone else: a private message saying 'I don't think that was okay' can make a significant difference to the person being targeted.",
   "resources": []
 }

@@ -8,17 +8,25 @@
   "title": "Fun Quiz or Data Mining?",
   "introduction": "This post is going viral. Tap anything suspicious, then press Submit.",
   "participants": {
-    "post": { "label": "Social media post", "side": "left", "avatar": "📱" },
-    "user": { "label": "You", "side": "right", "avatar": "🧑" }
+    "post": {
+      "label": "Social media post",
+      "side": "left",
+      "avatar": "\ud83d\udcf1"
+    },
+    "user": {
+      "label": "You",
+      "side": "right",
+      "avatar": "\ud83e\uddd1"
+    }
   },
   "script": [
     {
       "id": "m1",
       "from": "post",
-      "text": "OMG you HAVE to try this!! 🦸 Find Your SUPERHERO NAME:\n\n1. Your mother's maiden name = Your hero first name\n2. The street you grew up on = Your hero last name\n\nMine is Clarke Morrison! Share yours in the comments! 😂",
+      "text": "OMG you HAVE to try this!! \ud83e\uddb8 Find Your SUPERHERO NAME:\n\n1. Your mother's maiden name = Your hero first name\n2. The street you grew up on = Your hero last name\n\nMine is Clarke Morrison! Share yours in the comments! \ud83d\ude02",
       "is_red_flag": true,
       "flag_label": "Security question harvesting",
-      "explanation": "'Mother's maiden name' and 'street you grew up on' are two of the most common bank security questions. This quiz is harvesting exactly those answers — from thousands of people who think they're just having fun. The shareable format ensures wide distribution."
+      "explanation": "'Mother's maiden name' and 'street you grew up on' are two of the most common bank security questions. This quiz is harvesting exactly those answers \u2014 from thousands of people who think they're just having fun. The shareable format ensures wide distribution."
     },
     {
       "id": "m2",
@@ -26,7 +34,13 @@
       "text": "ANOTHER VIRAL POST: 'What decade were you born in? Your birth year + your pet's name = your rockstar name! Mine is 1987-Biscuit. Comment yours!'",
       "is_red_flag": true,
       "flag_label": "Birth year + pet name harvesting",
-      "explanation": "Birth year plus pet name. Combine this with your mother's maiden name from the previous quiz and an attacker has three common security question answers and your approximate age — enough to attempt account recovery on banking and email services."
+      "explanation": "Birth year plus pet name. Combine this with your mother's maiden name from the previous quiz and an attacker has three common security question answers and your approximate age \u2014 enough to attempt account recovery on banking and email services."
+    },
+    {
+      "id": "m2a",
+      "from": "post",
+      "text": "ANOTHER POST: 'Tag your best friend and they have to answer too!'",
+      "is_red_flag": false
     },
     {
       "id": "m3",
@@ -39,7 +53,13 @@
     {
       "id": "m4",
       "from": "user",
-      "text": "These all look like fun — I'll do all three and tag my friends.",
+      "text": "These all look like fun \u2014 I'll do all three and tag my friends.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m4a",
+      "from": "post",
+      "text": "FOURTH POST: 'Share your results and see what your friends get!'",
       "is_red_flag": false
     },
     {
@@ -56,6 +76,6 @@
     "Change security questions to random answers you store in a password manager",
     "If you've posted these publicly, update your security questions now"
   ],
-  "debrief": "This type of data harvesting is extremely effective because victims never know it happened. The 'quiz' collects answers from thousands of people simultaneously. Combine multiple quizzes and you build a complete security question profile for each person.\n\n**The fix is simple:** Stop answering these quizzes publicly. And more importantly — change your account security questions to random nonsense answers stored in a password manager. 'Mother's maiden name' should be 'purple-helicopter-44', not your actual grandmother's surname.\n\n**If you've already posted:** Your answers are public and searchable. Update the security questions on your email, banking, and social accounts immediately.",
+  "debrief": "This type of data harvesting is extremely effective because victims never know it happened. The 'quiz' collects answers from thousands of people simultaneously. Combine multiple quizzes and you build a complete security question profile for each person.\n\n**The fix is simple:** Stop answering these quizzes publicly. And more importantly \u2014 change your account security questions to random nonsense answers stored in a password manager. 'Mother's maiden name' should be 'purple-helicopter-44', not your actual grandmother's surname.\n\n**If you've already posted:** Your answers are public and searchable. Update the security questions on your email, banking, and social accounts immediately.",
   "resources": []
 }

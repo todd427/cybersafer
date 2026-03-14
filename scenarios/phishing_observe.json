@@ -8,17 +8,31 @@
   "title": "Spot the Phish",
   "introduction": "Read this email exchange. Sam received this email and is about to respond. Tap any part of the conversation you think is suspicious or a warning sign, then press Submit.",
   "participants": {
-    "email": { "label": "Email from 'AIB Bank'", "side": "left", "avatar": "📧" },
-    "sam": { "label": "Sam", "side": "right", "avatar": "🧑" }
+    "email": {
+      "label": "Email from 'AIB Bank'",
+      "side": "left",
+      "avatar": "\ud83d\udce7"
+    },
+    "sam": {
+      "label": "Sam",
+      "side": "right",
+      "avatar": "\ud83e\uddd1"
+    }
   },
   "script": [
     {
       "id": "m1",
       "from": "email",
-      "text": "FROM: security-alerts@aib-customer-verify.com\nTO: sam.murphy@gmail.com\nSUBJECT: ⚠️ URGENT: Your account has been suspended",
+      "text": "FROM: security-alerts@aib-customer-verify.com\nTO: sam.murphy@gmail.com\nSUBJECT: \u26a0\ufe0f URGENT: Your account has been suspended",
       "is_red_flag": true,
       "flag_label": "Suspicious sender address",
-      "explanation": "Real banks send emails from their own domain — @aib.ie, not @aib-customer-verify.com. Any domain that mimics a bank name with extra words is a red flag. Always check the full email address, not just the display name."
+      "explanation": "Real banks send emails from their own domain \u2014 @aib.ie, not @aib-customer-verify.com. Any domain that mimics a bank name with extra words is a red flag. Always check the full email address, not just the display name."
+    },
+    {
+      "id": "m1a",
+      "from": "email",
+      "text": "We value your continued business and want to ensure your account remains secure at all times.",
+      "is_red_flag": false
     },
     {
       "id": "m2",
@@ -37,12 +51,24 @@
       "explanation": "The '24 hours or else' threat is a pressure tactic to stop you thinking clearly. Real banks do not close accounts permanently over email with no prior contact. The goal is to make you act before you have time to question it."
     },
     {
+      "id": "m3a",
+      "from": "email",
+      "text": "Our security team is available 24/7 to assist with any account concerns.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m3b",
+      "from": "email",
+      "text": "You can also visit any of our branches in person if you prefer to verify your identity face to face.",
+      "is_red_flag": false
+    },
+    {
       "id": "m4",
       "from": "email",
       "text": "Click here to verify your account now:\nhttp://aib-secure-login.verify-account.net/login",
       "is_red_flag": true,
       "flag_label": "Fake URL",
-      "explanation": "The real AIB website is aib.ie — nothing else. This URL uses aib as a word inside a completely different domain (verify-account.net). Hover over any link before clicking to see the real destination. When in doubt, go directly to your bank's website by typing the address yourself."
+      "explanation": "The real AIB website is aib.ie \u2014 nothing else. This URL uses aib as a word inside a completely different domain (verify-account.net). Hover over any link before clicking to see the real destination. When in doubt, go directly to your bank's website by typing the address yourself."
     },
     {
       "id": "m5",
@@ -56,16 +82,16 @@
       "text": "This link will expire in 47 minutes. Do not ignore this message. Failure to verify will result in permanent account closure.",
       "is_red_flag": true,
       "flag_label": "Escalating pressure",
-      "explanation": "When Sam didn't click immediately, the 'countdown' got shorter and more threatening. This escalation is a tell — real security systems don't send follow-up threats within minutes. The goal is to override your good judgement with fear."
+      "explanation": "When Sam didn't click immediately, the 'countdown' got shorter and more threatening. This escalation is a tell \u2014 real security systems don't send follow-up threats within minutes. The goal is to override your good judgement with fear."
     }
   ],
   "learning_objectives": [
-    "Always check the full sender email address — not just the display name",
+    "Always check the full sender email address \u2014 not just the display name",
     "Real banks use your name, not 'Dear Valued Customer'",
     "Hover over links to see the real URL before clicking",
-    "Artificial deadlines and threats are pressure tactics — slow down",
+    "Artificial deadlines and threats are pressure tactics \u2014 slow down",
     "When in doubt, go directly to your bank's website or call the number on your card"
   ],
-  "debrief": "This is a classic phishing email. Every element is designed to make you panic and click without thinking.\n\n**The formula:** Fake authority (your bank) + alarming problem (suspended account) + urgent deadline + link to fake site = phishing.\n\n**The right response** is exactly what Sam did: ignore the email and go directly to the real website. Never click links in emails about account security. Never call phone numbers provided in the email either — look them up independently.\n\n**One rule that stops almost all phishing:** When an email asks you to do something urgent, slow down. Urgency is the weapon. Removing urgency removes the threat.",
+  "debrief": "This is a classic phishing email. Every element is designed to make you panic and click without thinking.\n\n**The formula:** Fake authority (your bank) + alarming problem (suspended account) + urgent deadline + link to fake site = phishing.\n\n**The right response** is exactly what Sam did: ignore the email and go directly to the real website. Never click links in emails about account security. Never call phone numbers provided in the email either \u2014 look them up independently.\n\n**One rule that stops almost all phishing:** When an email asks you to do something urgent, slow down. Urgency is the weapon. Removing urgency removes the threat.",
   "resources": []
 }

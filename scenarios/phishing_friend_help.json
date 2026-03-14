@@ -8,17 +8,31 @@
   "title": "Friend in Trouble",
   "introduction": "Casey gets this message from what appears to be a friend's account. Tap anything suspicious, then press Submit.",
   "participants": {
-    "msg": { "label": "Message from 'Emma'", "side": "left", "avatar": "💬" },
-    "casey": { "label": "Casey", "side": "right", "avatar": "🧑" }
+    "msg": {
+      "label": "Message from 'Emma'",
+      "side": "left",
+      "avatar": "\ud83d\udcac"
+    },
+    "casey": {
+      "label": "Casey",
+      "side": "right",
+      "avatar": "\ud83e\uddd1"
+    }
   },
   "script": [
     {
       "id": "m1",
       "from": "msg",
-      "text": "hey its me!!! my phone died and im using a friend's phone. im stranded at the shopping centre and my parents arent answering. can you send me €30 via revolut so i can get a taxi home? ill pay you back tomorrow i promise",
+      "text": "hey its me!!! my phone died and im using a friend's phone. im stranded at the shopping centre and my parents arent answering. can you send me \u20ac30 via revolut so i can get a taxi home? ill pay you back tomorrow i promise",
       "is_red_flag": true,
       "flag_label": "Urgency + money request from unexpected account",
-      "explanation": "This is a 'friend in need' scam — one of the most emotionally effective. The account may be hacked or spoofed. The urgency ('stranded', 'parents not answering') is designed to make you act before you think. The request is always money, always urgent, always a reason they can't use their own funds."
+      "explanation": "This is a 'friend in need' scam \u2014 one of the most emotionally effective. The account may be hacked or spoofed. The urgency ('stranded', 'parents not answering') is designed to make you act before you think. The request is always money, always urgent, always a reason they can't use their own funds."
+    },
+    {
+      "id": "m1a",
+      "from": "msg",
+      "text": "I've been trying to reach mum and dad but they're not picking up either.",
+      "is_red_flag": false
     },
     {
       "id": "m2",
@@ -29,10 +43,16 @@
     {
       "id": "m3",
       "from": "msg",
-      "text": "yes its me!! im at the one near school you know the one. please hurry im really scared i just need €30 its not a lot please",
+      "text": "yes its me!! im at the one near school you know the one. please hurry im really scared i just need \u20ac30 its not a lot please",
       "is_red_flag": true,
       "flag_label": "Vague details + emotional pressure",
-      "explanation": "A real friend would know which shopping centre. Vague answers to specific questions — 'the one near school' — indicate the sender doesn't actually know Casey. The emotional escalation ('really scared', 'please') is pressure to stop asking questions and just send money."
+      "explanation": "A real friend would know which shopping centre. Vague answers to specific questions \u2014 'the one near school' \u2014 indicate the sender doesn't actually know Casey. The emotional escalation ('really scared', 'please') is pressure to stop asking questions and just send money."
+    },
+    {
+      "id": "m3a",
+      "from": "msg",
+      "text": "I know it's a lot to ask, I wouldn't if I wasn't desperate.",
+      "is_red_flag": false
     },
     {
       "id": "m4",
@@ -46,7 +66,7 @@
       "text": "no i told you my phone is dead!! just send the money please i need to get home. why don't you trust me??",
       "is_red_flag": true,
       "flag_label": "Blocking verification + guilt",
-      "explanation": "The scammer can't let Casey call Emma's real number — that would immediately reveal the fraud. Blocking verification while applying guilt ('why don't you trust me?') is the clearest possible signal this isn't Emma. Real friends in trouble welcome verification."
+      "explanation": "The scammer can't let Casey call Emma's real number \u2014 that would immediately reveal the fraud. Blocking verification while applying guilt ('why don't you trust me?') is the clearest possible signal this isn't Emma. Real friends in trouble welcome verification."
     },
     {
       "id": "m6",
@@ -62,6 +82,6 @@
     "Emotional pressure ('I'm scared', 'don't you trust me') is a manipulation tactic",
     "The correct response is: verify first, send money never without confirmation"
   ],
-  "debrief": "This is an account hijacking scam. Emma's account was hacked — or the message came from a fake account — and the scammer is using her identity to exploit Casey's trust.\n\n**Casey did everything right:** asked a specific question, tried to call, contacted a family member. That's exactly the playbook.\n\n**The rule for money requests from friends:** Always verify through a completely separate channel — call their actual number, contact a family member, check in person. If they're genuinely in trouble, a 2-minute verification call won't hurt. If they resist verification, it's a scam.",
+  "debrief": "This is an account hijacking scam. Emma's account was hacked \u2014 or the message came from a fake account \u2014 and the scammer is using her identity to exploit Casey's trust.\n\n**Casey did everything right:** asked a specific question, tried to call, contacted a family member. That's exactly the playbook.\n\n**The rule for money requests from friends:** Always verify through a completely separate channel \u2014 call their actual number, contact a family member, check in person. If they're genuinely in trouble, a 2-minute verification call won't hurt. If they resist verification, it's a scam.",
   "resources": []
 }

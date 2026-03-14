@@ -8,17 +8,31 @@
   "title": "Help Me Recover My Account",
   "introduction": "Alex gets this message claiming to be from Instagram. Tap anything suspicious, then press Submit.",
   "participants": {
-    "msg": { "label": "Message from 'Instagram'", "side": "left", "avatar": "📱" },
-    "alex": { "label": "Alex", "side": "right", "avatar": "🧑" }
+    "msg": {
+      "label": "Message from 'Instagram'",
+      "side": "left",
+      "avatar": "\ud83d\udcf1"
+    },
+    "alex": {
+      "label": "Alex",
+      "side": "right",
+      "avatar": "\ud83e\uddd1"
+    }
   },
   "script": [
     {
       "id": "m1",
       "from": "msg",
-      "text": "⚠️ INSTAGRAM SECURITY ALERT ⚠️\n\nYour account has been reported for suspicious activity and may be permanently deleted within 24 hours unless you verify your identity.\n\nClick here to appeal: http://instagram-account-verify.support/appeal",
+      "text": "\u26a0\ufe0f INSTAGRAM SECURITY ALERT \u26a0\ufe0f\n\nYour account has been reported for suspicious activity and may be permanently deleted within 24 hours unless you verify your identity.\n\nClick here to appeal: http://instagram-account-verify.support/appeal",
       "is_red_flag": true,
       "flag_label": "Fake platform alert + suspicious URL",
-      "explanation": "Instagram communicates through the app and emails from @mail.instagram.com — not through external URLs. instagram-account-verify.support is a fake domain. Any security message with a link to a domain that isn't instagram.com should be ignored."
+      "explanation": "Instagram communicates through the app and emails from @mail.instagram.com \u2014 not through external URLs. instagram-account-verify.support is a fake domain. Any security message with a link to a domain that isn't instagram.com should be ignored."
+    },
+    {
+      "id": "m1a",
+      "from": "msg",
+      "text": "This process is part of our ongoing commitment to keeping our community safe.",
+      "is_red_flag": false
     },
     {
       "id": "m2",
@@ -35,12 +49,18 @@
       "explanation": "This is a credential harvesting page. It looks like Instagram's login but the URL is wrong. Entering your username and password here hands them directly to the attacker, who will immediately log into the real Instagram and lock Alex out."
     },
     {
+      "id": "m3a",
+      "from": "msg",
+      "text": "FAKE SITE: 'Your information is protected with 256-bit encryption.'",
+      "is_red_flag": false
+    },
+    {
       "id": "m4",
       "from": "alex",
       "text": "I logged in but now it's asking for my phone number and the 6-digit code Instagram just texted me.",
       "is_red_flag": true,
       "flag_label": "Real-time 2FA bypass attempt",
-      "explanation": "The attacker is logging into the real Instagram right now using Alex's stolen credentials. Instagram sent a real 2FA code to Alex's phone. The fake site is asking Alex to enter it in real time — giving the attacker the code they need to bypass two-factor authentication and complete the takeover."
+      "explanation": "The attacker is logging into the real Instagram right now using Alex's stolen credentials. Instagram sent a real 2FA code to Alex's phone. The fake site is asking Alex to enter it in real time \u2014 giving the attacker the code they need to bypass two-factor authentication and complete the takeover."
     },
     {
       "id": "m5",
@@ -50,12 +70,12 @@
     }
   ],
   "learning_objectives": [
-    "Platforms contact you through their app or official email domains — not external links",
+    "Platforms contact you through their app or official email domains \u2014 not external links",
     "Always check the URL before entering any password",
     "Never enter a 2FA code on a site you reached via a link in a message",
     "A 2FA code request on a 'verification' site means an account takeover is in progress",
     "If this happens: contact Instagram support immediately through the app"
   ],
-  "debrief": "This attack is called a real-time phishing or AiTM (Adversary in the Middle) attack. The fake site doesn't store your credentials for later — it uses them immediately, while you're still on the page.\n\n**The 2FA code request is the critical moment.** If you reach a step that asks for the code Instagram just texted you — on a site you reached via a suspicious link — an account takeover is in progress right now. Close the browser immediately.\n\n**The rule:** Never enter a login code on a website you reached by clicking a link in a message. If you want to check your account status, open the app directly.",
+  "debrief": "This attack is called a real-time phishing or AiTM (Adversary in the Middle) attack. The fake site doesn't store your credentials for later \u2014 it uses them immediately, while you're still on the page.\n\n**The 2FA code request is the critical moment.** If you reach a step that asks for the code Instagram just texted you \u2014 on a site you reached via a suspicious link \u2014 an account takeover is in progress right now. Close the browser immediately.\n\n**The rule:** Never enter a login code on a website you reached by clicking a link in a message. If you want to check your account status, open the app directly.",
   "resources": []
 }

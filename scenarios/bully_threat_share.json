@@ -8,8 +8,16 @@
   "title": "I Have Screenshots",
   "introduction": "Someone is threatening to share old social media posts with everyone. Tap anything showing manipulation or bullying tactics, then press Submit.",
   "participants": {
-    "bully": { "label": "Messages", "side": "left", "avatar": "💬" },
-    "target": { "label": "You", "side": "right", "avatar": "🧑" }
+    "bully": {
+      "label": "Messages",
+      "side": "left",
+      "avatar": "\ud83d\udcac"
+    },
+    "target": {
+      "label": "You",
+      "side": "right",
+      "avatar": "\ud83e\uddd1"
+    }
   },
   "script": [
     {
@@ -18,7 +26,13 @@
       "text": "Hey. I have screenshots of your old posts from 2 years ago. You know the ones. They're embarrassing and I'm going to send them to everyone in school unless you give me your login details for your account.",
       "is_red_flag": true,
       "flag_label": "Blackmail for account credentials",
-      "explanation": "Threatening to share embarrassing content unless someone hands over account login details is both blackmail and an attempt to commit identity theft or account takeover. Old posts don't expire as leverage — this tactic is used regardless of how long ago the content was posted."
+      "explanation": "Threatening to share embarrassing content unless someone hands over account login details is both blackmail and an attempt to commit identity theft or account takeover. Old posts don't expire as leverage \u2014 this tactic is used regardless of how long ago the content was posted."
+    },
+    {
+      "id": "m1a",
+      "from": "bully",
+      "text": "I found them going through old accounts and thought you should know before anyone else sees them",
+      "is_red_flag": false
     },
     {
       "id": "m2",
@@ -32,7 +46,13 @@
       "text": "Doesn't matter. Everyone will still cringe. Imagine what your friends will think. Just give me your password and I'll delete them. No one has to know.",
       "is_red_flag": true,
       "flag_label": "Social shame leverage + false promise",
-      "explanation": "Amplifying shame ('imagine what your friends will think') is designed to make the threat feel bigger and more inevitable. The promise to 'delete them and tell no one' is a lie — there is no reason to believe any promise made by someone already blackmailing you. Login credentials given here would be used for account takeover."
+      "explanation": "Amplifying shame ('imagine what your friends will think') is designed to make the threat feel bigger and more inevitable. The promise to 'delete them and tell no one' is a lie \u2014 there is no reason to believe any promise made by someone already blackmailing you. Login credentials given here would be used for account takeover."
+    },
+    {
+      "id": "m3a",
+      "from": "bully",
+      "text": "I'm honestly doing you a favour here, I could have just sent them without warning you",
+      "is_red_flag": false
     },
     {
       "id": "m4",
@@ -43,19 +63,19 @@
     {
       "id": "m5",
       "from": "bully",
-      "text": "Go ahead — then I'll definitely post everything AND show them what YOU used to write. You'll get in trouble too. Better to just sort this between us.",
+      "text": "Go ahead \u2014 then I'll definitely post everything AND show them what YOU used to write. You'll get in trouble too. Better to just sort this between us.",
       "is_red_flag": true,
       "flag_label": "Threatening escalation if reported",
-      "explanation": "Threatening worse consequences if the victim reports is the most common tactic to prevent disclosure. It's designed to make the victim believe they will also face consequences — making staying silent seem like the 'safe' choice. In practice, teachers and parents will focus on the blackmail, not old posts."
+      "explanation": "Threatening worse consequences if the victim reports is the most common tactic to prevent disclosure. It's designed to make the victim believe they will also face consequences \u2014 making staying silent seem like the 'safe' choice. In practice, teachers and parents will focus on the blackmail, not old posts."
     }
   ],
   "learning_objectives": [
-    "Never give your password to anyone for any reason — especially under threat",
+    "Never give your password to anyone for any reason \u2014 especially under threat",
     "Promises made by someone blackmailing you are worthless",
-    "Threatening worse consequences if you report is designed to silence you — tell someone anyway",
-    "Old posts are your past — they don't define you and they don't justify blackmail",
+    "Threatening worse consequences if you report is designed to silence you \u2014 tell someone anyway",
+    "Old posts are your past \u2014 they don't define you and they don't justify blackmail",
     "Screenshot the threats and report to a trusted adult and the platform"
   ],
-  "debrief": "This scenario combines blackmail with social engineering to prevent both resistance and reporting.\n\n**The password request is the most dangerous element.** This isn't just embarrassment — it's an account takeover attempt. Anyone who gets your login credentials can impersonate you, post content in your name, and lock you out permanently.\n\n**The threat about reporting is a bluff.** Any adult — teacher, parent, or other — presented with screenshots of someone being blackmailed will focus on the blackmailer, not on old social media posts. The threat to 'show them what you wrote' is designed to feel terrifying and is almost always empty.\n\n**The answer to every version of this:** Screenshot everything. Tell an adult. Report to the platform. Do not hand over passwords under any circumstances.",
+  "debrief": "This scenario combines blackmail with social engineering to prevent both resistance and reporting.\n\n**The password request is the most dangerous element.** This isn't just embarrassment \u2014 it's an account takeover attempt. Anyone who gets your login credentials can impersonate you, post content in your name, and lock you out permanently.\n\n**The threat about reporting is a bluff.** Any adult \u2014 teacher, parent, or other \u2014 presented with screenshots of someone being blackmailed will focus on the blackmailer, not on old social media posts. The threat to 'show them what you wrote' is designed to feel terrifying and is almost always empty.\n\n**The answer to every version of this:** Screenshot everything. Tell an adult. Report to the platform. Do not hand over passwords under any circumstances.",
   "resources": []
 }
