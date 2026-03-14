@@ -12,8 +12,8 @@ COPY players/ players/
 COPY scenarios/ scenarios/
 COPY static/ static/
 
-# Expose port
+# Expose port (Railway overrides with $PORT at runtime)
 EXPOSE 8021
 
-# Run
-CMD ["uvicorn", "cybers:app", "--host", "0.0.0.0", "--port", "8021"]
+# Use $PORT if set (Railway), fall back to 8021 (local)
+CMD ["sh", "-c", "uvicorn cybers:app --host 0.0.0.0 --port ${PORT:-8021}"]
