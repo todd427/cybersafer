@@ -75,10 +75,18 @@
 
     <h2>Cookies</h2>
     <p>
-      CyberSafer does not use cookies. We use <strong>localStorage</strong> (scenario progress)
-      and <strong>sessionStorage</strong> (session token) — both stored only in your browser
-      and never transmitted to us except as described above.
+      CyberSafer does not use cookies. We use two browser storage mechanisms, both stored
+      only in your browser and never transmitted to any server:
     </p>
+    <ul>
+      <li><strong>sessionStorage</strong> — stores your onboarding acceptance record for the
+      current browser session only. This record contains a timestamp, your stated age group
+      (16+ or under 16), and a version number. It is deleted automatically when you close
+      the browser tab. It is used to show the onboarding gate on every new session.</li>
+      <li><strong>localStorage</strong> — stores which scenarios you have completed.
+      This persists across sessions so your progress is remembered. It contains only
+      scenario IDs, never personal information.</li>
+    </ul>
 
     <h2>Children and young people</h2>
     <p>

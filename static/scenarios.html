@@ -72,8 +72,11 @@
 </head>
 <body>
   <script>
-    // Onboarding gate — redirect if not yet completed
-    if (!localStorage.getItem('cs_onboarded')) {
+    // Onboarding gate — redirect if not accepted this session
+    try {
+      const _ob = JSON.parse(sessionStorage.getItem('cs_onboarded') || 'null');
+      if (!_ob || !_ob.accepted) window.location.replace('onboarding.html');
+    } catch(e) {
       window.location.replace('onboarding.html');
     }
   </script>

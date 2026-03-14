@@ -245,14 +245,22 @@
     }
 
     function accept() {
-      localStorage.setItem('cs_onboarded', '1');
-      if (isYoung) localStorage.setItem('cs_young', '1');
+      const record = {
+        accepted: true,
+        timestamp: Date.now(),
+        ageGroup: isYoung ? 'under16' : '16plus',
+        version: '1.0'
+      };
+      sessionStorage.setItem('cs_onboarded', JSON.stringify(record));
       window.location.href = 'index.html';
     }
 
-    // If already onboarded, skip straight through
-    if (localStorage.getItem('cs_onboarded') === '1') {
-      window.location.href = 'index.html';
+    // If already accepted this session, skip straight through
+    try {
+      const existing = JSON.parse(sessionStorage.getItem('cs_onboarded') || 'null');
+      if (existing && existing.accepted) window.location.href = 'index.html';
+    } catch(e) {
+      sessionStorage.removeItem('cs_onboarded');
     }
   </script>
 </body>

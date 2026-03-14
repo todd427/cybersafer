@@ -9,8 +9,11 @@
 </head>
 <body>
   <script>
-    // Onboarding gate — redirect if not yet completed
-    if (!localStorage.getItem('cs_onboarded')) {
+    // Onboarding gate — redirect if not accepted this session
+    try {
+      const _ob = JSON.parse(sessionStorage.getItem('cs_onboarded') || 'null');
+      if (!_ob || !_ob.accepted) window.location.replace('onboarding.html');
+    } catch(e) {
       window.location.replace('onboarding.html');
     }
   </script>
@@ -82,7 +85,7 @@
       </p>
       <p class="text-muted" style="font-size:0.8rem;">
         CyberSafer is an educational tool. All scenarios are simulations.<br>
-        <a href="onboarding.html" onclick="localStorage.removeItem('cs_onboarded')" style="color:var(--text-subtle); font-size:0.75rem;">Review welcome screen</a>
+        <a href="onboarding.html" onclick="sessionStorage.removeItem('cs_onboarded')" style="color:var(--text-subtle); font-size:0.75rem;">Review welcome screen</a>
       </p>
     </div>
   </div>
