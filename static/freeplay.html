@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Play — CyberSafer</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="/" class="header__logo">🛡️ <span>Cyber</span>Safer</a>
+    <nav class="header__nav">
+      <a href="scenarios.html">Scenarios</a>
+      <a href="freeplay.html" style="color: var(--text);">Free Play</a>
+    </nav>
+  </header>
+
+  <div class="container page">
+    <h1 class="page__title">Free Play</h1>
+    <p class="page__subtitle">
+      Choose any persona to chat with — no scoring, no pressure. Good for practice, exploration, or just asking the Mentor questions about online safety.
+    </p>
+
+    <div style="margin-bottom:1.5rem;">
+      <div class="warning-banner">
+        <div class="warning-banner__icon">💡</div>
+        <div>
+          <div class="warning-banner__title">How Free Play works</div>
+          <div class="warning-banner__body">
+            Pick a persona and have an open conversation. Adversary personas will stay in character.
+            The <strong>Mentor</strong> will answer any questions about online safety in plain language.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario-grid" id="player-grid">
+      <p class="text-muted">Loading personas...</p>
+    </div>
+  </div>
+
+  <script>
+    const PERSONA_ICONS = {
+      mentor:               '🧭',
+      cyberbully:           '😤',
+      fake_friend:          '🎭',
+      phishing_emailer:     '🎣',
+      phishing_friend_help: '🎣',
+      phishing_prize_winner:'🎣',
+      romance_scammer:      '💔',
+      scam_romance_lonely:  '💔',
+      scam_investment_quick:'💸',
+      scam_job_offer:       '💼',
+      tech_support_scammer: '🖥️',
+      malware_email_attachment: '🦠',
+      malware_free_game:    '🦠',
+      malware_system_warning:'🦠',
+      identity_account_takeover: '🪪',
+      identity_fake_friend: '🪪',
+      identity_social_quiz: '🪪',
+      instagram_security:   '📷',
+      grooming_online:      '⚠️',
+    };
+
+    async function loadPlayers() {
+      const grid = document.getElementById('player-grid');
+      try {
+        const res = await fetch('/api/players');
+        const data = await res.json();
+        const players = data.players || [];
+
+        if (!players.length) {
+          grid.innerHTML = '<p class="text-muted">No personas available.</p>';
+          return;
+        }
+
+        // Mentor first
+        const sorted = [
+          ...players.filter(p => p.is_mentor),
+          ...players.filter(p => !p.is_mentor),
+        ];
+
+        grid.innerHTML = sorted.map(p => {
+          const icon = PERSONA_ICONS[p.id] || '🎭';
+          const isMentor = p.is_mentor;
+          return `
+            <div class="scenario-card" onclick="launch('${p.id}')">
+              <div class="scenario-card__header">
+                <div>
+                  <div style="font-size:1.5rem; margin-bottom:0.4rem;">${icon}</div>
+                  <div class="scenario-card__title">${p.name}</div>
+                </div>
+              </div>
+              <div class="scenario-card__desc">${p.profession}</div>
+              <div class="scenario-card__meta">
+                ${isMentor
+                  ? '<span class="badge badge--blue">Mentor</span>'
+                  : '<span class="badge badge--subtle">Adversary</span>'
+                }
+                ${p.id === 'grooming_online' ? '<span class="badge badge--amber">⚠️ Sensitive</span>' : ''}
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch(e) {
+        grid.innerHTML = `<p style="color:var(--red);">Could not load personas: ${e.message}</p>`;
+      }
+    }
+
+    function launch(playerId) {
+      window.location.href = `chat.html?player=${encodeURIComponent(playerId)}`;
+    }
+
+    loadPlayers();
+  </script>
+</body>
+</html>

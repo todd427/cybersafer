@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+  <title>Chat — CyberSafer</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="overflow:hidden;">
+
+  <div class="chat-layout">
+
+    <!-- Header -->
+    <div class="chat-header">
+      <a href="scenarios.html" class="btn btn--ghost btn--sm" id="back-btn" aria-label="Back">←</a>
+      <div class="chat-header__info">
+        <div class="chat-header__name" id="chat-name">Loading...</div>
+        <div class="chat-header__meta" id="chat-meta"></div>
+      </div>
+      <div class="chat-header__actions">
+        <div class="flag-counter" id="flag-counter" style="display:none;">
+          🚩 <span id="flag-count">0/0</span>
+        </div>
+        <button class="btn btn--danger btn--sm" id="end-btn" style="display:none;" onclick="endScenario()">End</button>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div class="chat-messages" id="messages"></div>
+
+    <!-- Input -->
+    <div class="chat-input-area">
+      <div class="chat-input-row">
+        <textarea
+          class="chat-input"
+          id="input"
+          placeholder="Type your response..."
+          rows="1"
+          disabled
+        ></textarea>
+        <button class="chat-send" id="send-btn" disabled aria-label="Send" onclick="sendMessage()">↑</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ---------- State ----------
+    const params = new URLSearchParams(location.search);
+    const scenarioId = params.get('scenario');
+    const playerId   = params.get('player');
+    const isFreePlay = !!playerId;
+
+    let sessionId  = sessionStorage.getItem('cs_session');
+    let mode       = isFreePlay ? 'freeplay' : 'scenario';
+    let scenarioData = null;
+    let totalRequired = 0;
+    let foundRequired = 0;
+    let isStreaming = false;
+
+    // ---------- DOM refs ----------
+    const messagesEl  = document.getElementById('messages');
+    const inputEl     = document.getElementById('input');
+    const sendBtn     = document.getElementById('send-btn');
+    const flagCounter = document.getElementById('flag-counter');
+    const flagCount   = document.getElementById('flag-count');
+    const chatName    = document.getElementById('chat-name');
+    const chatMeta    = document.getElementById('chat-meta');
+    const endBtn      = document.getElementById('end-btn');
+    const backBtn     = document.getElementById('back-btn');
+
+    // ---------- Init ----------
+    async function init() {
+      if (!scenarioId && !playerId) {
+        window.location.href = 'scenarios.html';
+        return;
+      }
+
+      // Create or reuse session
+      if (!sessionId) {
+        const res = await fetch('/api/session/start', { method: 'POST' });
+        const data = await res.json();
+        sessionId = data.session_id;
+        sessionStorage.setItem('cs_session', sessionId);
+      }
+
+      if (isFreePlay) {
+        await startFreePlay();
+      } else {
+        await startScenario();
+      }
+    }
+
+    async function startScenario() {
+      try {
+        const res = await fetch(`/api/scenario/${encodeURIComponent(scenarioId)}/start`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ session_id: sessionId }),
+        });
+        if (!res.ok) throw new Error(await res.text());
+        const data = await res.json();
+
+        scenarioData = data.scenario;
+        totalRequired = data.required_flags || 0;
+        foundRequired = 0;
+
+        chatName.textContent = data.adversary_name || 'Unknown';
+        chatMeta.textContent = `${data.scenario.title} · ${data.scenario.category}`;
+        updateFlagCounter();
+        flagCounter.style.display = 'flex';
+        endBtn.style.display = 'inline-flex';
+        backBtn.href = 'scenarios.html';
+
+        // Show intro
+        if (data.scenario.introduction) {
+          addSystemMessage(`📖 ${data.scenario.introduction}`);
+        }
+
+        // Show initial adversary message
+        if (data.initial_message) {
+          addMessage('adversary', data.adversary_name, data.initial_message);
+        }
+
+        enableInput();
+      } catch(e) {
+        addSystemMessage(`❌ Failed to start scenario: ${e.message}`);
+      }
+    }
+
+    async function startFreePlay() {
+      try {
+        const res = await fetch('/api/freeplay/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ session_id: sessionId, player_id: playerId }),
+        });
+        if (!res.ok) throw new Error(await res.text());
+        const data = await res.json();
+
+        chatName.textContent = data.player.name;
+        chatMeta.textContent = data.player.profession;
+        backBtn.href = 'freeplay.html';
+
+        addSystemMessage(`💬 Free play mode — chatting with ${data.player.name}. No scoring, no pressure.`);
+        enableInput();
+      } catch(e) {
+        addSystemMessage(`❌ Failed to start free play: ${e.message}`);
+      }
+    }
+
+    // ---------- Messaging ----------
+    function addMessage(role, name, text, flags) {
+      const div = document.createElement('div');
+      div.className = `message message--${role}`;
+
+      const avatar = document.createElement('div');
+      avatar.className = 'message__avatar';
+      avatar.textContent = role === 'user' ? '👤' : '🎭';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'message__bubble';
+      bubble.textContent = text;
+
+      if (flags && flags.length) {
+        const flagsDiv = document.createElement('div');
+        flagsDiv.className = 'message__flags';
+        flags.forEach(f => {
+          const chip = document.createElement('span');
+          chip.className = 'flag-chip';
+          chip.textContent = `🚩 ${formatFlag(f)}`;
+          flagsDiv.appendChild(chip);
+        });
+        bubble.appendChild(flagsDiv);
+      }
+
+      if (role === 'user') {
+        div.appendChild(bubble);
+        div.appendChild(avatar);
+      } else {
+        div.appendChild(avatar);
+        div.appendChild(bubble);
+      }
+
+      messagesEl.appendChild(div);
+      scrollToBottom();
+      return bubble;
+    }
+
+    function addSystemMessage(text) {
+      const div = document.createElement('div');
+      div.className = 'message message--system';
+      const bubble = document.createElement('div');
+      bubble.className = 'message__bubble';
+      bubble.textContent = text;
+      div.appendChild(bubble);
+      messagesEl.appendChild(div);
+      scrollToBottom();
+    }
+
+    function addTypingIndicator() {
+      const div = document.createElement('div');
+      div.className = 'message message--adversary';
+      div.id = 'typing';
+      const avatar = document.createElement('div');
+      avatar.className = 'message__avatar';
+      avatar.textContent = '🎭';
+      const indicator = document.createElement('div');
+      indicator.className = 'typing-indicator';
+      indicator.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+      div.appendChild(avatar);
+      div.appendChild(indicator);
+      messagesEl.appendChild(div);
+      scrollToBottom();
+      return div;
+    }
+
+    function removeTypingIndicator() {
+      const t = document.getElementById('typing');
+      if (t) t.remove();
+    }
+
+    // ---------- Send ----------
+    async function sendMessage() {
+      const text = inputEl.value.trim();
+      if (!text || isStreaming) return;
+
+      inputEl.value = '';
+      autoResize();
+      disableInput();
+      isStreaming = true;
+
+      // Add user message
+      addMessage('user', 'You', text);
+
+      // Typing indicator
+      const typingEl = addTypingIndicator();
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ session_id: sessionId, message: text }),
+        });
+
+        if (!res.ok) throw new Error(await res.text());
+
+        removeTypingIndicator();
+
+        // Stream the response
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+        let aiText = '';
+        let detectedFlags = [];
+        let bubbleEl = null;
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+
+          // Process line by line for control messages
+          const lines = buffer.split('\n');
+          buffer = lines.pop(); // last partial line stays in buffer
+
+          for (const line of lines) {
+            if (line.startsWith('[FLAGS:')) {
+              const flagStr = line.slice(7, -1);
+              detectedFlags = flagStr.split(',').filter(Boolean);
+              detectedFlags.forEach(f => {
+                if (mode === 'scenario') handleFlagDetected(f);
+              });
+            } else if (line.startsWith('[SCORE:')) {
+              const parts = line.slice(7, -1).split('/');
+              foundRequired = parseInt(parts[0]) || 0;
+              totalRequired = parseInt(parts[1]) || totalRequired;
+              updateFlagCounter();
+            } else if (line.startsWith('[ERROR:')) {
+              addSystemMessage(`⚠️ ${line.slice(7, -1)}`);
+            } else {
+              // Regular text token
+              aiText += line + '\n';
+              if (!bubbleEl) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = 'message message--adversary';
+                const av = document.createElement('div');
+                av.className = 'message__avatar';
+                av.textContent = '🎭';
+                bubbleEl = document.createElement('div');
+                bubbleEl.className = 'message__bubble';
+                msgDiv.appendChild(av);
+                msgDiv.appendChild(bubbleEl);
+                messagesEl.appendChild(msgDiv);
+              }
+              bubbleEl.textContent = aiText.trim();
+              scrollToBottom();
+            }
+          }
+        }
+
+        // Handle any remaining buffer
+        if (buffer.trim() && bubbleEl) {
+          aiText += buffer;
+          bubbleEl.textContent = aiText.trim();
+        }
+
+        // Add flag chips to the user message (retroactively)
+        if (detectedFlags.length && mode === 'scenario') {
+          const userMessages = messagesEl.querySelectorAll('.message--user');
+          const lastUser = userMessages[userMessages.length - 1];
+          if (lastUser) {
+            const existingFlags = lastUser.querySelector('.message__flags');
+            if (!existingFlags) {
+              const flagsDiv = document.createElement('div');
+              flagsDiv.className = 'message__flags';
+              detectedFlags.forEach(f => {
+                const chip = document.createElement('span');
+                chip.className = 'flag-chip';
+                chip.textContent = `🚩 ${formatFlag(f)}`;
+                flagsDiv.appendChild(chip);
+              });
+              lastUser.querySelector('.message__bubble').appendChild(flagsDiv);
+            }
+          }
+        }
+
+        scrollToBottom();
+
+      } catch(e) {
+        removeTypingIndicator();
+        addSystemMessage(`⚠️ Error: ${e.message}`);
+      }
+
+      isStreaming = false;
+      enableInput();
+      inputEl.focus();
+    }
+
+    function handleFlagDetected(flag) {
+      // Counter update is handled via [SCORE:] event
+      console.log('Flag detected:', flag);
+    }
+
+    // ---------- End scenario ----------
+    async function endScenario() {
+      if (!confirm('End this scenario and see your results?')) return;
+      disableInput();
+
+      try {
+        const res = await fetch('/api/scenario/complete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ session_id: sessionId }),
+        });
+        const results = await res.json();
+
+        // Mark as completed in localStorage
+        const completed = JSON.parse(localStorage.getItem('cs_completed') || '[]');
+        if (scenarioId && !completed.includes(scenarioId)) {
+          completed.push(scenarioId);
+          localStorage.setItem('cs_completed', JSON.stringify(completed));
+        }
+
+        // Store results and navigate
+        sessionStorage.setItem('cs_results', JSON.stringify(results));
+        sessionStorage.setItem('cs_scenario_title', scenarioData?.title || 'Scenario');
+        window.location.href = 'results.html';
+      } catch(e) {
+        addSystemMessage(`⚠️ Could not complete scenario: ${e.message}`);
+        enableInput();
+      }
+    }
+
+    // ---------- UI helpers ----------
+    function enableInput() {
+      inputEl.disabled = false;
+      sendBtn.disabled = false;
+      inputEl.focus();
+    }
+    function disableInput() {
+      inputEl.disabled = true;
+      sendBtn.disabled = true;
+    }
+    function scrollToBottom() {
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+    function formatFlag(key) {
+      return key.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    }
+    function updateFlagCounter() {
+      if (mode !== 'scenario') return;
+      flagCount.textContent = `${foundRequired}/${totalRequired}`;
+      if (foundRequired > 0) {
+        flagCounter.classList.add('has-flags');
+      }
+    }
+    function autoResize() {
+      inputEl.style.height = 'auto';
+      inputEl.style.height = Math.min(inputEl.scrollHeight, 140) + 'px';
+    }
+
+    // ---------- Input events ----------
+    inputEl.addEventListener('input', autoResize);
+    inputEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // ---------- Boot ----------
+    init().catch(e => {
+      addSystemMessage(`❌ Init error: ${e.message}`);
+    });
+  </script>
+</body>
+</html>

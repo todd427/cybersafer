@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberSafer — Learn to spot online threats</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="/" class="header__logo">🛡️ <span>Cyber</span>Safer</a>
+    <nav class="header__nav">
+      <a href="scenarios.html">Scenarios</a>
+      <a href="freeplay.html">Free Play</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero__icon">🛡️</div>
+    <h1 class="hero__title">Learn to stay safe <span>online</span></h1>
+    <p class="hero__desc">
+      Practice recognising phishing, scams, cyberbullying, and manipulation
+      through realistic AI conversations — in a safe environment.
+    </p>
+    <div class="hero__actions">
+      <a href="scenarios.html" class="btn btn--primary btn--lg">Start Training</a>
+      <a href="freeplay.html" class="btn btn--secondary btn--lg">Free Play</a>
+    </div>
+    <div class="hero__stats">
+      <div class="hero__stat">
+        <div class="hero__stat-num" id="stat-scenarios">15</div>
+        <div class="hero__stat-label">Scenarios</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-num">5</div>
+        <div class="hero__stat-label">Threat categories</div>
+      </div>
+      <div class="hero__stat">
+        <div class="hero__stat-num">Free</div>
+        <div class="hero__stat-label">No account needed</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom: 4rem;">
+    <div class="divider"></div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;" class="feature-grid">
+      <div class="card">
+        <div style="font-size:1.5rem; margin-bottom:0.5rem;">🎭</div>
+        <div style="font-weight:600; margin-bottom:0.25rem;">Realistic adversaries</div>
+        <div class="text-muted" style="font-size:0.875rem;">AI-powered personas — phishers, scammers, bullies — that behave like the real thing.</div>
+      </div>
+      <div class="card">
+        <div style="font-size:1.5rem; margin-bottom:0.5rem;">🚩</div>
+        <div style="font-weight:600; margin-bottom:0.25rem;">Red flag detection</div>
+        <div class="text-muted" style="font-size:0.875rem;">Get rewarded for spotting manipulation tactics as the conversation unfolds.</div>
+      </div>
+      <div class="card">
+        <div style="font-size:1.5rem; margin-bottom:0.5rem;">📱</div>
+        <div style="font-weight:600; margin-bottom:0.25rem;">Works on any device</div>
+        <div class="text-muted" style="font-size:0.875rem;">Fully mobile-friendly. Practise on your phone, tablet, or laptop.</div>
+      </div>
+      <div class="card">
+        <div style="font-size:1.5rem; margin-bottom:0.5rem;">🔒</div>
+        <div style="font-weight:600; margin-bottom:0.25rem;">No account required</div>
+        <div class="text-muted" style="font-size:0.875rem;">No sign-up, no data stored. Just learn.</div>
+      </div>
+    </div>
+
+    <div style="text-align:center; padding: 2rem 0;">
+      <p class="text-muted" style="font-size:0.875rem; margin-bottom: 0.5rem;">
+        Made by <a href="https://foxxelabs.ie" target="_blank">FoxxeLabs</a> ·
+        <a href="https://webwise.ie" target="_blank">Internet safety resources</a>
+      </p>
+      <p class="text-muted" style="font-size:0.8rem;">
+        CyberSafer is an educational tool. All scenarios are simulations.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Load real scenario count
+    fetch('/api/scenarios')
+      .then(r => r.json())
+      .then(data => {
+        const total = Object.values(data.categories || {}).reduce((sum, arr) => sum + arr.length, 0);
+        if (total > 0) document.getElementById('stat-scenarios').textContent = total;
+      })
+      .catch(() => {});
+  </script>
+
+  <style>
+    @media (max-width: 420px) {
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</body>
+</html>

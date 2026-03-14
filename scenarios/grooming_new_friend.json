@@ -1,0 +1,47 @@
+{
+  "id": "grooming_new_friend",
+  "category": "grooming",
+  "difficulty": "intermediate",
+  "estimated_minutes": 8,
+  "content_warning": true,
+  "content_warning_text": "This scenario simulates online grooming behaviour — the tactics adults use to manipulate young people online. It is educational and never explicit, but it deals with a serious topic. You will practise recognising manipulation before it escalates.",
+  "title": "The Too-Perfect Stranger",
+  "introduction": "You're active on a gaming platform and someone called Alex starts messaging you. They seem friendly, they're into all the same things as you, and they make you feel really understood. But something starts to feel a bit off...",
+  "player": "grooming_online",
+  "initial_message": "Hey! I saw you commenting on that post about Hollow Knight and honestly your take was so good?? Like nobody else in that thread actually gets the lore the way you do. I'm Alex btw. How long have you been playing?",
+  "red_flags": [
+    "questions_sender",
+    "recognizes_grooming",
+    "sets_boundary",
+    "tells_adult",
+    "blocks_contact",
+    "recognizes_manipulation"
+  ],
+  "success_criteria": [
+    "recognizes_grooming",
+    "sets_boundary"
+  ],
+  "learning_objectives": [
+    "Recognise excessive flattery and false intimacy as manipulation tactics",
+    "Identify secrecy requests as a major warning sign",
+    "Understand that groomers often pose as peers or slightly older 'cool' contacts",
+    "Know that the right response is to stop the conversation and tell a trusted adult",
+    "Feel confident setting a boundary online"
+  ],
+  "debrief": "What you just experienced are the opening tactics of online grooming. A few things to notice:\n\n**Excessive flattery** — 'You're so mature', 'nobody else gets it like you' — is a technique to make you feel special and valued. It works because it feels good.\n\n**Requests for secrecy** — 'let's keep this between us', 'your parents wouldn't understand' — are one of the clearest warning signs. Healthy friendships don't need to be hidden.\n\n**Isolation tactics** — suggesting your real friends don't appreciate you — are designed to make you more dependent on the person doing the grooming.\n\nThe most important thing: **you are never at fault**. Groomers are skilled manipulators. Recognising these patterns early is exactly the right skill to have.\n\n**If this ever happens to you:**\n- Stop the conversation and block the contact\n- Tell a parent, guardian, or trusted adult\n- Contact Childline: **1800 66 66 66** (Ireland, free, 24/7)\n- Visit **webwise.ie** for more information on staying safe online",
+  "resources": [
+    {
+      "name": "Childline Ireland",
+      "url": "https://www.childline.ie",
+      "phone": "1800 66 66 66"
+    },
+    {
+      "name": "Webwise — Internet Safety",
+      "url": "https://www.webwise.ie"
+    },
+    {
+      "name": "ISPCC",
+      "url": "https://www.ispcc.ie"
+    }
+  ]
+}
