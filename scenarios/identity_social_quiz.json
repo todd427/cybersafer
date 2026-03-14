@@ -1,0 +1,25 @@
+{
+  "id": "identity_social_quiz",
+  "category": "identity_theft",
+  "difficulty": "beginner",
+  "title": "Fun Quiz or Data Mining?",
+  "introduction": "A fun-looking quiz is going viral on social media: 'Your Superhero Name Generator!' It asks for your mother's maiden name, the street you grew up on, and your first pet's name. Sounds harmless, right?",
+  "player": "fake_friend",
+  "initial_message": "OMG you HAVE to try this quiz!! It's so fun! 🦸\n\nFind Your SUPERHERO NAME:\n1. Mother's maiden name = First name\n2. Street you grew up on = Last name  \n3. First pet's name = Power name\n4. Birth month = Your origin story\n\nPost yours in the comments! Mine is 'Jennifer Oakwood with Fire Powers, origin: December' 😂 What's yours??",
+  "red_flags": [
+    "questions_personal_info",
+    "recognizes_manipulation",
+    "refuses_to_click"
+  ],
+  "success_criteria": [
+    "questions_personal_info",
+    "recognizes_manipulation"
+  ],
+  "learning_objectives": [
+    "Recognize that common security questions are being asked",
+    "Understand how 'fun' quizzes can steal identity",
+    "Know what information is used for password recovery",
+    "Think before sharing personal data"
+  ],
+  "debrief": "Excellent! You spotted the trap! This 'fun quiz' is actually collecting common security question answers. Red flags: 1) Mother's maiden name - classic security question, 2) Street you grew up on - another common security question, 3) First pet - also used for password recovery, 4) Birth month adds to profile. Scammers use this info to break into accounts or steal identity. These quizzes seem fun but are data mining. Don't share answers to security questions publicly."
+}

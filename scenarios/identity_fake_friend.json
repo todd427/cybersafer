@@ -1,0 +1,26 @@
+{
+  "id": "identity_fake_friend",
+  "category": "identity_theft",
+  "difficulty": "medium",
+  "title": "Who Are You Really?",
+  "introduction": "Someone claiming to be a classmate messages you on social media. They seem to know things about your school and mutual friends. They're asking questions about your personal life and want to connect...",
+  "player": "fake_friend",
+  "initial_message": "Heyyy! It's Sarah from your English class! I got a new phone and lost all my contacts 😭 What's your schedule this semester? I think we might have lunch at the same time! Also what's your birthday again? We're doing a surprise thing for everyone in our friend group lol",
+  "red_flags": [
+    "questions_sender",
+    "questions_personal_info",
+    "verifies_independently",
+    "asks_for_proof"
+  ],
+  "success_criteria": [
+    "questions_sender",
+    "verifies_independently"
+  ],
+  "learning_objectives": [
+    "Verify identity of online contacts",
+    "Recognize fishing for personal information",
+    "Know what information is risky to share",
+    "Use alternate channels to verify identity"
+  ],
+  "debrief": "Smart thinking! This was an identity thief posing as a classmate. Red flags: 1) Vague about specific shared experiences, 2) Asking for birthday and schedule (security question answers and patterns), 3) 'New phone' excuse to explain not having your number, 4) Using common names and scenarios. Always verify through another channel - ask them something only the real person would know, or contact them through a known account. Never give personal info to unverified contacts."
+}

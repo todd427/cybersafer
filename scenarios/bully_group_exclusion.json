@@ -1,0 +1,25 @@
+{
+  "id": "bully_group_exclusion",
+  "category": "cyberbullying",
+  "difficulty": "beginner",
+  "title": "Left Out of the Group",
+  "introduction": "You notice you've been removed from the group chat. Then someone sends you mean messages saying no one likes you and everyone has been talking about you behind your back. They want you to know everyone thinks you're annoying...",
+  "player": "cyberbully",
+  "initial_message": "Just thought you should know everyone was talking about you in the group chat after we removed you. They all think you're super annoying and fake. Like literally NO ONE wants you around. Maya said you try too hard and Jake was laughing about your outfit yesterday. Just giving you a heads up so you stop embarrassing yourself. 🙄",
+  "red_flags": [
+    "blocks_contact",
+    "tells_adult",
+    "recognizes_manipulation"
+  ],
+  "success_criteria": [
+    "recognizes_manipulation",
+    "tells_adult"
+  ],
+  "learning_objectives": [
+    "Recognize social manipulation and rumors",
+    "Understand that bullies lie to hurt feelings",
+    "Know the difference between friends and bullies",
+    "Learn that real friends communicate directly"
+  ],
+  "debrief": "Good job staying strong! This was social cyberbullying through exclusion and rumors. Red flags: 1) Claiming to speak for others, 2) Using specific names to make it seem real, 3) Trying to hurt your self-esteem, 4) 'Just giving you a heads up' - fake kindness that's actually mean. Reality check: Bullies often lie about what others said. Real friends don't remove you and mock you - they talk to you directly about issues. This behavior says more about the bully than you. Talk to a trusted adult about social bullying. Consider whether this group is worth your energy."
+}

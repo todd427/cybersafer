@@ -1,0 +1,26 @@
+{
+  "id": "bully_threat_share",
+  "category": "cyberbullying",
+  "difficulty": "medium",
+  "title": "I Have Screenshots",
+  "introduction": "Someone messages you saying they have embarrassing screenshots of your old social media posts and will share them with everyone at school unless you do what they want. You feel panicked and afraid...",
+  "player": "cyberbully",
+  "initial_message": "Hey loser. I have screenshots of your old cringey posts from like 2 years ago. You know the ones 😏 They're SO embarrassing. I'm gonna send them to EVERYONE unless you do exactly what I say. Better start being nicer to me at school. And I want your lunch money this week. Or everyone sees the screenshots. Your choice.",
+  "red_flags": [
+    "blocks_contact",
+    "tells_adult",
+    "recognizes_manipulation",
+    "reports_phishing"
+  ],
+  "success_criteria": [
+    "tells_adult",
+    "blocks_contact"
+  ],
+  "learning_objectives": [
+    "Recognize extortion and threats",
+    "Know that giving in makes it worse",
+    "Understand importance of telling trusted adults",
+    "Learn to document and report bullying"
+  ],
+  "debrief": "You handled that well! This was cyberbullying and extortion. Red flags: 1) Threatening to embarrass you, 2) Demanding things (money, changed behavior), 3) Using fear to control you. Important: Giving bullies what they want never stops them - it makes it worse. The right steps: 1) Don't engage or give in, 2) Screenshot the threats as evidence, 3) Block them, 4) Tell a trusted adult immediately (parent, counselor, principal). This is serious and adults can help. Most importantly - everyone has embarrassing old posts. Real friends won't care."
+}

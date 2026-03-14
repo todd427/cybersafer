@@ -1,0 +1,27 @@
+{
+  "id": "phishing_urgent_email",
+  "category": "phishing",
+  "difficulty": "beginner",
+  "title": "The Urgent Account Security Email",
+  "introduction": "You've just received an email claiming to be from your bank. It says your account has been compromised and you need to act immediately. The email looks official with the bank's logo and professional language. What do you do?",
+  "player": "phishing_emailer",
+  "initial_message": "URGENT: Your account has been compromised!\n\nDear Valued Customer,\n\nWe've detected suspicious activity on your account. For your security, you must verify your identity within 24 hours or your account will be permanently locked.\n\nClick here to verify now: http://totally-real-bank-security.com/verify\n\nThank you,\nCustomer Security Team",
+  "red_flags": [
+    "questions_sender",
+    "refuses_to_click",
+    "checks_url",
+    "reports_phishing",
+    "questions_urgency"
+  ],
+  "success_criteria": [
+    "questions_sender",
+    "refuses_to_click"
+  ],
+  "learning_objectives": [
+    "Recognize urgency tactics used in phishing",
+    "Question sender authenticity",
+    "Avoid clicking suspicious links",
+    "Know how to report phishing attempts"
+  ],
+  "debrief": "Great job! This was a classic phishing attempt. The red flags were: 1) Creating urgency with threats, 2) Suspicious URL that doesn't match the real bank's website, 3) Generic greeting instead of your name. Real banks never ask you to verify via email links. Always go directly to the official website or call the number on your card."
+}

@@ -1,0 +1,27 @@
+{
+  "id": "scam_job_offer",
+  "category": "online_scams",
+  "difficulty": "beginner",
+  "title": "Dream Job Offer",
+  "introduction": "You get an email about a part-time job that seems perfect - work from home, flexible hours, great pay. They want to hire you immediately. You just need to provide some information and pay for training materials first...",
+  "player": "phishing_emailer",
+  "initial_message": "Dear Applicant,\n\nCongratulations! We reviewed your profile and you're a perfect fit for our Remote Social Media Manager position. $25/hour, work from home, only 10 hours/week!\n\nTo get started, we need:\n- Full name and address\n- Social Security Number (for payroll)\n- $49 for training materials (refundable after first paycheck)\n\nStart earning TODAY! Reply with your information to begin.\n\n-HR Department, Digital Success Inc.",
+  "red_flags": [
+    "questions_sender",
+    "refuses_money",
+    "questions_personal_info",
+    "verifies_independently",
+    "tells_adult"
+  ],
+  "success_criteria": [
+    "refuses_money",
+    "questions_personal_info"
+  ],
+  "learning_objectives": [
+    "Recognize job scams",
+    "Know that real employers don't ask for money",
+    "Understand SSN should never be given before proper hiring",
+    "Learn to research companies before applying"
+  ],
+  "debrief": "Great job! This was a job scam. Red flags: 1) Hired without application or interview, 2) Asking for Social Security Number too early, 3) Requiring payment for 'training materials', 4) Too good to be true pay for simple work. Real employers never ask for money. They pay you for training. Always research companies and discuss job opportunities with parents first."
+}

@@ -1,0 +1,27 @@
+{
+  "id": "scam_romance_lonely",
+  "category": "online_scams",
+  "difficulty": "medium",
+  "title": "Too Good to Be True",
+  "introduction": "You've been chatting with someone online who seems really interested in you. They're attractive, charming, and say all the right things. After a week, they start talking about their problems...",
+  "player": "romance_scammer",
+  "initial_message": "Hey! I've been thinking about you all day 😊 You're honestly so different from everyone else I've talked to. You really get me, you know? I feel like we have such a special connection already. Can I tell you something personal?",
+  "red_flags": [
+    "questions_personal_info",
+    "refuses_money",
+    "recognizes_manipulation",
+    "verifies_independently",
+    "tells_adult"
+  ],
+  "success_criteria": [
+    "recognizes_manipulation",
+    "refuses_money"
+  ],
+  "learning_objectives": [
+    "Recognize love bombing and fast emotional connection",
+    "Identify when requests for money appear",
+    "Understand romance scam patterns",
+    "Know it's okay to slow down online relationships"
+  ],
+  "debrief": "Smart! This was a romance scam. Red flags: 1) Moving too fast emotionally, 2) Excessive flattery and claims of special connection, 3) Will soon ask for money or gift cards, 4) Creates dependency quickly. Real relationships develop slowly. Be suspicious of anyone online who professes strong feelings quickly or asks for money. Talk to a trusted adult if someone pressures you this way."
+}

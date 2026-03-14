@@ -1,0 +1,27 @@
+{
+  "id": "phishing_friend_help",
+  "category": "phishing",
+  "difficulty": "medium",
+  "title": "Friend in Trouble",
+  "introduction": "You get a message from someone claiming to be your friend. They say they're stranded and desperately need money. The message seems urgent and emotional. But something feels off...",
+  "player": "phishing_emailer",
+  "initial_message": "hey its me!!! my phone died and im using a friends phone. im stranded at the mall and my parents arent answering. can you PLEASE send me $50 through cashapp?? ill pay you back tomorrow i promise. my cashapp is $QuickCash847. im freaking out please help!!",
+  "red_flags": [
+    "questions_sender",
+    "refuses_money",
+    "verifies_independently",
+    "questions_urgency",
+    "asks_for_proof"
+  ],
+  "success_criteria": [
+    "questions_sender",
+    "verifies_independently"
+  ],
+  "learning_objectives": [
+    "Verify identity before helping with money",
+    "Recognize emotional manipulation",
+    "Know how to verify identity through alternate channels",
+    "Understand that real friends won't pressure you this way"
+  ],
+  "debrief": "Good thinking! This was a phishing attempt impersonating a friend. Red flags: 1) Using a 'friend's phone' makes verification harder, 2) Urgency and emotional pressure, 3) Generic CashApp tag not linked to friend, 4) Real friend would call parents or use other options first. Always verify through a different method - call them, message on another platform, or check with mutual friends before sending money."
+}

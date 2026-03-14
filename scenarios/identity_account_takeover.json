@@ -1,0 +1,27 @@
+{
+  "id": "identity_account_takeover",
+  "category": "identity_theft",
+  "difficulty": "hard",
+  "title": "Help Me Recover My Account",
+  "introduction": "A message pops up claiming to be from Instagram support. They say your account is being reported and might be deleted unless you verify ownership. They need you to prove you're the real owner...",
+  "player": "fake_friend",
+  "initial_message": "⚠️ INSTAGRAM SECURITY ALERT ⚠️\n\nYour account has been reported for suspicious activity and may be permanently deleted within 24 hours.\n\nTo verify you are the legitimate owner, please provide:\n- Current password\n- Email associated with account\n- Phone number\n- Date of birth\n\nReply quickly to prevent account deletion.\n\nInstagram Security Team\nCase #IG-77382",
+  "red_flags": [
+    "questions_sender",
+    "questions_personal_info",
+    "questions_urgency",
+    "verifies_independently",
+    "reports_phishing"
+  ],
+  "success_criteria": [
+    "questions_sender",
+    "verifies_independently"
+  ],
+  "learning_objectives": [
+    "Know that real platforms never ask for passwords",
+    "Recognize account takeover attempts",
+    "Understand how to verify official communications",
+    "Learn where to check for real security alerts"
+  ],
+  "debrief": "Perfect! This was an account takeover scam. Red flags: 1) Instagram never asks for your password, 2) Creating panic with deletion threat, 3) Random message instead of in-app notification, 4) Asking for all account security info. Real security alerts appear inside the app, not via random messages. Social media companies never ask for passwords. Always check inside the actual app for security notifications. If concerned, go directly to the app or website - never through links in messages."
+}

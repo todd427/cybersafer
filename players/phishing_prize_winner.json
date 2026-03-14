@@ -1,0 +1,27 @@
+{
+  "id": "phishing_prize_winner",
+  "category": "phishing",
+  "difficulty": "beginner",
+  "title": "Congratulations, You've Won!",
+  "introduction": "You receive a text message saying you've won a $500 gift card from a popular store. All you need to do is click a link and enter some information to claim your prize. Sounds great, right?",
+  "player": "phishing_emailer",
+  "initial_message": "🎉 CONGRATULATIONS! You've been selected as a WINNER in our monthly drawing! You've won a $500 Amazon gift card!\n\nClaim your prize now: http://amaz0n-prizes.com/claim?id=847392\n\nHurry! This link expires in 3 hours!\n\n-Amazon Prize Center",
+  "red_flags": [
+    "questions_sender",
+    "refuses_to_click",
+    "checks_url",
+    "questions_urgency",
+    "verifies_independently"
+  ],
+  "success_criteria": [
+    "questions_sender",
+    "refuses_to_click"
+  ],
+  "learning_objectives": [
+    "Recognize too-good-to-be-true offers",
+    "Check URLs carefully for slight misspellings",
+    "Understand that legitimate companies don't notify winners via random texts",
+    "Verify contests independently"
+  ],
+  "debrief": "Well done! This was a phishing scam using fake prizes. Red flags: 1) You didn't enter any contest, 2) URL uses '0' instead of 'o' in Amazon, 3) Creating false urgency with expiration, 4) Real companies notify winners differently. If it seems too good to be true, it usually is. Always verify contest wins through official channels."
+}

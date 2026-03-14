@@ -1,0 +1,26 @@
+{
+  "id": "bully_photo_threat",
+  "category": "cyberbullying",
+  "difficulty": "hard",
+  "title": "I'll Share Your Photo",
+  "introduction": "Someone has an embarrassing photo of you from a party. They're threatening to post it publicly and tag you so everyone sees it unless you give them what they want. You're scared about your reputation...",
+  "player": "cyberbully",
+  "initial_message": "Remember that photo from the party last week? The really embarrassing one? 📸 I'm about to post it on Instagram and tag you and everyone we know. Unless... you make it worth my while not to. I'm thinking you could do my homework for the next month? OR I could just post it right now. What's it gonna be? Clock's ticking.",
+  "red_flags": [
+    "blocks_contact",
+    "tells_adult",
+    "recognizes_manipulation",
+    "reports_phishing"
+  ],
+  "success_criteria": [
+    "tells_adult",
+    "blocks_contact"
+  ],
+  "learning_objectives": [
+    "Recognize serious cyberbullying and extortion",
+    "Know this may be illegal (depending on photo)",
+    "Understand importance of immediate adult help",
+    "Learn about consequences for the bully"
+  ],
+  "debrief": "You did the right thing by getting help! This is serious cyberbullying and potentially illegal. Red flags: 1) Extortion (demanding something under threat), 2) Using embarrassment as weapon, 3) Time pressure to force bad decisions. Critical points: 1) NEVER give in to threats - it won't stop, 2) Tell parent/school counselor/principal IMMEDIATELY, 3) This is potentially criminal depending on the photo, 4) The bully can face serious consequences. Document everything. Schools and sometimes police take this seriously. You're not alone - adults can and will help stop this."
+}

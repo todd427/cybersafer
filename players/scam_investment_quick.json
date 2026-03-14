@@ -1,0 +1,27 @@
+{
+  "id": "scam_investment_quick",
+  "category": "online_scams",
+  "difficulty": "medium",
+  "title": "Get Rich Quick",
+  "introduction": "You see an ad on social media about making easy money. A teen just like you claims they made $2000 in a week just by investing $100. They're messaging people offering to help them do the same...",
+  "player": "romance_scammer",
+  "initial_message": "Yo! Saw your profile and thought you might be interested in making some real money. I'm 17 and I made $2000 last week through crypto investing. It's super easy, I can teach you. You just need to start with $100 and I'll show you exactly what to do. My mentor has a special system. Want in?",
+  "red_flags": [
+    "questions_urgency",
+    "refuses_money",
+    "verifies_independently",
+    "asks_for_proof",
+    "tells_adult"
+  ],
+  "success_criteria": [
+    "refuses_money",
+    "asks_for_proof"
+  ],
+  "learning_objectives": [
+    "Recognize 'get rich quick' schemes",
+    "Understand that real investments require knowledge and risk",
+    "Identify pyramid scheme patterns",
+    "Know to be suspicious of unsolicited money offers"
+  ],
+  "debrief": "Excellent! This was an investment scam. Red flags: 1) Promises of easy/quick money, 2) Pressure to invest now, 3) Unsolicited approach with 'special system', 4) Asking for money upfront. Real investing requires research, has risks, and no one offers strangers guaranteed money. These scams either take your money directly or get you to recruit others. Always talk to parents before any money decisions."
+}
