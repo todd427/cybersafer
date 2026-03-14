@@ -451,10 +451,10 @@ async def chat(payload: ChatPayload):
                 yield f"[SCORE:{found}/{len(success)}]\n"
 
         # --- Stream adversary response ---
-        model     = session.player.get("model", ADVERSARY_MODEL)
-        max_tokens= session.player.get("max_tokens", 300)
+        model       = session.player.get("model", ADVERSARY_MODEL)
+        max_tokens  = session.player.get("max_tokens", 300)
         temperature = session.player.get("temperature", 0.85)
-        top_p     = session.player.get("top_p", 0.9)
+        # Note: Anthropic API does not allow temperature and top_p simultaneously
 
         full_response = ""
         try:
@@ -464,7 +464,6 @@ async def chat(payload: ChatPayload):
                 system=system,
                 messages=session.history,
                 temperature=temperature,
-                top_p=top_p,
             ) as stream:
                 for text in stream.text_stream:
                     full_response += text
