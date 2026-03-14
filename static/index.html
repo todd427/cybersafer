@@ -19,7 +19,6 @@
     <a href="/" class="header__logo">🛡️ <span>Cyber</span>Safer</a>
     <nav class="header__nav">
       <a href="scenarios.html">Scenarios</a>
-      <a href="freeplay.html">Free Play</a>
     </nav>
   </header>
 
@@ -32,7 +31,6 @@
     </p>
     <div class="hero__actions">
       <a href="scenarios.html" class="btn btn--primary btn--lg">Start Training</a>
-      <a href="freeplay.html" class="btn btn--secondary btn--lg">Free Play</a>
     </div>
     <div class="hero__stats">
       <div class="hero__stat">
@@ -91,11 +89,10 @@
 
   <script>
     // Load real scenario count
-    fetch('/api/scenarios')
+    fetch('scenarios-index.json')
       .then(r => r.json())
       .then(data => {
-        const total = Object.values(data.categories || {}).reduce((sum, arr) => sum + arr.length, 0);
-        if (total > 0) document.getElementById('stat-scenarios').textContent = total;
+        if (data.total > 0) document.getElementById('stat-scenarios').textContent = data.total;
       })
       .catch(() => {});
   </script>

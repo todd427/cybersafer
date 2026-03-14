@@ -269,7 +269,7 @@
       if (!scenarioId) { location.href = 'scenarios.html'; return; }
 
       try {
-        const res = await fetch(`/api/scenario/${encodeURIComponent(scenarioId)}`);
+        const res = await fetch(`scenarios/${encodeURIComponent(scenarioId)}.json`);
         if (!res.ok) throw new Error('Scenario not found');
         scenario = await res.json();
         render();

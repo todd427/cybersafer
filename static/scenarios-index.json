@@ -1,0 +1,248 @@
+{
+  "categories": {
+    "cyberbullying": [
+      {
+        "id": "bully_group_exclusion",
+        "type": "observe",
+        "tier": "respond",
+        "category": "cyberbullying",
+        "difficulty": "intermediate",
+        "title": "Left Out of the Group",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "This is happening to Taylor. Tap anything that represents bullying or manipulation, then press Submit."
+      },
+      {
+        "id": "bully_observe",
+        "type": "observe",
+        "tier": "recognise",
+        "category": "cyberbullying",
+        "difficulty": "beginner",
+        "title": "The Group Chat",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Read this group chat conversation. Morgan is watching what's happening to their classmate Cian. Tap any message you thin"
+      },
+      {
+        "id": "bully_photo_threat",
+        "type": "observe",
+        "tier": "respond",
+        "category": "cyberbullying",
+        "difficulty": "hard",
+        "title": "I'll Share Your Photo",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Someone is threatening to share an embarrassing photo of Charlie. Tap anything that shows manipulation or bullying tacti"
+      },
+      {
+        "id": "bully_threat_share",
+        "type": "observe",
+        "tier": "respond",
+        "category": "cyberbullying",
+        "difficulty": "hard",
+        "title": "I Have Screenshots",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Someone is threatening to share old social media posts with everyone. Tap anything showing manipulation or bullying tact"
+      }
+    ],
+    "grooming": [
+      {
+        "id": "grooming_new_friend",
+        "type": "observe",
+        "tier": "recognise",
+        "category": "grooming",
+        "difficulty": "intermediate",
+        "title": "The Too-Perfect Stranger",
+        "estimated_minutes": 6,
+        "content_warning": true,
+        "description": "Read the conversation below between Jamie (14) and Alex, someone they met in a gaming forum. Tap any message you think c"
+      }
+    ],
+    "identity_theft": [
+      {
+        "id": "identity_account_takeover",
+        "type": "observe",
+        "tier": "respond",
+        "category": "identity_theft",
+        "difficulty": "intermediate",
+        "title": "Help Me Recover My Account",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Alex gets this message claiming to be from Instagram. Tap anything suspicious, then press Submit."
+      },
+      {
+        "id": "identity_fake_friend",
+        "type": "observe",
+        "tier": "respond",
+        "category": "identity_theft",
+        "difficulty": "intermediate",
+        "title": "Who Are You Really?",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Sam gets this message from someone claiming to be a classmate. Tap anything suspicious, then press Submit."
+      },
+      {
+        "id": "identity_observe",
+        "type": "observe",
+        "tier": "recognise",
+        "category": "identity_theft",
+        "difficulty": "beginner",
+        "title": "The Innocent Quiz",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Read this social media interaction. Riley comes across a post and starts engaging with it. Tap anything you think is a w"
+      },
+      {
+        "id": "identity_social_quiz",
+        "type": "observe",
+        "tier": "respond",
+        "category": "identity_theft",
+        "difficulty": "beginner",
+        "title": "Fun Quiz or Data Mining?",
+        "estimated_minutes": 4,
+        "content_warning": false,
+        "description": "This post is going viral. Tap anything suspicious, then press Submit."
+      }
+    ],
+    "malware": [
+      {
+        "id": "malware_email_attachment",
+        "type": "observe",
+        "tier": "respond",
+        "category": "malware",
+        "difficulty": "intermediate",
+        "title": "Suspicious Email Attachment",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Pat receives this email at work. Tap anything suspicious, then press Submit."
+      },
+      {
+        "id": "malware_free_game",
+        "type": "observe",
+        "tier": "recognise",
+        "category": "malware",
+        "difficulty": "beginner",
+        "title": "Free Game Download",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Alex wants to play a popular game but can't afford it. They found a website offering it for free. Read what happens and "
+      },
+      {
+        "id": "malware_observe",
+        "type": "observe",
+        "tier": "recognise",
+        "category": "malware",
+        "difficulty": "beginner",
+        "title": "Your Computer Is Not Infected",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Read this sequence of events. Casey is browsing the web when something unexpected happens. Tap anything you think is sus"
+      },
+      {
+        "id": "malware_system_warning",
+        "type": "observe",
+        "tier": "respond",
+        "category": "malware",
+        "difficulty": "intermediate",
+        "title": "Your Computer Is Infected",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Lee is browsing when this appears. Tap anything suspicious, then press Submit."
+      }
+    ],
+    "phishing": [
+      {
+        "id": "phishing_friend_help",
+        "type": "observe",
+        "tier": "respond",
+        "category": "phishing",
+        "difficulty": "intermediate",
+        "title": "Friend in Trouble",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Casey gets this message from what appears to be a friend's account. Tap anything suspicious, then press Submit."
+      },
+      {
+        "id": "phishing_observe",
+        "type": "observe",
+        "tier": "recognise",
+        "category": "phishing",
+        "difficulty": "beginner",
+        "title": "Spot the Phish",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Read this email exchange. Sam received this email and is about to respond. Tap any part of the conversation you think is"
+      },
+      {
+        "id": "phishing_prize_winner",
+        "type": "observe",
+        "tier": "respond",
+        "category": "phishing",
+        "difficulty": "beginner",
+        "title": "Congratulations, You've Won!",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Sam just received this text. Tap anything suspicious, then press Submit."
+      },
+      {
+        "id": "phishing_urgent_email",
+        "type": "observe",
+        "tier": "respond",
+        "category": "phishing",
+        "difficulty": "beginner",
+        "title": "The Urgent Account Security Email",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Read this email that landed in Jamie's inbox. Tap every message or element you think is suspicious, then press Submit."
+      }
+    ],
+    "online_scams": [
+      {
+        "id": "scam_investment_quick",
+        "type": "observe",
+        "tier": "respond",
+        "category": "online_scams",
+        "difficulty": "intermediate",
+        "title": "Get Rich Quick",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Jordan gets this DM out of nowhere. Tap anything suspicious, then press Submit."
+      },
+      {
+        "id": "scam_job_offer",
+        "type": "observe",
+        "tier": "respond",
+        "category": "online_scams",
+        "difficulty": "intermediate",
+        "title": "Dream Job Offer",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Riley gets this email about a job. Tap anything suspicious, then press Submit."
+      },
+      {
+        "id": "scam_observe",
+        "type": "observe",
+        "tier": "recognise",
+        "category": "online_scams",
+        "difficulty": "beginner",
+        "title": "The Investment DM",
+        "estimated_minutes": 5,
+        "content_warning": false,
+        "description": "Read this Instagram DM conversation. Jordan received this message out of the blue. Tap any message you think contains a "
+      },
+      {
+        "id": "scam_romance_lonely",
+        "type": "observe",
+        "tier": "respond",
+        "category": "online_scams",
+        "difficulty": "intermediate",
+        "title": "Too Good to Be True",
+        "estimated_minutes": 6,
+        "content_warning": false,
+        "description": "Morgan has been chatting online with someone called 'Daniel' for three weeks. Read this conversation. Tap anything suspi"
+      }
+    ]
+  },
+  "total": 21
+}

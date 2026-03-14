@@ -81,7 +81,6 @@
     <a href="/" class="header__logo">🛡️ <span>Cyber</span>Safer</a>
     <nav class="header__nav">
       <a href="scenarios.html" style="color:var(--text);">Training</a>
-      <a href="freeplay.html">Free Play</a>
     </nav>
   </header>
 
@@ -106,7 +105,7 @@
     async function load() {
       const grid = document.getElementById('cat-grid');
       try {
-        const res = await fetch('/api/scenarios');
+        const res = await fetch('scenarios-index.json');
         const data = await res.json();
         const cats = data.categories || {};
         const completed = JSON.parse(localStorage.getItem('cs_completed') || '[]');

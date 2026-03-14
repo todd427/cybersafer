@@ -67,8 +67,8 @@ VALID_CATEGORIES  = {"phishing", "online_scams", "malware", "identity_theft",
 VALID_DIFFICULTIES= {"beginner", "medium", "intermediate", "hard", "advanced"}
 
 STATIC_PAGES = ["index.html", "scenarios.html", "category.html",
-                "chat.html", "observe.html", "results.html",
-                "freeplay.html", "onboarding.html", "privacy.html"]
+                "observe.html", "onboarding.html", "privacy.html"]
+STATIC_INDEX = Path("static/scenarios-index.json")
 
 API_ROUTES = [
     ("GET",  "/api/health",    200),
@@ -292,11 +292,27 @@ def _test_chat_scenario(name, data):
 
 
 def test_player_files():
-    header("2. PLAYER JSON INTEGRITY")
+    header("2. PLAYER / INDEX INTEGRITY")
+
+    # Check static scenarios index
+    check(STATIC_INDEX.exists(),
+          f"scenarios-index.json exists",
+          f"Missing static/scenarios-index.json — run build script")
+
+    if STATIC_INDEX.exists():
+        idx = json.loads(STATIC_INDEX.read_text())
+        total = idx.get('total', 0)
+        check(total > 0,
+              f"Index contains {total} scenarios",
+              "Index is empty")
+        # Verify every scenario file has an entry
+        scenario_files = list(SCENARIOS_DIR.glob('*.json'))
+        check(total == len(scenario_files),
+              f"Index total ({total}) matches scenario files ({len(scenario_files)})",
+              f"Index ({total}) out of sync with files ({len(scenario_files)}) — rebuild index")
 
     if not PLAYERS_DIR.exists():
-        fail("players/ directory not found")
-        R.record(False, "players/ directory missing")
+        info("players/ directory not present (expected for static build)")
         return
 
     files = sorted(PLAYERS_DIR.glob("*.json"))

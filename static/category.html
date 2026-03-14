@@ -154,14 +154,14 @@
       document.getElementById('cat-desc').textContent = meta.desc;
 
       try {
-        const res = await fetch('/api/scenarios');
+        const res = await fetch('scenarios-index.json');
         const data = await res.json();
         const scenarios = (data.categories || {})[catKey] || [];
         const completed = JSON.parse(localStorage.getItem('cs_completed') || '[]');
 
-        // Fetch full scenario details for tier info
+        // Fetch full scenario details from static JSON files
         const details = await Promise.all(
-          scenarios.map(s => fetch(`/api/scenario/${encodeURIComponent(s.id)}`).then(r => r.json()))
+          scenarios.map(s => fetch(`scenarios/${s.id}.json`).then(r => r.json()))
         );
 
         const recognise = details.filter(s => s.tier === 'recognise');
@@ -214,7 +214,7 @@
 
     async function selectScenario(id, hasWarning, type) {
       if (hasWarning) {
-        const res = await fetch(`/api/scenario/${id}`);
+        const res = await fetch(`scenarios/${id}.json`);
         const s = await res.json();
         pendingScenario = { id, type };
         document.getElementById('warning-title').textContent = `Content Warning — ${s.title}`;
