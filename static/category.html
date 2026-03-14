@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Category — CyberSafer</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .tier-section { margin-bottom: 2.5rem; }
+    .tier-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .tier-icon { font-size: 1.25rem; }
+    .tier-title { font-weight: 700; font-size: 1rem; }
+    .tier-desc { font-size: 0.8125rem; color: var(--text-muted); margin-top: 0.1rem; }
+    .scenario-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .s-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.25rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .s-card:hover { border-color: var(--blue); }
+    .s-card:active { transform: scale(0.99); }
+    .s-card__body { flex: 1; min-width: 0; }
+    .s-card__title { font-weight: 600; font-size: 0.9375rem; margin-bottom: 0.3rem; }
+    .s-card__desc { font-size: 0.8125rem; color: var(--text-muted); line-height: 1.45;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .s-card__meta { display: flex; gap: 0.4rem; margin-top: 0.5rem; flex-wrap: wrap; align-items: center; }
+    .s-card__done {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--green-dim); border: 1px solid var(--green-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; color: var(--green); flex-shrink: 0;
+    }
+    .s-card__arrow { color: var(--text-subtle); flex-shrink: 0; transition: all 0.15s; }
+    .s-card:hover .s-card__arrow { color: var(--blue); transform: translateX(2px); }
+
+    .recommended-tag {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.5px; color: var(--blue); background: var(--blue-dim);
+      border: 1px solid var(--blue-border); border-radius: 20px;
+      padding: 0.15rem 0.5rem;
+    }
+
+    .cat-hero {
+      padding: 1.5rem 0 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .cat-hero__icon { font-size: 2.5rem; }
+    .cat-hero__title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .cat-hero__desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="scenarios.html" class="header__logo">← <span>Cyber</span>Safer</a>
+  </header>
+
+  <div class="container page" style="padding-top:0;">
+    <div class="cat-hero">
+      <div class="cat-hero__icon" id="cat-icon"></div>
+      <div>
+        <div class="cat-hero__title" id="cat-title">Loading...</div>
+        <div class="cat-hero__desc" id="cat-desc"></div>
+      </div>
+    </div>
+
+    <div id="tier-recognise" class="tier-section" style="display:none;">
+      <div class="tier-header">
+        <div class="tier-icon">👁️</div>
+        <div>
+          <div class="tier-title">Step 1 — Recognise</div>
+          <div class="tier-desc">Read a scripted conversation and identify the warning signs</div>
+        </div>
+      </div>
+      <div class="scenario-list" id="list-recognise"></div>
+    </div>
+
+    <div id="tier-respond" class="tier-section" style="display:none;">
+      <div class="tier-header">
+        <div class="tier-icon">💬</div>
+        <div>
+          <div class="tier-title">Step 2 — Respond</div>
+          <div class="tier-desc">Have a live conversation with an AI adversary and practise your responses</div>
+        </div>
+      </div>
+      <div class="scenario-list" id="list-respond"></div>
+    </div>
+  </div>
+
+  <!-- Content warning modal -->
+  <div class="modal-overlay" id="warning-modal" style="display:none;">
+    <div class="modal">
+      <div class="modal__icon">⚠️</div>
+      <h2 class="modal__title" id="warning-title">Content Warning</h2>
+      <div class="modal__body" id="warning-body"></div>
+      <div class="modal__actions">
+        <button class="btn btn--primary" id="warning-proceed">I understand — continue</button>
+        <button class="btn btn--ghost" id="warning-cancel">Go back</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const CATEGORIES = {
+      phishing:      { icon:'🎣', label:'Phishing',       desc:'Fake emails and messages designed to steal your information or trick you into clicking malicious links.' },
+      online_scams:  { icon:'💸', label:'Scams',          desc:'Too-good-to-be-true investment offers, fake jobs, and financial fraud.' },
+      malware:       { icon:'🦠', label:'Malware',        desc:'Malicious software and fake tech support scams that try to compromise your device.' },
+      identity_theft:{ icon:'🪪', label:'Identity Theft', desc:'Attempts to harvest your personal information and take over your accounts.' },
+      cyberbullying: { icon:'😤', label:'Cyberbullying',  desc:'Online harassment, threats, and social manipulation in group chats and on social media.' },
+      grooming:      { icon:'⚠️', label:'Online Safety',  desc:'Manipulation and grooming tactics used by adults targeting young people online.' },
+    };
+    const DIFFICULTY_BADGE = {
+      beginner:    ['badge--green','Beginner'],
+      medium:      ['badge--amber','Intermediate'],
+      intermediate:['badge--amber','Intermediate'],
+      hard:        ['badge--red','Advanced'],
+      advanced:    ['badge--red','Advanced'],
+    };
+
+    const params = new URLSearchParams(location.search);
+    const catKey = params.get('cat');
+    let pendingScenario = null;
+
+    async function load() {
+      if (!catKey) { location.href = 'scenarios.html'; return; }
+
+      const meta = CATEGORIES[catKey] || { icon:'🔐', label: catKey, desc:'' };
+      document.title = `${meta.label} — CyberSafer`;
+      document.getElementById('cat-icon').textContent = meta.icon;
+      document.getElementById('cat-title').textContent = meta.label;
+      document.getElementById('cat-desc').textContent = meta.desc;
+
+      try {
+        const res = await fetch('/api/scenarios');
+        const data = await res.json();
+        const scenarios = (data.categories || {})[catKey] || [];
+        const completed = JSON.parse(localStorage.getItem('cs_completed') || '[]');
+
+        // Fetch full scenario details for tier info
+        const details = await Promise.all(
+          scenarios.map(s => fetch(`/api/scenario/${encodeURIComponent(s.id)}`).then(r => r.json()))
+        );
+
+        const recognise = details.filter(s => s.tier === 'recognise');
+        const respond   = details.filter(s => s.tier === 'respond' || !s.tier);
+
+        // Sort respond by difficulty
+        const diffOrder = { beginner:0, medium:1, intermediate:1, hard:2, advanced:2 };
+        respond.sort((a,b) => (diffOrder[a.difficulty]||1) - (diffOrder[b.difficulty]||1));
+
+        if (recognise.length) {
+          document.getElementById('tier-recognise').style.display = 'block';
+          document.getElementById('list-recognise').innerHTML =
+            recognise.map((s,i) => renderCard(s, completed, i === 0 && !completed.includes(s.id))).join('');
+        }
+
+        if (respond.length) {
+          document.getElementById('tier-respond').style.display = 'block';
+          const recogniseDone = recognise.length === 0 || recognise.every(s => completed.includes(s.id));
+          document.getElementById('list-respond').innerHTML =
+            respond.map((s,i) => renderCard(s, completed, i === 0 && recogniseDone && !completed.includes(s.id))).join('');
+        }
+
+      } catch(e) {
+        document.getElementById('cat-title').textContent = 'Error loading scenarios';
+      }
+    }
+
+    function renderCard(s, completed, recommended) {
+      const done = completed.includes(s.id);
+      const [diffCls, diffLabel] = DIFFICULTY_BADGE[s.difficulty] || ['badge--subtle', s.difficulty];
+      const typeLabel = s.type === 'observe' ? '👁️ Identify' : '💬 Chat';
+      const mins = s.estimated_minutes || 5;
+
+      return `
+        <div class="s-card" onclick="selectScenario('${s.id}', ${s.content_warning ? 'true' : 'false'}, '${s.type || 'chat'}')">
+          <div class="s-card__body">
+            <div class="s-card__title">${s.title}</div>
+            <div class="s-card__desc">${(s.introduction || '').substring(0, 90)}${s.introduction?.length > 90 ? '…' : ''}</div>
+            <div class="s-card__meta">
+              <span class="badge ${diffCls}">${diffLabel}</span>
+              <span class="badge badge--subtle">${typeLabel}</span>
+              <span class="badge badge--subtle">~${mins} min</span>
+              ${recommended ? '<span class="recommended-tag">★ Start here</span>' : ''}
+            </div>
+          </div>
+          ${done ? '<div class="s-card__done">✓</div>' : '<div class="s-card__arrow">›</div>'}
+        </div>
+      `;
+    }
+
+    async function selectScenario(id, hasWarning, type) {
+      if (hasWarning) {
+        const res = await fetch(`/api/scenario/${id}`);
+        const s = await res.json();
+        pendingScenario = { id, type };
+        document.getElementById('warning-title').textContent = `Content Warning — ${s.title}`;
+        document.getElementById('warning-body').textContent = s.content_warning_text || 'This scenario deals with a sensitive topic.';
+        document.getElementById('warning-modal').style.display = 'flex';
+      } else {
+        launch(id, type);
+      }
+    }
+
+    function launch(id, type) {
+      if (type === 'observe') {
+        location.href = `observe.html?scenario=${encodeURIComponent(id)}`;
+      } else {
+        location.href = `chat.html?scenario=${encodeURIComponent(id)}`;
+      }
+    }
+
+    document.getElementById('warning-proceed').onclick = () => {
+      document.getElementById('warning-modal').style.display = 'none';
+      if (pendingScenario) launch(pendingScenario.id, pendingScenario.type);
+    };
+    document.getElementById('warning-cancel').onclick = () => {
+      document.getElementById('warning-modal').style.display = 'none';
+      pendingScenario = null;
+    };
+    document.getElementById('warning-modal').onclick = e => {
+      if (e.target === e.currentTarget) {
+        e.currentTarget.style.display = 'none';
+        pendingScenario = null;
+      }
+    };
+
+    load();
+  </script>
+</body>
+</html>

@@ -3,214 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scenarios — CyberSafer</title>
+  <title>Training — CyberSafer</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .cat-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.875rem;
+    }
+    .cat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.25rem 1.25rem 1rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-card:hover { border-color: var(--blue); transform: translateY(-1px); }
+    .cat-card:active { transform: translateY(0); }
+    .cat-card__icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+      width: 3rem;
+      text-align: center;
+    }
+    .cat-card__body { flex: 1; min-width: 0; }
+    .cat-card__title { font-weight: 700; font-size: 1rem; margin-bottom: 0.25rem; }
+    .cat-card__desc { font-size: 0.8375rem; color: var(--text-muted); line-height: 1.45; }
+    .cat-card__meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .cat-card__arrow {
+      color: var(--text-subtle);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      transition: transform 0.15s ease, color 0.15s ease;
+    }
+    .cat-card:hover .cat-card__arrow { transform: translateX(3px); color: var(--blue); }
+    .progress-dots {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.2s;
+    }
+    .dot--done { background: var(--green); }
+    @media (min-width: 560px) {
+      .cat-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 900px) {
+      .cat-grid { grid-template-columns: 1fr 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
-
   <header class="header">
     <a href="/" class="header__logo">🛡️ <span>Cyber</span>Safer</a>
     <nav class="header__nav">
-      <a href="scenarios.html" style="color: var(--text);">Scenarios</a>
+      <a href="scenarios.html" style="color:var(--text);">Training</a>
       <a href="freeplay.html">Free Play</a>
     </nav>
   </header>
 
   <div class="container page">
     <h1 class="page__title">Training Scenarios</h1>
-    <p class="page__subtitle">Choose a scenario to practise. Each one simulates a real threat.</p>
-
-    <div class="tabs" id="tabs"></div>
-    <div class="scenario-grid" id="grid"></div>
-  </div>
-
-  <!-- Content warning modal -->
-  <div class="modal-overlay" id="warning-modal" style="display:none;">
-    <div class="modal">
-      <div class="modal__icon">⚠️</div>
-      <h2 class="modal__title" id="warning-title">Content Warning</h2>
-      <div class="modal__body" id="warning-body"></div>
-      <div class="modal__actions">
-        <button class="btn btn--primary" id="warning-proceed">I understand — continue</button>
-        <button class="btn btn--ghost" id="warning-cancel">Go back</button>
-      </div>
+    <p class="page__subtitle">Choose a threat category to begin. Each category has a Recognise level and a Respond level.</p>
+    <div class="cat-grid" id="cat-grid">
+      <p class="text-muted">Loading...</p>
     </div>
   </div>
 
   <script>
-    const CATEGORY_ICONS = {
-      phishing:     '🎣',
-      scam:         '💸',
-      malware:      '🦠',
-      identity:     '🪪',
-      cyberbullying:'😤',
-      grooming:     '⚠️',
-      other:        '🔐',
-    };
-    const CATEGORY_LABELS = {
-      phishing:     'Phishing',
-      scam:         'Scams',
-      malware:      'Malware',
-      identity:     'Identity Theft',
-      cyberbullying:'Cyberbullying',
-      grooming:     'Online Safety',
-      other:        'Other',
-    };
-    const DIFFICULTY_BADGE = {
-      beginner:     ['badge--green', 'Beginner'],
-      intermediate: ['badge--amber', 'Intermediate'],
-      advanced:     ['badge--red', 'Advanced'],
+    const CATEGORIES = {
+      phishing:      { icon:'🎣', label:'Phishing',       desc:'Fake emails and messages designed to steal your information or trick you into clicking malicious links.' },
+      online_scams:  { icon:'💸', label:'Scams',          desc:'Too-good-to-be-true investment offers, fake jobs, and financial fraud.' },
+      malware:       { icon:'🦠', label:'Malware',        desc:'Malicious software and fake tech support scams that try to compromise your device.' },
+      identity_theft:{ icon:'🪪', label:'Identity Theft', desc:'Attempts to harvest your personal information and take over your accounts.' },
+      cyberbullying: { icon:'😤', label:'Cyberbullying',  desc:'Online harassment, threats, and social manipulation in group chats and on social media.' },
+      grooming:      { icon:'⚠️', label:'Online Safety',  desc:'Manipulation and grooming tactics used by adults targeting young people online.' },
     };
 
-    let allCategories = {};
-    let activeCategory = 'all';
-    let pendingScenario = null;
-
-    // Completed scenarios from localStorage
-    function getCompleted() {
-      try { return JSON.parse(localStorage.getItem('cs_completed') || '[]'); }
-      catch { return []; }
-    }
-
-    async function loadScenarios() {
-      const grid = document.getElementById('grid');
-      grid.innerHTML = '<p class="text-muted" style="padding:1rem 0;">Loading...</p>';
+    async function load() {
+      const grid = document.getElementById('cat-grid');
       try {
         const res = await fetch('/api/scenarios');
         const data = await res.json();
-        allCategories = data.categories || {};
-        buildTabs();
-        renderGrid('all');
-      } catch(e) {
-        grid.innerHTML = '<p style="color:var(--red);">Could not load scenarios. Is the server running?</p>';
-      }
-    }
+        const cats = data.categories || {};
+        const completed = JSON.parse(localStorage.getItem('cs_completed') || '[]');
 
-    function buildTabs() {
-      const tabs = document.getElementById('tabs');
-      const cats = Object.keys(allCategories);
-      const total = cats.reduce((s, c) => s + allCategories[c].length, 0);
+        const order = ['phishing','online_scams','malware','identity_theft','cyberbullying','grooming'];
+        const sorted = order.filter(k => cats[k]).concat(Object.keys(cats).filter(k => !order.includes(k)));
 
-      tabs.innerHTML = `
-        <button class="tab tab--active" data-cat="all" onclick="renderGrid('all', this)">
-          All <span style="opacity:0.6;margin-left:0.3rem;">${total}</span>
-        </button>
-        ${cats.map(c => `
-          <button class="tab" data-cat="${c}" onclick="renderGrid('${c}', this)">
-            ${CATEGORY_ICONS[c] || '🔐'} ${CATEGORY_LABELS[c] || c}
-            <span style="opacity:0.6;margin-left:0.3rem;">${allCategories[c].length}</span>
-          </button>
-        `).join('')}
-      `;
-    }
+        grid.innerHTML = sorted.map(key => {
+          const meta = CATEGORIES[key] || { icon:'🔐', label: key, desc:'' };
+          const scenarios = cats[key] || [];
+          const total = scenarios.length;
+          const done = scenarios.filter(s => completed.includes(s.id)).length;
+          const dots = scenarios.map(s => `<div class="dot ${completed.includes(s.id) ? 'dot--done' : ''}"></div>`).join('');
 
-    function renderGrid(cat, tabEl) {
-      activeCategory = cat;
-
-      // Update tab styles
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab--active'));
-      if (tabEl) tabEl.classList.add('tab--active');
-
-      const completed = getCompleted();
-      const grid = document.getElementById('grid');
-
-      let scenarios = [];
-      if (cat === 'all') {
-        Object.values(allCategories).forEach(arr => scenarios.push(...arr));
-      } else {
-        scenarios = allCategories[cat] || [];
-      }
-
-      if (!scenarios.length) {
-        grid.innerHTML = '<p class="text-muted">No scenarios in this category yet.</p>';
-        return;
-      }
-
-      grid.innerHTML = scenarios.map(s => {
-        const [diffClass, diffLabel] = DIFFICULTY_BADGE[s.difficulty] || ['badge--subtle', s.difficulty];
-        const catKey = Object.keys(allCategories).find(k => allCategories[k].some(x => x.id === s.id));
-        const icon = CATEGORY_ICONS[catKey] || '🔐';
-        const isDone = completed.includes(s.id);
-        const isGrooming = catKey === 'grooming';
-        return `
-          <div class="scenario-card" onclick="selectScenario('${s.id}', ${isGrooming})">
-            ${isDone ? '<div class="scenario-card__done">✓</div>' : ''}
-            <div class="scenario-card__header">
-              <div>
-                <div style="font-size:1.25rem; margin-bottom:0.4rem;">${icon}</div>
-                <div class="scenario-card__title">${s.title}</div>
+          return `
+            <div class="cat-card" onclick="location.href='category.html?cat=${encodeURIComponent(key)}'">
+              <div class="cat-card__icon">${meta.icon}</div>
+              <div class="cat-card__body">
+                <div class="cat-card__title">${meta.label}</div>
+                <div class="cat-card__desc">${meta.desc}</div>
+                <div class="cat-card__meta">
+                  <span class="badge badge--subtle">${total} scenario${total !== 1 ? 's' : ''}</span>
+                  ${done > 0 ? `<span class="badge badge--green">${done} done</span>` : ''}
+                  <div class="progress-dots">${dots}</div>
+                </div>
               </div>
+              <div class="cat-card__arrow">›</div>
             </div>
-            <div class="scenario-card__desc">${s.description}</div>
-            <div class="scenario-card__meta">
-              <span class="badge ${diffClass}">${diffLabel}</span>
-              <span class="badge badge--subtle">~${s.estimated_minutes || 5} min</span>
-              ${isGrooming ? '<span class="badge badge--amber">⚠️ Content warning</span>' : ''}
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    async function selectScenario(scenarioId, hasWarning) {
-      if (hasWarning) {
-        // Fetch scenario details for warning text
-        try {
-          const res = await fetch(`/api/scenario/${scenarioId}`);
-          const s = await res.json();
-          showWarning(s, scenarioId);
-        } catch {
-          showWarning(null, scenarioId);
-        }
-      } else {
-        launchScenario(scenarioId);
+          `;
+        }).join('');
+      } catch(e) {
+        grid.innerHTML = `<p style="color:var(--red);">Could not load scenarios: ${e.message}</p>`;
       }
     }
 
-    function showWarning(scenario, scenarioId) {
-      pendingScenario = scenarioId;
-      const modal = document.getElementById('warning-modal');
-      const title = document.getElementById('warning-title');
-      const body = document.getElementById('warning-body');
-
-      title.textContent = scenario?.title ? `Content Warning — ${scenario.title}` : 'Content Warning';
-      body.textContent = scenario?.content_warning_text ||
-        'This scenario deals with a sensitive topic. It is educational and appropriate for general audiences, but please be aware of the subject matter before continuing.';
-
-      modal.style.display = 'flex';
-    }
-
-    document.getElementById('warning-proceed').onclick = () => {
-      document.getElementById('warning-modal').style.display = 'none';
-      if (pendingScenario) launchScenario(pendingScenario);
-    };
-    document.getElementById('warning-cancel').onclick = () => {
-      document.getElementById('warning-modal').style.display = 'none';
-      pendingScenario = null;
-    };
-    document.getElementById('warning-modal').onclick = (e) => {
-      if (e.target === e.currentTarget) {
-        e.currentTarget.style.display = 'none';
-        pendingScenario = null;
-      }
-    };
-
-    async function launchScenario(scenarioId) {
-      // Check scenario type — observe scenarios use observe.html
-      try {
-        const res = await fetch(`/api/scenario/${encodeURIComponent(scenarioId)}`);
-        const s = await res.json();
-        if (s.type === 'observe') {
-          window.location.href = `observe.html?scenario=${encodeURIComponent(scenarioId)}`;
-        } else {
-          window.location.href = `chat.html?scenario=${encodeURIComponent(scenarioId)}`;
-        }
-      } catch {
-        window.location.href = `chat.html?scenario=${encodeURIComponent(scenarioId)}`;
-      }
-    }
-
-    loadScenarios();
+    load();
   </script>
 </body>
 </html>

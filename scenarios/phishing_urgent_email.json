@@ -23,5 +23,6 @@
     "Avoid clicking suspicious links",
     "Know how to report phishing attempts"
   ],
-  "debrief": "Great job! This was a classic phishing attempt. The red flags were: 1) Creating urgency with threats, 2) Suspicious URL that doesn't match the real bank's website, 3) Generic greeting instead of your name. Real banks never ask you to verify via email links. Always go directly to the official website or call the number on your card."
+  "debrief": "Great job! This was a classic phishing attempt. The red flags were: 1) Creating urgency with threats, 2) Suspicious URL that doesn't match the real bank's website, 3) Generic greeting instead of your name. Real banks never ask you to verify via email links. Always go directly to the official website or call the number on your card.",
+  "tier": "respond"
 }

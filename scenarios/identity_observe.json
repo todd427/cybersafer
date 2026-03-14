@@ -1,0 +1,69 @@
+{
+  "id": "identity_observe",
+  "type": "observe",
+  "tier": "recognise",
+  "category": "identity_theft",
+  "difficulty": "beginner",
+  "estimated_minutes": 5,
+  "title": "The Innocent Quiz",
+  "introduction": "Read this social media interaction. Riley comes across a post and starts engaging with it. Tap anything you think is a warning sign, then press Submit.",
+  "participants": {
+    "post": { "label": "Facebook Post", "side": "left", "avatar": "📱" },
+    "riley": { "label": "Riley", "side": "right", "avatar": "🧑" }
+  },
+  "script": [
+    {
+      "id": "m1",
+      "from": "post",
+      "text": "🎉 GIVEAWAY TIME! We're giving away €500 in cash to 3 lucky winners!\n\nTo enter:\n✅ Like this post\n✅ Share to your timeline\n✅ Comment your full name and date of birth below\n\nWinner announced Friday! Good luck! 🍀",
+      "is_red_flag": true,
+      "flag_label": "Giveaway requesting personal info",
+      "explanation": "Legitimate competitions never need your date of birth in a public comment. Your full name + date of birth is a key combination for identity theft and account recovery attacks. This post is harvesting personal data from thousands of people at once."
+    },
+    {
+      "id": "m2",
+      "from": "riley",
+      "text": "Riley O'Brien, 14th March 1998 🤞",
+      "is_red_flag": false
+    },
+    {
+      "id": "m3",
+      "from": "post",
+      "text": "DM from 'CompetitionHQ': Congratulations Riley! You're one of our winners 🎉 To claim your €500 please verify your identity by providing: your address, mobile number, and the last 4 digits of your bank card.",
+      "is_red_flag": true,
+      "flag_label": "Winner DM requesting more details",
+      "explanation": "The 'you've won' DM following a public post is a second-stage harvest. Riley has already given their name and DOB. Now the scammer is building a complete profile: address + mobile + card digits. Together with publicly available info, this is enough to attempt account takeovers or fraud."
+    },
+    {
+      "id": "m4",
+      "from": "riley",
+      "text": "Oh amazing! Sure — [address], 087-XXX-XXXX, and the last 4 are 4821.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m5",
+      "from": "post",
+      "text": "DM from 'CompetitionHQ': Perfect, thanks! Just one last step — there's a small €2.99 processing fee to release the prize. You can pay via this link: prize-release-payment.com/verify",
+      "is_red_flag": true,
+      "flag_label": "Processing fee to claim prize",
+      "explanation": "The 'small fee to release your prize' is the final step. Real competitions have no fees — ever. This is both a direct money grab and a way to capture full card details. Riley never won anything. There is no €500."
+    },
+    {
+      "id": "m6",
+      "from": "post",
+      "text": "SEPARATE POST — 'Fun Quiz: What's your personality type?'\n\nAnswer these to find out!\n🔹 What street did you grow up on?\n🔹 What was your first pet's name?\n🔹 What's your mother's maiden name?\n🔹 What was your first car?",
+      "is_red_flag": true,
+      "flag_label": "Security question harvesting quiz",
+      "explanation": "These four questions are almost universal bank security questions. A quiz that asks exactly these things — no matter how fun the framing — is harvesting the answers to your account recovery questions. Never answer these publicly."
+    }
+  ],
+  "learning_objectives": [
+    "Never post your full name and date of birth publicly",
+    "Real competitions never charge a fee to claim a prize",
+    "Fun quizzes asking for street names, pets, and mother's maiden name are harvesting security question answers",
+    "The combination of name + DOB + address + card digits enables identity fraud",
+    "If you've already shared this data, change your security questions and alert your bank"
+  ],
+  "debrief": "This scenario shows two related identity theft techniques — fake giveaways and security question harvesting quizzes — both extremely common on Facebook and Instagram.\n\n**What makes this effective:** Each step seems harmless. Your name and birthday in a comment. Answering a fun quiz. A tiny €2.99 fee. None of it screams 'danger' in the moment.\n\n**What actually happened:** A complete profile was assembled — name, DOB, address, phone, partial card number, security question answers. That's enough to attempt account takeovers on banks, email providers, and social platforms.\n\n**The rule:** If a social media post asks for personal information as part of a competition, quiz, or giveaway — don't. Real prizes don't need your mother's maiden name.",
+  "resources": []
+}

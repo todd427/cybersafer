@@ -23,5 +23,6 @@
     "Know how to verify identity through alternate channels",
     "Understand that real friends won't pressure you this way"
   ],
-  "debrief": "Good thinking! This was a phishing attempt impersonating a friend. Red flags: 1) Using a 'friend's phone' makes verification harder, 2) Urgency and emotional pressure, 3) Generic CashApp tag not linked to friend, 4) Real friend would call parents or use other options first. Always verify through a different method - call them, message on another platform, or check with mutual friends before sending money."
+  "debrief": "Good thinking! This was a phishing attempt impersonating a friend. Red flags: 1) Using a 'friend's phone' makes verification harder, 2) Urgency and emotional pressure, 3) Generic CashApp tag not linked to friend, 4) Real friend would call parents or use other options first. Always verify through a different method - call them, message on another platform, or check with mutual friends before sending money.",
+  "tier": "respond"
 }

@@ -1,0 +1,97 @@
+{
+  "id": "scam_observe",
+  "type": "observe",
+  "tier": "recognise",
+  "category": "online_scams",
+  "difficulty": "beginner",
+  "estimated_minutes": 5,
+  "title": "The Investment DM",
+  "introduction": "Read this Instagram DM conversation. Jordan received this message out of the blue. Tap any message you think contains a warning sign, then press Submit.",
+  "participants": {
+    "scammer": {
+      "label": "crypto_profits_official",
+      "side": "left",
+      "avatar": "\ud83d\udcb0"
+    },
+    "jordan": {
+      "label": "Jordan",
+      "side": "right",
+      "avatar": "\ud83e\uddd1"
+    }
+  },
+  "script": [
+    {
+      "id": "m1",
+      "from": "scammer",
+      "text": "Hey! I came across your profile and I think you'd be perfect for an exclusive investment opportunity I'm sharing with a small group. I've already helped 47 people make \u20ac500\u2013\u20ac2,000 in their first week. Interested?",
+      "is_red_flag": true,
+      "flag_label": "Unsolicited contact + big claims",
+      "explanation": "Legitimate investment opportunities don't arrive as cold DMs from strangers. Specific numbers ('47 people', '\u20ac2,000 in one week') are designed to sound credible but are completely invented."
+    },
+    {
+      "id": "m2",
+      "from": "jordan",
+      "text": "What kind of investment?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m3",
+      "from": "scammer",
+      "text": "Crypto trading \u2014 I use a special algorithm that predicts market movements. It's not available to the public. I'm only sharing it with people I personally select. You'd start with just \u20ac50 and I guarantee you'll see returns within 48 hours.",
+      "is_red_flag": true,
+      "flag_label": "'Guaranteed returns' + exclusivity",
+      "explanation": "No legitimate investment guarantees returns \u2014 it's actually illegal to claim that. 'Special algorithm', 'not available to the public', and 'personally selected' are flattery tactics to make the target feel chosen. Real opportunities don't work this way."
+    },
+    {
+      "id": "m4",
+      "from": "jordan",
+      "text": "That sounds good. How does it work?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m5",
+      "from": "scammer",
+      "text": "You send me \u20ac50 via Revolut and I invest it through my platform. Within 48 hours I send you back \u20ac150. Once you see it working you can invest more \u2014 some of my clients are putting in \u20ac500 a week.",
+      "is_red_flag": true,
+      "flag_label": "Send money to a stranger",
+      "explanation": "Sending money directly to an individual you've never met, via an instant transfer app, with no paper trail or contract, is the core of this scam. Once sent, Revolut payments are extremely difficult to recover. The '\u20ac150 back' never arrives."
+    },
+    {
+      "id": "m6",
+      "from": "jordan",
+      "text": "Can I see proof it works?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m7",
+      "from": "scammer",
+      "text": "Of course! Here are some screenshots from clients this week \ud83d\udcf8 [image of fake bank transfers]. Look \u2014 this is real money. But I have to warn you, this window closes tonight. I only have 3 spots left and two people are already confirming.",
+      "is_red_flag": true,
+      "flag_label": "Fake proof + artificial scarcity",
+      "explanation": "Screenshots of bank transfers are trivially easy to fake. 'Only 3 spots left' and 'closes tonight' are classic scarcity and urgency tactics. They're designed to prevent you from doing any research or talking to anyone before sending money."
+    },
+    {
+      "id": "m8",
+      "from": "jordan",
+      "text": "I'm going to look you up and do some research first.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m9",
+      "from": "scammer",
+      "text": "I understand but honestly if you wait you'll miss out. The people who second-guess always regret it. This is a once-in-a-lifetime chance. Your call.",
+      "is_red_flag": true,
+      "flag_label": "Pressure + guilt when questioned",
+      "explanation": "When Jordan said they'd do research, the scammer responded with pressure and mild guilt. Legitimate opportunities welcome scrutiny. Any investment offer that pushes back when you ask for time to think is a scam."
+    }
+  ],
+  "learning_objectives": [
+    "Unsolicited investment DMs are almost always scams",
+    "Guaranteed returns are illegal to promise \u2014 and a lie",
+    "Never send money to strangers via Revolut, PayPal or bank transfer",
+    "Screenshots and 'proof' are easily faked",
+    "Urgency and scarcity tactics mean stop, not hurry up"
+  ],
+  "debrief": "This is an investment scam \u2014 one of the most common types of online fraud targeting young adults. The script is almost always the same: cold contact, impressive claims, fake proof, artificial urgency, money sent via untraceable method.\n\n**The money is always gone.** There is no algorithm, no platform, no returns. The first small 'proof' payment sometimes arrives to build trust \u2014 funded by earlier victims \u2014 before the scammer asks for a larger amount.\n\n**Jordan did the right thing** by saying they'd research first. That's the correct response to any investment opportunity: take your time, look them up, ask someone you trust, and never send money to a stranger online regardless of how convincing the screenshots look.",
+  "resources": []
+}
