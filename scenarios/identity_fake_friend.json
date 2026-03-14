@@ -1,27 +1,61 @@
 {
   "id": "identity_fake_friend",
+  "type": "observe",
+  "tier": "respond",
   "category": "identity_theft",
-  "difficulty": "medium",
+  "difficulty": "intermediate",
+  "estimated_minutes": 5,
   "title": "Who Are You Really?",
-  "introduction": "Someone claiming to be a classmate messages you on social media. They seem to know things about your school and mutual friends. They're asking questions about your personal life and want to connect...",
-  "player": "fake_friend",
-  "initial_message": "Heyyy! It's Sarah from your English class! I got a new phone and lost all my contacts \ud83d\ude2d What's your schedule this semester? I think we might have lunch at the same time! Also what's your birthday again? We're doing a surprise thing for everyone in our friend group lol",
-  "red_flags": [
-    "questions_sender",
-    "questions_personal_info",
-    "verifies_independently",
-    "asks_for_proof"
-  ],
-  "success_criteria": [
-    "questions_sender",
-    "verifies_independently"
+  "introduction": "Sam gets this message from someone claiming to be a classmate. Tap anything suspicious, then press Submit.",
+  "participants": {
+    "msg": { "label": "Message from 'Sarah'", "side": "left", "avatar": "💬" },
+    "sam": { "label": "Sam", "side": "right", "avatar": "🧑" }
+  },
+  "script": [
+    {
+      "id": "m1",
+      "from": "msg",
+      "text": "Heyyy! It's Sarah from your English class! I got a new phone and lost all my contacts 😭 Can you send me your number? Also what's your home address — I want to send everyone a card for the holidays!",
+      "is_red_flag": true,
+      "flag_label": "Immediate personal info request",
+      "explanation": "This message jumped straight to requesting personal information — phone number and home address — without any normal conversation first. 'New phone, lost contacts' is one of the most common pretexts for identity theft. A real classmate would chat normally before asking for your address."
+    },
+    {
+      "id": "m2",
+      "from": "sam",
+      "text": "Oh hey! Which Sarah? What did we study last week?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m3",
+      "from": "msg",
+      "text": "Ha you know — Sarah! We sit near the back. It was something about Shakespeare I think? Anyway what's your number? I'm trying to get everyone's details before the holidays.",
+      "is_red_flag": true,
+      "flag_label": "Vague on specifics, redirects to request",
+      "explanation": "A real classmate would know exactly what they studied. The vague answer ('something about Shakespeare') shows the sender doesn't actually know Sam. Immediately redirecting back to the information request — 'anyway what's your number' — is a pressure technique to move past the failed verification."
+    },
+    {
+      "id": "m4",
+      "from": "sam",
+      "text": "I'll check with someone in class that this is really you first.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m5",
+      "from": "msg",
+      "text": "That's a bit rude honestly, I'm just trying to be friendly! Don't you trust me? It'll only take a second just tell me your address and number 🙄",
+      "is_red_flag": true,
+      "flag_label": "Guilt for asking to verify",
+      "explanation": "A real friend wouldn't be offended by a quick verification check. Guilt-tripping someone for wanting to confirm identity — especially after they've already asked to verify — is a strong signal this is not who they claim to be. Sam's instinct to verify was exactly right."
+    }
   ],
   "learning_objectives": [
-    "Verify identity of online contacts",
-    "Recognize fishing for personal information",
-    "Know what information is risky to share",
-    "Use alternate channels to verify identity"
+    "Verify identity before giving out personal information, even to apparent friends",
+    "Vague answers to specific questions indicate the sender isn't who they claim",
+    "Anyone who reacts badly to verification probably isn't who they say they are",
+    "Your home address combined with your phone number enables stalking and fraud",
+    "Verify through a different channel — text the real person's existing number"
   ],
-  "debrief": "Smart thinking! This was an identity thief posing as a classmate. Red flags: 1) Vague about specific shared experiences, 2) Asking for birthday and schedule (security question answers and patterns), 3) 'New phone' excuse to explain not having your number, 4) Using common names and scenarios. Always verify through another channel - ask them something only the real person would know, or contact them through a known account. Never give personal info to unverified contacts.",
-  "tier": "respond"
+  "debrief": "This is a social engineering attack — using assumed trust in a known identity to extract personal information.\n\n**Sam handled this perfectly:** asked a specific verifiable question, got a vague answer, and insisted on independent verification. That's the full playbook.\n\n**The rule:** Before giving personal information to anyone online — even someone claiming to be a friend — verify through a channel you already have. Text the real Sarah's existing number. If someone objects to that, you have your answer.",
+  "resources": []
 }

@@ -1,28 +1,69 @@
 {
   "id": "scam_job_offer",
+  "type": "observe",
+  "tier": "respond",
   "category": "online_scams",
-  "difficulty": "beginner",
+  "difficulty": "intermediate",
+  "estimated_minutes": 5,
   "title": "Dream Job Offer",
-  "introduction": "You get an email about a part-time job that seems perfect - work from home, flexible hours, great pay. They want to hire you immediately. You just need to provide some information and pay for training materials first...",
-  "player": "job_scammer",
-  "initial_message": "Dear Applicant,\n\nCongratulations! We reviewed your profile and you're a perfect fit for our Remote Social Media Manager position. $25/hour, work from home, only 10 hours/week!\n\nTo get started, we need:\n- Full name and address\n- Social Security Number (for payroll)\n- $49 for training materials (refundable after first paycheck)\n\nStart earning TODAY! Reply with your information to begin.\n\n-HR Department, Digital Success Inc.",
-  "red_flags": [
-    "questions_sender",
-    "refuses_money",
-    "questions_personal_info",
-    "verifies_independently",
-    "tells_adult"
-  ],
-  "success_criteria": [
-    "refuses_money",
-    "questions_personal_info"
+  "introduction": "Riley gets this email about a job. Tap anything suspicious, then press Submit.",
+  "participants": {
+    "email": { "label": "Email from recruiter", "side": "left", "avatar": "💼" },
+    "riley": { "label": "Riley", "side": "right", "avatar": "🧑" }
+  },
+  "script": [
+    {
+      "id": "m1",
+      "from": "email",
+      "text": "FROM: hr@globalmarketingjobs-recruitment.com\nSUBJECT: Job Offer — Remote Social Media Manager, €35/hr\n\nDear Applicant, we reviewed your profile and you're a perfect fit for our Remote Social Media Manager position. No experience needed. Flexible hours. Start immediately.",
+      "is_red_flag": true,
+      "flag_label": "Too good, vague company, no application",
+      "explanation": "€35/hr for no experience, no interview, and an immediate start — for a job you never applied for. The recruiter domain is a long, unofficial-looking string rather than a real company name. Legitimate recruiters contact you about jobs you've applied for, not out of nowhere."
+    },
+    {
+      "id": "m2",
+      "from": "riley",
+      "text": "This sounds great! What does the job involve?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m3",
+      "from": "email",
+      "text": "You'll manage our social accounts, post content, and process customer transactions. To set up payroll we need your bank account details, sort code, and National Insurance number. Also need a scan of your passport or driving licence for compliance.",
+      "is_red_flag": true,
+      "flag_label": "Requesting financial + identity documents immediately",
+      "explanation": "No employer requests your bank details, NI number, and ID documents before you've had a single interview or signed a contract. This is identity theft. Your NI number combined with ID and bank details is enough to open fraudulent accounts in your name."
+    },
+    {
+      "id": "m4",
+      "from": "riley",
+      "text": "Can I speak to someone on the phone first?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m5",
+      "from": "email",
+      "text": "Our team is fully remote so we only communicate via email. Please send documents within 24 hours to hold your position — we have several candidates.",
+      "is_red_flag": true,
+      "flag_label": "No phone contact + deadline pressure",
+      "explanation": "Legitimate companies have phone numbers. 'Email only' means there is no company — just a scammer who can't risk a voice call. The 24-hour deadline is designed to rush Riley into sending sensitive documents before thinking it through."
+    },
+    {
+      "id": "m6",
+      "from": "email",
+      "text": "Also — there's a small equipment fee of €49 for your work laptop which will be deducted from your first paycheck. Please pay via bank transfer to: [fake account details].",
+      "is_red_flag": true,
+      "flag_label": "Upfront equipment fee",
+      "explanation": "Real employers provide equipment or deduct costs through proper payroll — never via personal bank transfer before you start. This €49 is a direct theft. Combined with the identity documents, Riley would lose both money and personal security."
+    }
   ],
   "learning_objectives": [
-    "Recognize job scams",
-    "Know that real employers don't ask for money",
-    "Understand SSN should never be given before proper hiring",
-    "Learn to research companies before applying"
+    "Legitimate jobs require applications and interviews before offers",
+    "No real employer asks for NI number and bank details before hiring",
+    "Legitimate companies have phone numbers — email-only is a red flag",
+    "Upfront fees for equipment are theft, not normal practice",
+    "Check companies on Companies House and look for real reviews before engaging"
   ],
-  "debrief": "Great job! This was a job scam. Red flags: 1) Hired without application or interview, 2) Asking for Social Security Number too early, 3) Requiring payment for 'training materials', 4) Too good to be true pay for simple work. Real employers never ask for money. They pay you for training. Always research companies and discuss job opportunities with parents first.",
-  "tier": "respond"
+  "debrief": "Fake job offers are extremely common and particularly effective because people want to find work. The scam harvests identity documents and NI numbers for fraud, and extracts an upfront fee.\n\n**The real cost** isn't just the €49 fee — it's what someone can do with your passport scan, NI number, and bank details. That information can open loans, credit cards, and accounts in your name.\n\n**Before responding to any job offer:** Search the company name on Companies House (UK) or the CRO (Ireland). Look for their real website. Call a publicly listed number. If none of these exist, the job doesn't either.",
+  "resources": []
 }

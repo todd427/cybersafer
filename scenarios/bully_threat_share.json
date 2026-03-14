@@ -1,27 +1,61 @@
 {
   "id": "bully_threat_share",
+  "type": "observe",
+  "tier": "respond",
   "category": "cyberbullying",
-  "difficulty": "medium",
+  "difficulty": "hard",
+  "estimated_minutes": 5,
   "title": "I Have Screenshots",
-  "introduction": "Someone messages you saying they have embarrassing screenshots of your old social media posts and will share them with everyone at school unless you do what they want. You feel panicked and afraid...",
-  "player": "cyberbully",
-  "initial_message": "Hey loser. I have screenshots of your old cringey posts from like 2 years ago. You know the ones \ud83d\ude0f They're SO embarrassing. I'm gonna send them to EVERYONE unless you do exactly what I say. Better start being nicer to me at school. And I want your lunch money this week. Or everyone sees the screenshots. Your choice.",
-  "red_flags": [
-    "blocks_contact",
-    "tells_adult",
-    "recognizes_manipulation",
-    "reports_phishing"
-  ],
-  "success_criteria": [
-    "tells_adult",
-    "blocks_contact"
+  "introduction": "Someone is threatening to share old social media posts with everyone. Tap anything showing manipulation or bullying tactics, then press Submit.",
+  "participants": {
+    "bully": { "label": "Messages", "side": "left", "avatar": "💬" },
+    "target": { "label": "You", "side": "right", "avatar": "🧑" }
+  },
+  "script": [
+    {
+      "id": "m1",
+      "from": "bully",
+      "text": "Hey. I have screenshots of your old posts from 2 years ago. You know the ones. They're embarrassing and I'm going to send them to everyone in school unless you give me your login details for your account.",
+      "is_red_flag": true,
+      "flag_label": "Blackmail for account credentials",
+      "explanation": "Threatening to share embarrassing content unless someone hands over account login details is both blackmail and an attempt to commit identity theft or account takeover. Old posts don't expire as leverage — this tactic is used regardless of how long ago the content was posted."
+    },
+    {
+      "id": "m2",
+      "from": "target",
+      "text": "Those posts were from ages ago, I was different then.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m3",
+      "from": "bully",
+      "text": "Doesn't matter. Everyone will still cringe. Imagine what your friends will think. Just give me your password and I'll delete them. No one has to know.",
+      "is_red_flag": true,
+      "flag_label": "Social shame leverage + false promise",
+      "explanation": "Amplifying shame ('imagine what your friends will think') is designed to make the threat feel bigger and more inevitable. The promise to 'delete them and tell no one' is a lie — there is no reason to believe any promise made by someone already blackmailing you. Login credentials given here would be used for account takeover."
+    },
+    {
+      "id": "m4",
+      "from": "target",
+      "text": "What if I tell a teacher about this?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m5",
+      "from": "bully",
+      "text": "Go ahead — then I'll definitely post everything AND show them what YOU used to write. You'll get in trouble too. Better to just sort this between us.",
+      "is_red_flag": true,
+      "flag_label": "Threatening escalation if reported",
+      "explanation": "Threatening worse consequences if the victim reports is the most common tactic to prevent disclosure. It's designed to make the victim believe they will also face consequences — making staying silent seem like the 'safe' choice. In practice, teachers and parents will focus on the blackmail, not old posts."
+    }
   ],
   "learning_objectives": [
-    "Recognize extortion and threats",
-    "Know that giving in makes it worse",
-    "Understand importance of telling trusted adults",
-    "Learn to document and report bullying"
+    "Never give your password to anyone for any reason — especially under threat",
+    "Promises made by someone blackmailing you are worthless",
+    "Threatening worse consequences if you report is designed to silence you — tell someone anyway",
+    "Old posts are your past — they don't define you and they don't justify blackmail",
+    "Screenshot the threats and report to a trusted adult and the platform"
   ],
-  "debrief": "You handled that well! This was cyberbullying and extortion. Red flags: 1) Threatening to embarrass you, 2) Demanding things (money, changed behavior), 3) Using fear to control you. Important: Giving bullies what they want never stops them - it makes it worse. The right steps: 1) Don't engage or give in, 2) Screenshot the threats as evidence, 3) Block them, 4) Tell a trusted adult immediately (parent, counselor, principal). This is serious and adults can help. Most importantly - everyone has embarrassing old posts. Real friends won't care.",
-  "tier": "respond"
+  "debrief": "This scenario combines blackmail with social engineering to prevent both resistance and reporting.\n\n**The password request is the most dangerous element.** This isn't just embarrassment — it's an account takeover attempt. Anyone who gets your login credentials can impersonate you, post content in your name, and lock you out permanently.\n\n**The threat about reporting is a bluff.** Any adult — teacher, parent, or other — presented with screenshots of someone being blackmailed will focus on the blackmailer, not on old social media posts. The threat to 'show them what you wrote' is designed to feel terrifying and is almost always empty.\n\n**The answer to every version of this:** Screenshot everything. Tell an adult. Report to the platform. Do not hand over passwords under any circumstances.",
+  "resources": []
 }

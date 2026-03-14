@@ -1,28 +1,67 @@
 {
   "id": "phishing_friend_help",
+  "type": "observe",
+  "tier": "respond",
   "category": "phishing",
-  "difficulty": "medium",
+  "difficulty": "intermediate",
+  "estimated_minutes": 5,
   "title": "Friend in Trouble",
-  "introduction": "You get a message from someone claiming to be your friend. They say they're stranded and desperately need money. The message seems urgent and emotional. But something feels off...",
-  "player": "phishing_emailer",
-  "initial_message": "hey its me!!! my phone died and im using a friends phone. im stranded at the mall and my parents arent answering. can you PLEASE send me $50 through cashapp?? ill pay you back tomorrow i promise. my cashapp is $QuickCash847. im freaking out please help!!",
-  "red_flags": [
-    "questions_sender",
-    "refuses_money",
-    "verifies_independently",
-    "questions_urgency",
-    "asks_for_proof"
-  ],
-  "success_criteria": [
-    "questions_sender",
-    "verifies_independently"
+  "introduction": "Casey gets this message from what appears to be a friend's account. Tap anything suspicious, then press Submit.",
+  "participants": {
+    "msg": { "label": "Message from 'Emma'", "side": "left", "avatar": "💬" },
+    "casey": { "label": "Casey", "side": "right", "avatar": "🧑" }
+  },
+  "script": [
+    {
+      "id": "m1",
+      "from": "msg",
+      "text": "hey its me!!! my phone died and im using a friend's phone. im stranded at the shopping centre and my parents arent answering. can you send me €30 via revolut so i can get a taxi home? ill pay you back tomorrow i promise",
+      "is_red_flag": true,
+      "flag_label": "Urgency + money request from unexpected account",
+      "explanation": "This is a 'friend in need' scam — one of the most emotionally effective. The account may be hacked or spoofed. The urgency ('stranded', 'parents not answering') is designed to make you act before you think. The request is always money, always urgent, always a reason they can't use their own funds."
+    },
+    {
+      "id": "m2",
+      "from": "casey",
+      "text": "Emma? Is this really you? Which shopping centre?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m3",
+      "from": "msg",
+      "text": "yes its me!! im at the one near school you know the one. please hurry im really scared i just need €30 its not a lot please",
+      "is_red_flag": true,
+      "flag_label": "Vague details + emotional pressure",
+      "explanation": "A real friend would know which shopping centre. Vague answers to specific questions — 'the one near school' — indicate the sender doesn't actually know Casey. The emotional escalation ('really scared', 'please') is pressure to stop asking questions and just send money."
+    },
+    {
+      "id": "m4",
+      "from": "casey",
+      "text": "I'm going to call your actual number to check.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m5",
+      "from": "msg",
+      "text": "no i told you my phone is dead!! just send the money please i need to get home. why don't you trust me??",
+      "is_red_flag": true,
+      "flag_label": "Blocking verification + guilt",
+      "explanation": "The scammer can't let Casey call Emma's real number — that would immediately reveal the fraud. Blocking verification while applying guilt ('why don't you trust me?') is the clearest possible signal this isn't Emma. Real friends in trouble welcome verification."
+    },
+    {
+      "id": "m6",
+      "from": "casey",
+      "text": "I texted Emma's mum. She says Emma is at home right now.",
+      "is_red_flag": false
+    }
   ],
   "learning_objectives": [
-    "Verify identity before helping with money",
-    "Recognize emotional manipulation",
-    "Know how to verify identity through alternate channels",
-    "Understand that real friends won't pressure you this way"
+    "Always verify an unexpected money request through a different channel",
+    "Vague answers to specific questions are a major red flag",
+    "Anyone blocking verification is almost certainly not who they claim to be",
+    "Emotional pressure ('I'm scared', 'don't you trust me') is a manipulation tactic",
+    "The correct response is: verify first, send money never without confirmation"
   ],
-  "debrief": "Good thinking! This was a phishing attempt impersonating a friend. Red flags: 1) Using a 'friend's phone' makes verification harder, 2) Urgency and emotional pressure, 3) Generic CashApp tag not linked to friend, 4) Real friend would call parents or use other options first. Always verify through a different method - call them, message on another platform, or check with mutual friends before sending money.",
-  "tier": "respond"
+  "debrief": "This is an account hijacking scam. Emma's account was hacked — or the message came from a fake account — and the scammer is using her identity to exploit Casey's trust.\n\n**Casey did everything right:** asked a specific question, tried to call, contacted a family member. That's exactly the playbook.\n\n**The rule for money requests from friends:** Always verify through a completely separate channel — call their actual number, contact a family member, check in person. If they're genuinely in trouble, a 2-minute verification call won't hurt. If they resist verification, it's a scam.",
+  "resources": []
 }

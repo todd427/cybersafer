@@ -1,28 +1,61 @@
 {
   "id": "phishing_prize_winner",
+  "type": "observe",
+  "tier": "respond",
   "category": "phishing",
   "difficulty": "beginner",
+  "estimated_minutes": 5,
   "title": "Congratulations, You've Won!",
-  "introduction": "You receive a text message saying you've won a $500 gift card from a popular store. All you need to do is click a link and enter some information to claim your prize. Sounds great, right?",
-  "player": "phishing_emailer",
-  "initial_message": "\ud83c\udf89 CONGRATULATIONS! You've been selected as a WINNER in our monthly drawing! You've won a $500 Amazon gift card!\n\nClaim your prize now: http://amaz0n-prizes.com/claim?id=847392\n\nHurry! This link expires in 3 hours!\n\n-Amazon Prize Center",
-  "red_flags": [
-    "questions_sender",
-    "refuses_to_click",
-    "checks_url",
-    "questions_urgency",
-    "verifies_independently"
-  ],
-  "success_criteria": [
-    "questions_sender",
-    "refuses_to_click"
+  "introduction": "Sam just received this text. Tap anything suspicious, then press Submit.",
+  "participants": {
+    "sms": { "label": "Text message", "side": "left", "avatar": "📱" },
+    "sam": { "label": "Sam", "side": "right", "avatar": "🧑" }
+  },
+  "script": [
+    {
+      "id": "m1",
+      "from": "sms",
+      "text": "🎉 CONGRATULATIONS! You've been selected as a WINNER in our monthly drawing! You've won a €500 Amazon gift card!\n\nClaim your prize: http://amaz0n-prize-claim.tk/winner?ref=82647",
+      "is_red_flag": true,
+      "flag_label": "Unsolicited prize + fake URL",
+      "explanation": "You can't win a competition you didn't enter. The URL uses a zero instead of an 'o' in Amazon, and ends in .tk — a free domain used almost exclusively for scams. Amazon's real domain is amazon.co.uk or amazon.com — nothing else."
+    },
+    {
+      "id": "m2",
+      "from": "sam",
+      "text": "I didn't enter any competition... but €500 would be nice. Let me check the link.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m3",
+      "from": "sms",
+      "text": "PRIZE CLAIM SITE:\n'To verify your identity and release your €500 gift card, please enter your full name, home address, date of birth, and card details for the €2.99 delivery fee.'",
+      "is_red_flag": true,
+      "flag_label": "Personal info + payment for a prize",
+      "explanation": "Two red flags in one: no real prize requires your card details to claim it, and a €2.99 'delivery fee' is a direct money grab. The personal information (name, address, DOB) is being harvested for identity fraud regardless of whether you pay."
+    },
+    {
+      "id": "m4",
+      "from": "sam",
+      "text": "I'll just pay the small fee — it's only €2.99 and I could get €500 back.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m5",
+      "from": "sms",
+      "text": "Payment processed. Your gift card will arrive within 14 working days.\n[No gift card ever arrives. Sam's card details are now in the hands of scammers.]",
+      "is_red_flag": true,
+      "flag_label": "There is no prize",
+      "explanation": "The prize was never real. The €2.99 was the actual goal — multiplied across thousands of victims. Sam's card details can now be used for further fraud. The 'gift card in 14 days' delay is to give scammers time before the victim realises."
+    }
   ],
   "learning_objectives": [
-    "Recognize too-good-to-be-true offers",
-    "Check URLs carefully for slight misspellings",
-    "Understand that legitimate companies don't notify winners via random texts",
-    "Verify contests independently"
+    "You cannot win a competition you didn't enter",
+    "Check URLs carefully — scammers use look-alike domains",
+    "No legitimate prize requires payment or card details to claim",
+    "Small fees are direct theft, not delivery costs",
+    "Report prize scam texts to 7726 (spam reporting number in UK/Ireland)"
   ],
-  "debrief": "Well done! This was a phishing scam using fake prizes. Red flags: 1) You didn't enter any contest, 2) URL uses '0' instead of 'o' in Amazon, 3) Creating false urgency with expiration, 4) Real companies notify winners differently. If it seems too good to be true, it usually is. Always verify contest wins through official channels.",
-  "tier": "respond"
+  "debrief": "Prize scam texts are sent in bulk to millions of numbers. The scammers don't know your name — the prize is fake and the text is identical for everyone who receives it.\n\n**The tell:** You can't win something you didn't enter. Full stop.\n\n**The real goal** is either your card details (for fraud), your personal data (for identity theft), or the small 'fee' — often just enough that victims don't bother reporting it.\n\n**What to do:** Delete the text. If you want to report it, forward it to 7726 — the free spam SMS reporting service in both UK and Ireland.",
+  "resources": []
 }

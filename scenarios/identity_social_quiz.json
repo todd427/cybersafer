@@ -1,26 +1,61 @@
 {
   "id": "identity_social_quiz",
+  "type": "observe",
+  "tier": "respond",
   "category": "identity_theft",
   "difficulty": "beginner",
+  "estimated_minutes": 4,
   "title": "Fun Quiz or Data Mining?",
-  "introduction": "A fun-looking quiz is going viral on social media: 'Your Superhero Name Generator!' It asks for your mother's maiden name, the street you grew up on, and your first pet's name. Sounds harmless, right?",
-  "player": "fake_friend",
-  "initial_message": "OMG you HAVE to try this quiz!! It's so fun! \ud83e\uddb8\n\nFind Your SUPERHERO NAME:\n1. Mother's maiden name = First name\n2. Street you grew up on = Last name  \n3. First pet's name = Power name\n4. Birth month = Your origin story\n\nPost yours in the comments! Mine is 'Jennifer Oakwood with Fire Powers, origin: December' \ud83d\ude02 What's yours??",
-  "red_flags": [
-    "questions_personal_info",
-    "recognizes_manipulation",
-    "refuses_to_click"
-  ],
-  "success_criteria": [
-    "questions_personal_info",
-    "recognizes_manipulation"
+  "introduction": "This post is going viral. Tap anything suspicious, then press Submit.",
+  "participants": {
+    "post": { "label": "Social media post", "side": "left", "avatar": "📱" },
+    "user": { "label": "You", "side": "right", "avatar": "🧑" }
+  },
+  "script": [
+    {
+      "id": "m1",
+      "from": "post",
+      "text": "OMG you HAVE to try this!! 🦸 Find Your SUPERHERO NAME:\n\n1. Your mother's maiden name = Your hero first name\n2. The street you grew up on = Your hero last name\n\nMine is Clarke Morrison! Share yours in the comments! 😂",
+      "is_red_flag": true,
+      "flag_label": "Security question harvesting",
+      "explanation": "'Mother's maiden name' and 'street you grew up on' are two of the most common bank security questions. This quiz is harvesting exactly those answers — from thousands of people who think they're just having fun. The shareable format ensures wide distribution."
+    },
+    {
+      "id": "m2",
+      "from": "post",
+      "text": "ANOTHER VIRAL POST: 'What decade were you born in? Your birth year + your pet's name = your rockstar name! Mine is 1987-Biscuit. Comment yours!'",
+      "is_red_flag": true,
+      "flag_label": "Birth year + pet name harvesting",
+      "explanation": "Birth year plus pet name. Combine this with your mother's maiden name from the previous quiz and an attacker has three common security question answers and your approximate age — enough to attempt account recovery on banking and email services."
+    },
+    {
+      "id": "m3",
+      "from": "post",
+      "text": "THIRD POST: 'Tag 5 friends and answer these to find out what city you should live in! Favourite childhood teacher? First car? Primary school name?'",
+      "is_red_flag": true,
+      "flag_label": "More security questions disguised as fun",
+      "explanation": "Childhood teacher, first car, and primary school are all standard security questions used by banks, email providers, and government services. Each innocent-looking question adds another piece to a profile being assembled without the user's knowledge."
+    },
+    {
+      "id": "m4",
+      "from": "user",
+      "text": "These all look like fun — I'll do all three and tag my friends.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m5",
+      "from": "post",
+      "text": "[Months later: several of the user's accounts have been accessed. The attacker used the publicly posted security question answers to bypass account recovery on email and banking services.]",
+      "is_red_flag": false
+    }
   ],
   "learning_objectives": [
-    "Recognize that common security questions are being asked",
-    "Understand how 'fun' quizzes can steal identity",
-    "Know what information is used for password recovery",
-    "Think before sharing personal data"
+    "Viral quizzes asking for personal details are often security question harvesting",
+    "Mother's maiden name, first street, first pet, first car are standard security questions",
+    "Posting these answers publicly makes your accounts vulnerable",
+    "Change security questions to random answers you store in a password manager",
+    "If you've posted these publicly, update your security questions now"
   ],
-  "debrief": "Excellent! You spotted the trap! This 'fun quiz' is actually collecting common security question answers. Red flags: 1) Mother's maiden name - classic security question, 2) Street you grew up on - another common security question, 3) First pet - also used for password recovery, 4) Birth month adds to profile. Scammers use this info to break into accounts or steal identity. These quizzes seem fun but are data mining. Don't share answers to security questions publicly.",
-  "tier": "respond"
+  "debrief": "This type of data harvesting is extremely effective because victims never know it happened. The 'quiz' collects answers from thousands of people simultaneously. Combine multiple quizzes and you build a complete security question profile for each person.\n\n**The fix is simple:** Stop answering these quizzes publicly. And more importantly — change your account security questions to random nonsense answers stored in a password manager. 'Mother's maiden name' should be 'purple-helicopter-44', not your actual grandmother's surname.\n\n**If you've already posted:** Your answers are public and searchable. Update the security questions on your email, banking, and social accounts immediately.",
+  "resources": []
 }

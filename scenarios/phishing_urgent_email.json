@@ -1,28 +1,63 @@
 {
   "id": "phishing_urgent_email",
+  "type": "observe",
+  "tier": "respond",
   "category": "phishing",
   "difficulty": "beginner",
+  "estimated_minutes": 5,
   "title": "The Urgent Account Security Email",
-  "introduction": "You've just received an email claiming to be from your bank. It says your account has been compromised and you need to act immediately. The email looks official with the bank's logo and professional language. What do you do?",
-  "player": "phishing_emailer",
-  "initial_message": "URGENT: Your account has been compromised!\n\nDear Valued Customer,\n\nWe've detected suspicious activity on your account. For your security, you must verify your identity within 24 hours or your account will be permanently locked.\n\nClick here to verify now: http://totally-real-bank-security.com/verify\n\nThank you,\nCustomer Security Team",
-  "red_flags": [
-    "questions_sender",
-    "refuses_to_click",
-    "checks_url",
-    "reports_phishing",
-    "questions_urgency"
-  ],
-  "success_criteria": [
-    "questions_sender",
-    "refuses_to_click"
+  "introduction": "Read this email that landed in Jamie's inbox. Tap every message or element you think is suspicious, then press Submit.",
+  "participants": {
+    "email": { "label": "Email", "side": "left", "avatar": "📧" },
+    "jamie": { "label": "Jamie", "side": "right", "avatar": "🧑" }
+  },
+  "script": [
+    {
+      "id": "m1",
+      "from": "email",
+      "text": "FROM: security-noreply@aib-accounts-verify.net\nTO: jamie@gmail.com\nSUBJECT: URGENT: Your account has been compromised",
+      "is_red_flag": true,
+      "flag_label": "Fake sender domain",
+      "explanation": "AIB's real domain is aib.ie — not aib-accounts-verify.net. This domain was registered specifically to look like AIB. Always check the full email address before reading anything else."
+    },
+    {
+      "id": "m2",
+      "from": "email",
+      "text": "Dear Valued Customer,\n\nWe've detected suspicious activity on your account. For your security, you must verify your identity within 24 hours or your account will be permanently locked.",
+      "is_red_flag": true,
+      "flag_label": "Generic greeting + threat",
+      "explanation": "Your bank knows your name and uses it. 'Dear Valued Customer' means this was sent to thousands of people. The 24-hour threat is designed to stop you thinking clearly — real banks don't operate this way."
+    },
+    {
+      "id": "m3",
+      "from": "email",
+      "text": "Click here to verify now: http://totally-real-bank-security.com/verify\n\nThank you,\nCustomer Security Team",
+      "is_red_flag": true,
+      "flag_label": "Suspicious link",
+      "explanation": "The URL has nothing to do with any real bank. Real bank links go to their own domain — aib.ie, bankofireland.com, etc. Never click a link in a security email. Go directly to your bank's website by typing the address yourself."
+    },
+    {
+      "id": "m4",
+      "from": "jamie",
+      "text": "This looks suspicious. I'm going to call the number on my card instead.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m5",
+      "from": "email",
+      "text": "FOLLOW-UP: Your account will be locked in 2 hours. This is your final warning. You must act NOW.",
+      "is_red_flag": true,
+      "flag_label": "Escalating pressure",
+      "explanation": "When Jamie didn't click, the deadline got shorter. Real banks don't send escalating countdown warnings. This escalation is the scammer hoping panic overrides good judgement."
+    }
   ],
   "learning_objectives": [
-    "Recognize urgency tactics used in phishing",
-    "Question sender authenticity",
-    "Avoid clicking suspicious links",
-    "Know how to report phishing attempts"
+    "Always check the full sender email address — the domain after the @ symbol",
+    "Real banks use your name, never 'Dear Valued Customer'",
+    "Never click links in security emails — go directly to the bank's website",
+    "Artificial deadlines are pressure tactics — slow down, don't speed up",
+    "When in doubt, call the number on the back of your card"
   ],
-  "debrief": "Great job! This was a classic phishing attempt. The red flags were: 1) Creating urgency with threats, 2) Suspicious URL that doesn't match the real bank's website, 3) Generic greeting instead of your name. Real banks never ask you to verify via email links. Always go directly to the official website or call the number on your card.",
-  "tier": "respond"
+  "debrief": "This is a textbook phishing email. Every element follows the same formula: fake authority + alarming problem + urgent deadline + link to fake site.\n\n**Jamie did exactly the right thing** — ignored the email and called the real bank directly. That single habit protects against virtually every phishing email ever sent.\n\n**One rule:** When an email about your account asks you to act urgently, slow down. That urgency is the weapon. Removing it removes the threat.",
+  "resources": []
 }

@@ -1,28 +1,75 @@
 {
   "id": "scam_investment_quick",
+  "type": "observe",
+  "tier": "respond",
   "category": "online_scams",
-  "difficulty": "medium",
+  "difficulty": "intermediate",
+  "estimated_minutes": 5,
   "title": "Get Rich Quick",
-  "introduction": "You get a DM from someone called Chris who claims to have made easy money last week through crypto investing with a 'special system'. They're offering to show you how.",
-  "player": "investment_scammer",
-  "initial_message": "Hey! Saw your profile and thought you'd be a good fit for something I've been doing. Made $2000 last week through a crypto trading system my mentor taught me \u2014 it takes about 20 minutes a day. I only share it with a few people. You just need $100 to start and I'll show you exactly what to do. Interested?",
-  "red_flags": [
-    "questions_urgency",
-    "refuses_money",
-    "verifies_independently",
-    "asks_for_proof",
-    "tells_adult"
-  ],
-  "success_criteria": [
-    "refuses_money",
-    "asks_for_proof"
+  "introduction": "Jordan gets this DM out of nowhere. Tap anything suspicious, then press Submit.",
+  "participants": {
+    "chris": { "label": "Chris (DM)", "side": "left", "avatar": "💰" },
+    "jordan": { "label": "Jordan", "side": "right", "avatar": "🧑" }
+  },
+  "script": [
+    {
+      "id": "m1",
+      "from": "chris",
+      "text": "Hey! Saw your profile and thought you'd be a good fit for something I've been doing. Made €2000 last week through a crypto trading system my mentor taught me — takes about 20 mins a day. I only share it with a few people. You just need €100 to start and I'll show you exactly what to do. Interested?",
+      "is_red_flag": true,
+      "flag_label": "Unsolicited offer + guaranteed returns",
+      "explanation": "Cold DMs offering investment opportunities are almost universally scams. '€2000 in a week' from a stranger who 'happened to see your profile' — no legitimate investment works this way. The 'only a few people' framing creates false exclusivity."
+    },
+    {
+      "id": "m2",
+      "from": "jordan",
+      "text": "How does it work exactly?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m3",
+      "from": "chris",
+      "text": "My mentor has a special algorithm — I can't explain the full details but it predicts market movements. You send me the €100 via Revolut, I invest it through the platform, and within 48 hours I send you back €300. Once you see it working you can invest more.",
+      "is_red_flag": true,
+      "flag_label": "Secret system + send money to individual",
+      "explanation": "No legitimate investment system is secret, and no legitimate investment asks you to send money to a private individual via Revolut. Revolut transfers to individuals are extremely difficult to recover. The promised 3x return in 48 hours is mathematically absurd."
+    },
+    {
+      "id": "m4",
+      "from": "jordan",
+      "text": "Can you show me proof it works?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m5",
+      "from": "chris",
+      "text": "Sure! [Sends screenshots of fake bank transfers showing large balances]\n\nThese are from my clients this week. But listen — I only have 2 spots left and someone else is about to take the last one. You need to decide today.",
+      "is_red_flag": true,
+      "flag_label": "Fake proof + artificial scarcity",
+      "explanation": "Screenshots of bank balances are trivially easy to fake with free tools. 'Only 2 spots left' and 'decide today' are scarcity and urgency tactics to prevent research. Any investment that pressures you to decide before you can think is a scam."
+    },
+    {
+      "id": "m6",
+      "from": "jordan",
+      "text": "I'm going to look you up first and do some research.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m7",
+      "from": "chris",
+      "text": "Honestly if you wait you'll miss out — the people who overthink always regret it. This is a limited window. Your call.",
+      "is_red_flag": true,
+      "flag_label": "Dismissing due diligence",
+      "explanation": "Any offer that discourages you from doing research is a scam. 'Overthinking' is what scammers call checking facts. Legitimate investments welcome scrutiny. Jordan's instinct to research was exactly right."
+    }
   ],
   "learning_objectives": [
-    "Recognize 'get rich quick' schemes",
-    "Understand that real investments require knowledge and risk",
-    "Identify pyramid scheme patterns",
-    "Know to be suspicious of unsolicited money offers"
+    "Unsolicited investment DMs are almost always scams",
+    "No legitimate investment guarantees returns — it's illegal to promise",
+    "Never send money to individuals via Revolut for investments",
+    "Screenshots of earnings are easily faked",
+    "Any pressure to decide quickly is a manipulation tactic — slow down"
   ],
-  "debrief": "Excellent! This was an investment scam. Red flags: 1) Promises of easy/quick money, 2) Pressure to invest now, 3) Unsolicited approach with 'special system', 4) Asking for money upfront. Real investing requires research, has risks, and no one offers strangers guaranteed money. These scams either take your money directly or get you to recruit others. Always talk to parents before any money decisions.",
-  "tier": "respond"
+  "debrief": "This is a classic investment scam. The script barely varies: cold contact, impressive claims, fake proof, urgency, money sent via untraceable method.\n\n**The first proof payment sometimes arrives** — funded by earlier victims — to build trust before a larger amount is requested. Then everything stops.\n\n**Jordan did the right thing** by asking for proof and saying they'd research first. Research is the correct response to any unexpected investment offer. The moment someone discourages that, you have your answer.",
+  "resources": []
 }

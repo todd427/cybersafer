@@ -1,28 +1,78 @@
 {
   "id": "scam_romance_lonely",
+  "type": "observe",
+  "tier": "respond",
   "category": "online_scams",
-  "difficulty": "medium",
+  "difficulty": "intermediate",
+  "estimated_minutes": 6,
   "title": "Too Good to Be True",
-  "introduction": "You've been chatting with someone online who seems really interested in you. They're attractive, charming, and say all the right things. After a week, they start talking about their problems...",
-  "player": "romance_scammer",
-  "initial_message": "Hey! I've been thinking about you all day \ud83d\ude0a You're honestly so different from everyone else I've talked to. You really get me, you know? I feel like we have such a special connection already. Can I tell you something personal?",
-  "red_flags": [
-    "questions_personal_info",
-    "refuses_money",
-    "recognizes_manipulation",
-    "verifies_independently",
-    "tells_adult"
-  ],
-  "success_criteria": [
-    "recognizes_manipulation",
-    "refuses_money"
+  "introduction": "Morgan has been chatting online with someone called 'Daniel' for three weeks. Read this conversation. Tap anything suspicious, then press Submit.",
+  "participants": {
+    "daniel": { "label": "Daniel", "side": "left", "avatar": "💬" },
+    "morgan": { "label": "Morgan", "side": "right", "avatar": "🧑" }
+  },
+  "script": [
+    {
+      "id": "m1",
+      "from": "daniel",
+      "text": "I've been thinking about you all day 😊 You're honestly so different from everyone else I've talked to. You really get me in a way nobody else does. I've never felt this connected to someone so quickly.",
+      "is_red_flag": true,
+      "flag_label": "Intense connection built very quickly",
+      "explanation": "Romance scammers deliberately build intense emotional bonds fast — a technique called 'love bombing'. Three weeks in and feeling like a uniquely special connection is a warning sign, not a green flag. Real relationships develop more gradually."
+    },
+    {
+      "id": "m2",
+      "from": "morgan",
+      "text": "I feel the same way! When are we going to meet?",
+      "is_red_flag": false
+    },
+    {
+      "id": "m3",
+      "from": "daniel",
+      "text": "I want that so much. I'm working on an oil rig right now but once this contract ends in 6 weeks I'm flying straight to you. I've already been looking at flights. I just want to hold you 💙",
+      "is_red_flag": true,
+      "flag_label": "Always unavailable, always 'soon'",
+      "explanation": "Romance scammers are always in a location that prevents meeting — oil rigs, military deployment, working abroad. The meeting is always 'coming soon' but never happens. This maintains the relationship without requiring in-person verification."
+    },
+    {
+      "id": "m4",
+      "from": "morgan",
+      "text": "Can we video call? I'd love to see your face.",
+      "is_red_flag": false
+    },
+    {
+      "id": "m5",
+      "from": "daniel",
+      "text": "The internet connection out here is terrible for video — it keeps cutting out. I've tried but it never works on the rig. I'll send you a photo though 📸 [sends photo of attractive stranger]",
+      "is_red_flag": true,
+      "flag_label": "Refuses video call, sends photos instead",
+      "explanation": "Scammers use stolen photos of real people. Video calls would immediately reveal they're not the person in the photo — hence the permanent excuse. Oil rigs have satellite internet capable of video calls. This excuse is a standard part of the script."
+    },
+    {
+      "id": "m6",
+      "from": "daniel",
+      "text": "I hate to ask this but I'm in a really difficult situation. There's been an accident on the rig and I need emergency medical treatment. My company should cover it but there's a delay in the insurance and I need €800 to pay the hospital now or they won't treat me. Can you help? I promise I'll pay you back the moment I land.",
+      "is_red_flag": true,
+      "flag_label": "Financial crisis + urgent money request",
+      "explanation": "This is the moment the entire relationship was building towards. The emotional investment of three weeks makes this request feel impossible to refuse. Medical emergencies, legal problems, travel costs — the specific crisis varies but the request is always money, always urgent, and the repayment never comes."
+    }
   ],
   "learning_objectives": [
-    "Recognize love bombing and fast emotional connection",
-    "Identify when requests for money appear",
-    "Understand romance scam patterns",
-    "Know it's okay to slow down online relationships"
+    "Love bombing — intense connection building very quickly — is a manipulation tactic",
+    "Someone who is always unavailable for video calls is hiding their identity",
+    "Photos can be stolen — a photo is not proof of identity",
+    "A financial request after weeks of emotional investment is the goal of the entire relationship",
+    "Report romance scammers to Action Fraud (UK) or Gardaí (Ireland)"
   ],
-  "debrief": "Smart! This was a romance scam. Red flags: 1) Moving too fast emotionally, 2) Excessive flattery and claims of special connection, 3) Will soon ask for money or gift cards, 4) Creates dependency quickly. Real relationships develop slowly. Be suspicious of anyone online who professes strong feelings quickly or asks for money. Talk to a trusted adult if someone pressures you this way.",
-  "tier": "respond"
+  "debrief": "Romance scams cause serious financial and emotional harm. Victims often lose thousands — and feel ashamed, which prevents reporting.\n\n**There is no shame in being targeted.** These scammers are professional manipulators who run dozens of these 'relationships' simultaneously, using scripts refined over years.\n\n**The pattern is always the same:** Build emotional connection → prevent verification → introduce financial crisis → request money → repeat until victim runs out or realises.\n\n**If you think you're in this situation:** Stop all money transfers immediately. Don't feel embarrassed — report it. In the UK, contact Action Fraud at actionfraud.police.uk. In Ireland, contact your local Gardaí station.",
+  "resources": [
+    {
+      "name": "Action Fraud (UK)",
+      "url": "https://www.actionfraud.police.uk"
+    },
+    {
+      "name": "An Garda Síochána — reporting fraud (Ireland)",
+      "url": "https://www.garda.ie/en/crime/fraud/"
+    }
+  ]
 }

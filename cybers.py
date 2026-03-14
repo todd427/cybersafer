@@ -37,6 +37,12 @@ SESSION_TTL_HOURS = int(os.getenv("SESSION_TTL_HOURS", "2"))
 HOST              = os.getenv("CYBERS_HOST", "0.0.0.0")
 PORT              = int(os.getenv("CYBERS_PORT", "8021"))
 
+# CYBERS_MODE env var — override scenario type at runtime
+# "observe" = force all scenarios to observe (default, current behaviour)
+# "chat"    = force all scenarios to chat (restores LLM adversary mode)
+# "mixed"   = respect the type field in each scenario JSON
+CYBERS_MODE = os.getenv("CYBERS_MODE", "observe")
+
 client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
 
 # ---------- Data loaders ----------
@@ -337,7 +343,14 @@ async def get_scenario(scenario_id: str):
     s = app.state.scenarios.get(scenario_id)
     if not s:
         raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found")
-    return s
+    # Apply CYBERS_MODE override
+    result = dict(s)
+    if CYBERS_MODE == "observe":
+        result["type"] = "observe"
+    elif CYBERS_MODE == "chat":
+        result["type"] = "chat"
+    # "mixed" respects the JSON type field as-is
+    return result
 
 @app.post("/api/scenario/{scenario_id}/start")
 async def start_scenario(scenario_id: str, payload: StartScenarioPayload):
