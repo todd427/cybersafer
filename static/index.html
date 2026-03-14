@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CyberSafer — Learn to spot online threats</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <script>
+    // Onboarding gate — redirect if not yet completed
+    if (!localStorage.getItem('cs_onboarded')) {
+      window.location.replace('onboarding.html');
+    }
+  </script>
 
   <header class="header">
     <a href="/" class="header__logo">🛡️ <span>Cyber</span>Safer</a>
@@ -72,10 +79,12 @@
     <div style="text-align:center; padding: 2rem 0;">
       <p class="text-muted" style="font-size:0.875rem; margin-bottom: 0.5rem;">
         Made by <a href="https://foxxelabs.ie" target="_blank">FoxxeLabs</a> ·
-        <a href="https://webwise.ie" target="_blank">Internet safety resources</a>
+        <a href="https://webwise.ie" target="_blank">Internet safety resources</a> ·
+        <a href="privacy.html">Privacy Notice</a>
       </p>
       <p class="text-muted" style="font-size:0.8rem;">
-        CyberSafer is an educational tool. All scenarios are simulations.
+        CyberSafer is an educational tool. All scenarios are simulations.<br>
+        <a href="onboarding.html" onclick="localStorage.removeItem('cs_onboarded')" style="color:var(--text-subtle); font-size:0.75rem;">Review welcome screen</a>
       </p>
     </div>
   </div>

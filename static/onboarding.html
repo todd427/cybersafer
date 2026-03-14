@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Welcome — CyberSafer</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 1.5rem;
+    }
+    .gate {
+      max-width: 480px;
+      width: 100%;
+      animation: fadeUp 0.4s ease forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .gate__logo {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .gate__title {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .gate__title span { color: var(--blue); }
+    .gate__step { display: none; }
+    .gate__step--active { display: block; animation: fadeUp 0.3s ease; }
+
+    .purpose-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .purpose-box__row {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      align-items: flex-start;
+    }
+    .purpose-box__row:last-child { border-bottom: none; }
+    .purpose-box__row em { font-style: normal; font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+    .age-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.875rem;
+      margin: 1.5rem 0;
+    }
+    .age-btn {
+      padding: 1.25rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .age-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-dim); }
+    .age-btn__label { font-size: 0.8rem; font-weight: 400; color: var(--text-muted); display: block; margin-top: 0.25rem; }
+
+    .young-box {
+      background: var(--amber-dim);
+      border: 1px solid rgba(210,153,34,0.3);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    .young-box__icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .young-box__title { font-weight: 700; color: var(--amber); margin-bottom: 0.5rem; }
+    .young-box__body { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+    .terms-text {
+      font-size: 0.8125rem;
+      color: var(--text-subtle);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+    .terms-text a { color: var(--text-muted); }
+    .terms-text a:hover { color: var(--blue); }
+
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      margin-bottom: 2rem;
+    }
+    .step-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.2s;
+    }
+    .step-dot--active { background: var(--blue); }
+    .step-dot--done  { background: var(--green); }
+  </style>
+</head>
+<body>
+  <div class="gate">
+    <div class="gate__logo">🛡️</div>
+    <h1 class="gate__title"><span>Cyber</span>Safer</h1>
+
+    <div class="step-indicator">
+      <div class="step-dot step-dot--active" id="dot-0"></div>
+      <div class="step-dot" id="dot-1"></div>
+      <div class="step-dot" id="dot-2"></div>
+    </div>
+
+    <!-- Step 0: Age check -->
+    <div class="gate__step gate__step--active" id="step-age">
+      <p style="text-align:center; color:var(--text-muted); margin-bottom:1.5rem; font-size:0.9375rem; line-height:1.6;">
+        CyberSafer contains simulated threatening and manipulative content for educational purposes.
+        Before we begin — how old are you?
+      </p>
+      <div class="age-buttons">
+        <button class="age-btn" onclick="chooseAge(true)">
+          16 or over
+          <span class="age-btn__label">Continue independently</span>
+        </button>
+        <button class="age-btn" onclick="chooseAge(false)">
+          Under 16
+          <span class="age-btn__label">See guidance first</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 1a: Under 16 guidance -->
+    <div class="gate__step" id="step-young">
+      <div class="young-box">
+        <div class="young-box__icon">👋</div>
+        <div class="young-box__title">Welcome — a quick note first</div>
+        <div class="young-box__body">
+          CyberSafer is a great tool for learning to stay safe online.
+          Because some scenarios deal with serious topics like bullying and online manipulation,
+          we recommend that you use it with a parent, guardian, or teacher nearby —
+          especially if anything you see makes you feel uncomfortable.
+          <br><br>
+          <strong style="color:var(--amber);">That said — you're welcome here.</strong>
+          These are important things to learn, and you're doing the right thing by being curious about them.
+        </div>
+      </div>
+      <p class="terms-text">
+        If anything you see here concerns you in real life, talk to someone you trust.<br>
+        <a href="https://www.childline.ie" target="_blank">Childline Ireland</a> ·
+        <a href="https://www.childline.org.uk" target="_blank">Childline UK</a> ·
+        <a href="https://www.webwise.ie" target="_blank">Webwise</a>
+      </p>
+      <button class="btn btn--primary btn--full" onclick="showPurpose()">I understand — continue</button>
+      <div style="margin-top:0.75rem; text-align:center;">
+        <button class="btn btn--ghost btn--sm" onclick="showStep('step-age')">← Go back</button>
+      </div>
+    </div>
+
+    <!-- Step 1b / 2: Purpose statement -->
+    <div class="gate__step" id="step-purpose">
+      <p style="font-weight:600; margin-bottom:0.25rem;">What this tool does</p>
+      <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:0; line-height:1.5;">
+        Read this before you begin.
+      </p>
+      <div class="purpose-box">
+        <div class="purpose-box__row">
+          <em>🎭</em>
+          <span>Scenarios use AI-powered characters that simulate real online threats — phishing, scams, bullying, manipulation. They are designed to be convincing.</span>
+        </div>
+        <div class="purpose-box__row">
+          <em>🚩</em>
+          <span>Your responses are analysed to identify when you spot warning signs. Nothing you type is stored, logged, or seen by anyone.</span>
+        </div>
+        <div class="purpose-box__row">
+          <em>⚠️</em>
+          <span>Some scenarios contain content that may be upsetting — bullying, manipulation, threatening messages. Content warnings appear before these scenarios.</span>
+        </div>
+        <div class="purpose-box__row">
+          <em>🔒</em>
+          <span>No account is needed. No personal data is collected. Sessions are anonymous and temporary.</span>
+        </div>
+        <div class="purpose-box__row">
+          <em>🛡️</em>
+          <span>This is a safe environment. Nothing here is real. The goal is to help you recognise these threats before you encounter them.</span>
+        </div>
+      </div>
+      <p class="terms-text">
+        By continuing you confirm you understand this is an educational simulation.<br>
+        <a href="privacy.html" target="_blank">Privacy Notice</a> ·
+        <a href="mailto:hello@foxxelabs.ie">Contact FoxxeLabs</a>
+      </p>
+      <button class="btn btn--primary btn--full btn--lg" onclick="accept()">I understand — let's begin</button>
+    </div>
+
+  </div>
+
+  <script>
+    let isYoung = false;
+
+    function showStep(id) {
+      document.querySelectorAll('.gate__step').forEach(s => s.classList.remove('gate__step--active'));
+      document.getElementById(id).classList.add('gate__step--active');
+    }
+
+    function updateDots(active) {
+      for (let i = 0; i < 3; i++) {
+        const dot = document.getElementById(`dot-${i}`);
+        dot.className = 'step-dot';
+        if (i < active) dot.classList.add('step-dot--done');
+        else if (i === active) dot.classList.add('step-dot--active');
+      }
+    }
+
+    function chooseAge(isAdult) {
+      isYoung = !isAdult;
+      updateDots(1);
+      if (isAdult) {
+        showStep('step-purpose');
+      } else {
+        showStep('step-young');
+      }
+    }
+
+    function showPurpose() {
+      updateDots(2);
+      showStep('step-purpose');
+    }
+
+    function accept() {
+      localStorage.setItem('cs_onboarded', '1');
+      if (isYoung) localStorage.setItem('cs_young', '1');
+      window.location.href = 'index.html';
+    }
+
+    // If already onboarded, skip straight through
+    if (localStorage.getItem('cs_onboarded') === '1') {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

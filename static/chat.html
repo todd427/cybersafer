@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
   <title>Chat — CyberSafer</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body style="overflow:hidden;">
+  <script>
+    // Onboarding gate — redirect if not yet completed
+    if (!localStorage.getItem('cs_onboarded')) {
+      window.location.replace('onboarding.html');
+    }
+  </script>
 
   <div class="chat-layout">
 

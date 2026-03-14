@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="robots" content="noindex,nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Training — CyberSafer</title>
   <link rel="stylesheet" href="css/styles.css">
@@ -70,6 +71,12 @@
   </style>
 </head>
 <body>
+  <script>
+    // Onboarding gate — redirect if not yet completed
+    if (!localStorage.getItem('cs_onboarded')) {
+      window.location.replace('onboarding.html');
+    }
+  </script>
   <header class="header">
     <a href="/" class="header__logo">🛡️ <span>Cyber</span>Safer</a>
     <nav class="header__nav">
